@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "495080718925",
+    "project_id": "garosero-70ff7",
+    "storage_bucket": "garosero-70ff7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:495080718925:android:7f7234fd1b0e87938a9204",
+        "android_client_info": {
+          "package_name": "com.foo.garosero"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "495080718925-8pecbbbp6dccgqhbi8abobbb2sf07tnm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbfrE8ant9bZ0IOKtGZVdYgVhFbNuW1Vg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "495080718925-8pecbbbp6dccgqhbi8abobbb2sf07tnm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
