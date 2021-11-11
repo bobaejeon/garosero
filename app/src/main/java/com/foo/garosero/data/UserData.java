@@ -1,13 +1,43 @@
 package com.foo.garosero.data;
 
-public class UserTreesData {
+import java.io.Serializable;
+
+public class UserData implements Serializable {
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String name;
     public String district;
     public String kind;
     public String location;
     public String road;
     public String start_date;
 
-    public UserTreesData(){}
+    public String getTree_name() {
+        return tree_name;
+    }
+
+    public void setTree_name(String tree_name) {
+        this.tree_name = tree_name;
+    }
+
+    public String tree_name;
+
+    public UserData(){}
+    public UserData(String name){
+        this.district = "";
+        this.kind = "아직 나무가 없어요";
+        this.location = "";
+        this.road = "";
+        this.start_date = "";
+        this.name = name;
+        this.tree_name = "아직 나무가 없어요";
+    }
 
     public String getDistrict() {
         return district;

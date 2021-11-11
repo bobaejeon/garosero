@@ -30,6 +30,7 @@
                         android:src="@drawable/mid_tree"/>
 
                     <TextView
+                        android:id="@+id/tv_tree_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="나무고유번호"
@@ -44,6 +45,7 @@
                         android:gravity="center"/>
 
                     <TextView
+                        android:id="@+id/tv_carbon_amt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="99999"
@@ -74,6 +76,7 @@
                         android:text="수목명"
                         android:layout_margin="5dp"/>
                     <TextView
+                        android:id="@+id/tv_kind"
                         android:text="은행 나무"
                         android:layout_margin="5dp"/>
                 </TableRow>
@@ -83,6 +86,7 @@
                         android:text="가로명"
                         android:layout_margin="5dp"/>
                     <TextView
+                        android:id="@+id/tv_road"
                         android:text="덕수궁길"
                         android:layout_margin="5dp"/>
                 </TableRow>
@@ -92,6 +96,7 @@
                         android:text="구명"
                         android:layout_margin="5dp"/>
                     <TextView
+                        android:id="@+id/tv_dist"
                         android:text="중구"
                         android:layout_margin="5dp"/>
                 </TableRow>
@@ -101,6 +106,7 @@
                         android:text="위치"
                         android:layout_margin="5dp"/>
                     <TextView
+                        android:id="@+id/tv_loc"
                         android:text="경찰서"
                         android:layout_margin="5dp"/>
                 </TableRow>
