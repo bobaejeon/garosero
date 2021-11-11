@@ -24,17 +24,20 @@ public class TreeInfoFragment extends Fragment {
     FirebaseDatabase database;
     DatabaseReference databaseReference;
 
+    View root;
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
+        HomeViewModel.setExplain("입양한 나무의 정보를 확인하세요!");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         View view = inflater.inflate(R.layout.fragment_tree_info, container, false);
 
         //String uid = firebaseAuth.getInstance().getUid();
@@ -64,6 +67,7 @@ public class TreeInfoFragment extends Fragment {
             }
         });
 
-        return view;
+        root = inflater.inflate(R.layout.fragment_tree_info, container, false);
+        return root;
     }
 }
