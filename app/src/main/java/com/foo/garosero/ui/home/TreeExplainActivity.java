@@ -15,7 +15,7 @@ import com.foo.garosero.R;
 public class TreeExplainActivity extends AppCompatActivity {
     WebView wView;      // 웹뷰
     ProgressBar pBar;   // 로딩바
-    String mURL = "https://618cdf09145ae20008f961dc--garosero.netlify.app/caretreeintroduce";
+    String mURL = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +27,7 @@ public class TreeExplainActivity extends AppCompatActivity {
         pBar = findViewById(R.id.explain_ProgressBar);
 
         //웹 뷰 띄우기
+        mURL = getIntent().getStringExtra("mURL");
         initWebView();
     }
 
