@@ -11,18 +11,19 @@ import android.view.ViewGroup;
 import com.foo.garosero.R;
 
 public class TreeManagementFragment extends Fragment {
+    View root;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
+        HomeViewModel.setExplain("입양한 나무는 어떤 상태일까요?");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tree_management, container, false);
+        root = inflater.inflate(R.layout.fragment_tree_management, container, false);
+        return root;
     }
 }

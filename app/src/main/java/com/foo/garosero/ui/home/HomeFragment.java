@@ -6,16 +6,26 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.foo.garosero.R;
 
 public class HomeFragment extends Fragment {
 
-    View root;
+    private View root;
+    private HomeViewModel model;
+    private TextView home_TextView_pageTitle;
+    private TextView home_TextView_explain;
+    private Button home_Button_treeInfo;
+    private Button home_Button_treeManagement;
+    private Button home_Button_treeTip;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -31,26 +41,55 @@ public class HomeFragment extends Fragment {
 
         replaceFragment(new TreeInfoFragment());
 
-        // tab button
-        root.findViewById(R.id.button_tree_info).setOnClickListener(new View.OnClickListener() {
+        // init view
+        home_TextView_pageTitle = root.findViewById(R.id.home_TextView_pageTitle);
+        home_TextView_explain = root.findViewById(R.id.home_TextView_explain);
+        home_Button_treeInfo = root.findViewById(R.id.home_Button_treeInfo);
+        home_Button_treeManagement = root.findViewById(R.id.home_Button_treeManagement);
+        home_Button_treeTip = root.findViewById(R.id.home_Button_treeTip);
+
+        // LiveData
+        model = new ViewModelProvider(this).get(HomeViewModel.class);
+        final Observer<String> titleObserver = new Observer<String>() { // page title
+            @Override
+            public void onChanged(@Nullable final String newtext) {
+                home_TextView_pageTitle.setText(newtext);
+            }
+        };
+        model.getPageTitle().observe(getActivity(), titleObserver);
+
+        final Observer<String> explainObserver = new Observer<String>() { // explain
+            @Override
+            public void onChanged(@Nullable final String newtext) {
+                home_TextView_explain.setText(newtext);
+            }
+        };
+        HomeViewModel.getExplain().observe(getActivity(), explainObserver);
+
+
+        // tab button : change Fragment
+        home_Button_treeInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // 내 나무 정보
                 replaceFragment(new TreeInfoFragment());
+                model.getPageTitle().setValue(home_Button_treeInfo.getText().toString());
             }
         });
-        root.findViewById(R.id.button_tree_management).setOnClickListener(new View.OnClickListener() {
+        home_Button_treeManagement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // 내 나무 관리
                 replaceFragment(new TreeManagementFragment());
+                model.getPageTitle().setValue(home_Button_treeManagement.getText().toString());
             }
         });
-        root.findViewById(R.id.button_tree_tip).setOnClickListener(new View.OnClickListener() {
+        home_Button_treeTip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // 나무 관리 tip
                 replaceFragment(new TreeTipFragment());
+                model.getPageTitle().setValue(home_Button_treeTip.getText().toString());
             }
         });
 

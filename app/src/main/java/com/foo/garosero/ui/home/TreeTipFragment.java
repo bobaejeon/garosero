@@ -15,8 +15,7 @@ public class TreeTipFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
+        HomeViewModel.setExplain("우리 나무를 지키기 위한 팁들!");
     }
 
     @Override
