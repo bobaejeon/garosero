@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.home.TreeExplainActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="은행 나무 관리 TIP"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="은행나무란?"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="은행나무는 어떤 나무일까요?"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="은행나무에서 은행은 그 열매가 \n‘은빛이 나는 살구’라는 뜻에서 \n은행나무라고 불리게 되었다고 합니다."
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="관리방법"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="은행나무를 잘 키우기 위해선 어떻게 해야할까요?"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="은행나무는 모래가 많거나 건조한 곳에서\n 자라지 않아요\n\n또한 물이 고이거나 물이 나는 곳에서도\n잘 자라지 않아요\n\n그러므로 물이 고이지 않게하고 너무 건조하지\n
+않게 은행나무를 관리하는 것이 중요합니다!"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
