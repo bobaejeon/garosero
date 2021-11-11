@@ -40,7 +40,6 @@ public class HomeFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         replaceFragment(new TreeInfoFragment());
-
         // init view
         home_TextView_pageTitle = root.findViewById(R.id.home_TextView_pageTitle);
         home_TextView_explain = root.findViewById(R.id.home_TextView_explain);
@@ -93,6 +92,8 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        // 초기설정
+        model.getPageTitle().setValue("내 나무 정보"); //초기값
     }
 
     // 프래그먼트 재설정
