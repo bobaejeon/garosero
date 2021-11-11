@@ -3,6 +3,7 @@ package com.foo.garosero.ui.home;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -53,6 +54,23 @@ public class HomeFragment extends Fragment {
             @Override
             public void onChanged(@Nullable final String newtext) {
                 home_TextView_pageTitle.setText(newtext);
+
+                // focus Button
+                home_Button_treeInfo.setBackground(ContextCompat.getDrawable(root.getContext(), R.drawable.button_back));
+                home_Button_treeManagement.setBackground(ContextCompat.getDrawable(root.getContext(), R.drawable.button_back));
+                home_Button_treeTip.setBackground(ContextCompat.getDrawable(root.getContext(), R.drawable.button_back));
+
+                switch (newtext){
+                    case "내 나무 관리" :
+                        home_Button_treeManagement.setBackground(ContextCompat.getDrawable(root.getContext(), R.drawable.button_focus));
+                        break;
+                    case "나무 관리 TIP" :
+                        home_Button_treeTip.setBackground(ContextCompat.getDrawable(root.getContext(), R.drawable.button_focus));
+                        break;
+                    case "내 나무 정보":
+                        home_Button_treeInfo.setBackground(ContextCompat.getDrawable(root.getContext(), R.drawable.button_focus));
+                        break;
+                }
             }
         };
         model.getPageTitle().observe(getActivity(), titleObserver);
