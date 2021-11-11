@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:textSize="30dp"
+            android:textSize="24sp"
             android:text ="은행나무"/>
 
         <TextView
@@ -36,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:textSize="20dp"
+            android:textSize="14sp"
             android:text="이효진"/>
     </LinearLayout>
 

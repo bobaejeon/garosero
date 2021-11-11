@@ -19,7 +19,7 @@
             android:id="@+id/home_TextView_pageTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="내 나무 정보"/>
+            android:text="PAGE TITLE"/>
 
         <!-- Image View : Explain page -->
         <androidx.cardview.widget.CardView
@@ -39,6 +39,8 @@
                     android:layout_height="match_parent"
                     android:layout_marginStart="24dp"
                     android:gravity="center"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
                     android:text="입양한 나무의 정보를 확인하세요!"
                     app:layout_constraintStart_toStartOf="parent" />
 
@@ -68,7 +70,7 @@
                 android:id="@+id/home_Button_treeInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="나무정보"
+                android:text="내 나무 정보"
                 android:layout_weight="1"/>
 
             <Button

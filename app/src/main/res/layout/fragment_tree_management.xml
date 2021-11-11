@@ -13,6 +13,7 @@
 
             <!-- 나무정보 -->
             <androidx.cardview.widget.CardView
+                app:cardCornerRadius="12dp"
                 android:backgroundTint="@color/gray_default"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -26,9 +27,9 @@
 
                     <ImageView
                         android:layout_width="match_parent"
-                        android:layout_height="200dp"
+                        android:layout_height="153dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/mid_tree"
+                        android:src="@drawable/big_tree"
                         android:layout_margin="@dimen/activity_margin_small"/>
 
                     <TextView
@@ -36,7 +37,7 @@
                         android:paddingBottom="@dimen/activity_padding_default"
                         android:layout_width="match_parent"
                         android:layout_height="34dp"
-                        android:text="은행 나무"
+                        android:text="나무 이름"
                         android:gravity="center"/>
 
                     <TextView
@@ -95,12 +96,14 @@
 
             <!-- 할일 리스트1 -->
             <androidx.cardview.widget.CardView
+                android:id="@+id/treeManagement_CardView_todo1"
                 android:backgroundTint="@color/gray_default"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/activity_margin_default"
                 android:layout_marginBottom="@dimen/activity_margin_small"
-                android:layout_marginRight="@dimen/activity_margin_default">
+                android:layout_marginRight="@dimen/activity_margin_default"
+                app:cardCornerRadius="12dp">
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
@@ -119,6 +122,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
+                        android:id="@+id/treeManagement_TextView_ans1"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -126,12 +130,12 @@
                         android:text="양호"
                         android:textStyle="bold"
                         android:padding="@dimen/activity_padding_default"
-                        app:layout_constraintEnd_toStartOf="@+id/imageView" />
+                        app:layout_constraintEnd_toStartOf="@+id/treeManagement_imageView_ans1" />
 
                     <ImageView
-                        android:id="@+id/imageView"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:id="@+id/treeManagement_imageView_ans1"
+                        android:layout_width="43dp"
+                        android:layout_height="43dp"
                         android:scaleType="centerCrop"
                         android:background="@drawable/circle_green"
                         android:gravity="center_vertical"
@@ -143,12 +147,14 @@
 
             <!-- 할일 리스트2 -->
             <androidx.cardview.widget.CardView
+                android:id="@+id/treeManagement_CardView_todo2"
                 android:backgroundTint="@color/gray_default"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/activity_margin_default"
                 android:layout_marginBottom="@dimen/activity_margin_small"
-                android:layout_marginRight="@dimen/activity_margin_default">
+                android:layout_marginRight="@dimen/activity_margin_default"
+                app:cardCornerRadius="12dp">
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
@@ -167,6 +173,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
+                        android:id="@+id/treeManagement_TextView_ans2"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -174,12 +181,12 @@
                         android:text="양호"
                         android:textStyle="bold"
                         android:padding="@dimen/activity_padding_default"
-                        app:layout_constraintEnd_toStartOf="@+id/imageView2" />
+                        app:layout_constraintEnd_toStartOf="@+id/treeManagement_imageView_ans2" />
 
                     <ImageView
-                        android:id="@+id/imageView2"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:id="@+id/treeManagement_imageView_ans2"
+                        android:layout_width="43dp"
+                        android:layout_height="43dp"
                         android:scaleType="centerCrop"
                         android:background="@drawable/circle_green"
                         android:gravity="center_vertical"
@@ -191,12 +198,14 @@
 
             <!-- 할일 리스트3 -->
             <androidx.cardview.widget.CardView
+                android:id="@+id/treeManagement_CardView_todo3"
                 android:backgroundTint="@color/gray_default"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/activity_margin_default"
                 android:layout_marginBottom="@dimen/activity_margin_small"
-                android:layout_marginRight="@dimen/activity_margin_default">
+                android:layout_marginRight="@dimen/activity_margin_default"
+                app:cardCornerRadius="12dp">
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
@@ -215,6 +224,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
+                        android:id="@+id/treeManagement_TextView_ans3"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -222,12 +232,12 @@
                         android:text="양호"
                         android:textStyle="bold"
                         android:padding="@dimen/activity_padding_default"
-                        app:layout_constraintEnd_toStartOf="@+id/imageView3" />
+                        app:layout_constraintEnd_toStartOf="@+id/treeManagement_imageView_ans3" />
 
                     <ImageView
-                        android:id="@+id/imageView3"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:id="@+id/treeManagement_imageView_ans3"
+                        android:layout_width="43dp"
+                        android:layout_height="43dp"
                         android:scaleType="centerCrop"
                         android:background="@drawable/circle_green"
                         android:gravity="center_vertical"

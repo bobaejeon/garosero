@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         menuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                drawerLayout.openDrawer(GravityCompat.START);
+                drawerLayout.openDrawer(GravityCompat.END);
             }
         });
         
@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(new Intent(MainActivity.this, LoginActivity.class));
                         break;
                 }
-                drawerLayout.closeDrawer(GravityCompat.START);
+                drawerLayout.closeDrawer(GravityCompat.END);
                 return false;
             }
         });
@@ -105,8 +105,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() { //뒤로가기 했을 때
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) { // drawer가 열려 있을 때
-            drawerLayout.closeDrawer(GravityCompat.START);
+        if (drawerLayout.isDrawerOpen(GravityCompat.END)) { // drawer가 열려 있을 때
+            drawerLayout.closeDrawer(GravityCompat.END);
         } else {
             // 두번 클릭시 종료
             if (System.currentTimeMillis() - lastTimeBackPressed < 2000) {
