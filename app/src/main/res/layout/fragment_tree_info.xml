@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.home.TreeInfoFragment">
 
         <LinearLayout
@@ -15,7 +16,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/activity_margin_default"
-                android:backgroundTint="@color/gray_default">
+                android:backgroundTint="@color/gray_default"
+                app:cardCornerRadius="12dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -63,7 +65,8 @@
                 android:layout_height="wrap_content"
                 android:text="내 나무정보"
                 android:textSize="15sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:paddingBottom="@dimen/activity_padding_default"/>
 
             <TableLayout
                 android:paddingStart="@dimen/activity_padding_default"

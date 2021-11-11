@@ -22,11 +22,10 @@
                     android:textSize="15sp"
                     android:textStyle="bold"
                     android:textColor="@color/green_textColor"
-                    android:id="@+id/textView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:text="SEOUL CAROSU"
+                    android:text="@string/app_title"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
