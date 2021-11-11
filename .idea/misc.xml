@@ -3,15 +3,24 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/bbj56/AndroidStudioProjects/garosero/app/src/main/res/drawable/border.xml" value="0.1" />
         <entry key="..\:/Users/bbj56/AndroidStudioProjects/garosero/app/src/main/res/drawable/border_bottom.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/bbj56/AndroidStudioProjects/garosero/app/src/main/res/drawable/button_background.xml" value="0.19583333333333333" />
+        <entry key="..\:/Users/bbj56/AndroidStudioProjects/garosero/app/src/main/res/drawable/circle_green.xml" value="0.1" />
+        <entry key="..\:/Users/bbj56/AndroidStudioProjects/garosero/app/src/main/res/drawable/img_circle.xml" value="0.1" />
+        <entry key="..\:/Users/bbj56/AndroidStudioProjects/garosero/app/src/main/res/font/font.xml" value="0.10677083333333333" />
         <entry key="..\:/Users/bbj56/AndroidStudioProjects/garosero/app/src/main/res/layout/activity_login.xml" value="0.14666666666666667" />
         <entry key="..\:/Users/bbj56/AndroidStudioProjects/garosero/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/Users/bbj56/AndroidStudioProjects/garosero/app/src/main/res/layout/activity_register.xml" value="0.15416666666666667" />
+        <entry key="..\:/Users/bbj56/AndroidStudioProjects/garosero/app/src/main/res/layout/activity_register.xml" value="0.1" />
         <entry key="..\:/Users/bbj56/AndroidStudioProjects/garosero/app/src/main/res/layout/border_bottom.xml" value="0.1796875" />
         <entry key="..\:/Users/bbj56/AndroidStudioProjects/garosero/app/src/main/res/layout/fragment_application.xml" value="0.22" />
         <entry key="..\:/Users/bbj56/AndroidStudioProjects/garosero/app/src/main/res/layout/fragment_dialog.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/bbj56/AndroidStudioProjects/garosero/app/src/main/res/layout/fragment_tree_info.xml" value="0.1" />
+        <entry key="..\:/Users/bbj56/AndroidStudioProjects/garosero/app/src/main/res/layout/fragment_tree_management.xml" value="0.1" />
+        <entry key="..\:/Users/bbj56/AndroidStudioProjects/garosero/app/src/main/res/layout/fragment_tree_tip.xml" value="0.1" />
+        <entry key="..\:/Users/bbj56/AndroidStudioProjects/garosero/app/src/main/res/layout/fragment_visualization.xml" value="0.1" />
+        <entry key="..\:/Users/bbj56/AndroidStudioProjects/garosero/app/src/main/res/layout/navi_header.xml" value="0.1796875" />
+        <entry key="..\:/Users/bbj56/AndroidStudioProjects/garosero/app/src/main/res/menu/navi_menu.xml" value="0.1796875" />
       </map>
     </option>
   </component>

@@ -77,7 +77,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                         if(snapshot.exists()){
                                             Log.e("LoginActivity","data does exist");
                                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                            intent.putExtra("current_user", uid);
+//                                            intent.putExtra("current_user", uid);
                                             startActivity(intent);
                                             finish();
 

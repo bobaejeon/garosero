@@ -1,5 +1,6 @@
 package com.foo.garosero;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,6 +20,8 @@ import com.foo.garosero.ui.home.HomeFragment;
 import com.foo.garosero.ui.information.InformationFragment;
 import com.foo.garosero.ui.visualization.VisualizationFragment;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -65,7 +68,10 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.item_visualization:
                         replaceFragment(new VisualizationFragment());
                         break;
-                    case R.id.item_logout:
+                    case R.id.item_logout: //logout 후 login activity로 redirect
+                        FirebaseAuth.getInstance().signOut();
+                        Toast.makeText(MainActivity.this, "로그아웃되었습니다.", Toast.LENGTH_LONG);
+                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
                         break;
                 }
                 drawerLayout.closeDrawer(GravityCompat.START);
@@ -95,4 +101,5 @@ public class MainActivity extends AppCompatActivity {
             lastTimeBackPressed = System.currentTimeMillis();
         }
     }
+
 }

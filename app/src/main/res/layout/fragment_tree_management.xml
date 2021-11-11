@@ -34,8 +34,8 @@
                     <TextView
                         android:paddingBottom="@dimen/activity_padding_default"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="나무 이름"
+                        android:layout_height="34dp"
+                        android:text="은행 나무"
                         android:gravity="center"/>
 
                     <TextView

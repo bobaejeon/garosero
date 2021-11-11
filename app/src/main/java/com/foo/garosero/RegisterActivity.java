@@ -84,7 +84,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     Map<String, Object> childUpdates = new HashMap<>();
                                     childUpdates.put("/Users/"+uid+"/name", name);
                                     // 나무 종류 등 입력
-                                    childUpdates.put("/Users/"+uid+"/tree", "");
+                                    // childUpdates.put("/Users/"+uid+"/tree", "");
 
                                     ref.updateChildren(childUpdates);
                                     Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
@@ -99,7 +99,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     } catch (Exception e) {
                                         Log.e(TAG, e.toString());
                                     }
-                                    Toast.makeText(RegisterActivity.this, "이미 존재하는 아이디 입니다.", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(RegisterActivity.this, "아이디와 비밀번호를 확인해주세요.", Toast.LENGTH_LONG).show();
                                     //해당 메소드 진행을 멈추고 빠져나감.
                                 }
                             }
@@ -108,7 +108,7 @@ public class RegisterActivity extends AppCompatActivity {
                         //비밀번호 오류시
                     }catch(Exception e){
                         mDialog.dismiss();
-                        Toast.makeText(RegisterActivity.this, "다시 입력해주세요", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this, "다시 입력해주세요.", Toast.LENGTH_SHORT).show();
                         //해당 메소드 진행을 멈추고 빠져나감.
                     }
                 }
