@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
     ImageButton menuButton;
 
+    private long lastTimeBackPressed; //뒤로가기 버튼이 클릭된 시간
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,10 +83,16 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() { //뒤로가기 했을 때
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) { // drawer가 열려 있을 때
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            // 두번 클릭시 종료
+            if (System.currentTimeMillis() - lastTimeBackPressed < 2000) {
+                finish();
+                return;
+            }
+            Toast.makeText(this, "'뒤로' 버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT).show();
+            lastTimeBackPressed = System.currentTimeMillis();
         }
     }
 }
