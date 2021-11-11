@@ -41,13 +41,6 @@ public class HomeFragment extends Fragment {
 
         replaceFragment(new TreeInfoFragment());
 
-        // init view
-        home_TextView_pageTitle = root.findViewById(R.id.home_TextView_pageTitle);
-        home_TextView_explain = root.findViewById(R.id.home_TextView_explain);
-        home_Button_treeInfo = root.findViewById(R.id.home_Button_treeInfo);
-        home_Button_treeManagement = root.findViewById(R.id.home_Button_treeManagement);
-        home_Button_treeTip = root.findViewById(R.id.home_Button_treeTip);
-
         // LiveData
         model = new ViewModelProvider(this).get(HomeViewModel.class);
         final Observer<String> titleObserver = new Observer<String>() { // page title
@@ -92,6 +85,15 @@ public class HomeFragment extends Fragment {
                 model.getPageTitle().setValue(home_Button_treeTip.getText().toString());
             }
         });
+
+        // init view
+        home_TextView_pageTitle = root.findViewById(R.id.home_TextView_pageTitle);
+        home_TextView_explain = root.findViewById(R.id.home_TextView_explain);
+        home_Button_treeInfo = root.findViewById(R.id.home_Button_treeInfo);
+        home_Button_treeManagement = root.findViewById(R.id.home_Button_treeManagement);
+        home_Button_treeTip = root.findViewById(R.id.home_Button_treeTip);
+
+        model.getPageTitle().setValue("내 나무 정보"); //초기값
 
     }
 

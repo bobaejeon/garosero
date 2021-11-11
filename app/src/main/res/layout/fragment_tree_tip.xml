@@ -3,16 +3,145 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.home.TreeTipFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="tree tip" />
+        android:stretchColumns="*"
+        android:padding="6dp">
+        <TableRow>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/TreeTip_CardView_1"
+                android:layout_margin="6dp"
+                android:layout_height="135dp"
+                android:backgroundTint="#BDF1C9"
+                app:cardCornerRadius="12dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="은행나무 관리 TIP"
+                        android:padding="@dimen/activity_padding_default"
+                        android:textSize="15sp"
+                        android:textStyle="bold"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/TreeTip_CardView_2"
+                android:layout_margin="6dp"
+                android:layout_height="135dp"
+                android:layout_span="2"
+                android:backgroundTint="#AED8D8"
+                app:cardCornerRadius="12dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="소나무 관리 TIP"
+                        android:padding="@dimen/activity_padding_default"
+                        android:textSize="15sp"
+                        android:textStyle="bold"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </TableRow>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        <TableRow>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/TreeTip_CardView_3"
+                android:layout_height="135dp"
+                android:layout_span="2"
+                android:backgroundTint="#8CCDC2"
+                android:layout_margin="6dp"
+                app:cardCornerRadius="12dp">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="느티나무 관리 TIP"
+                        android:padding="@dimen/activity_padding_default"
+                        android:textSize="15sp"
+                        android:textStyle="bold"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/TreeTip_CardView_4"
+                android:layout_height="135dp"
+                android:backgroundTint="#F4E9EA"
+                android:layout_margin="6dp"
+                app:cardCornerRadius="12dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="왕벚나무 관리 TIP"
+                        android:padding="@dimen/activity_padding_default"
+                        android:textSize="15sp"
+                        android:textStyle="bold"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </TableRow>
+
+        <TableRow>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/TreeTip_CardView_5"
+                android:layout_height="135dp"
+                android:backgroundTint="#A0DFC1"
+                android:layout_margin="6dp"
+                app:cardCornerRadius="12dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="이팝나무 관리 TIP"
+                        android:padding="@dimen/activity_padding_default"
+                        android:textSize="15sp"
+                        android:textStyle="bold"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/TreeTip_CardView_6"
+                android:layout_margin="6dp"
+                android:layout_height="135dp"
+                android:layout_span="2"
+                android:backgroundTint="#EEC9C9"
+                app:cardCornerRadius="12dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="살구나무 관리 TIP"
+                        android:padding="@dimen/activity_padding_default"
+                        android:textSize="15sp"
+                        android:textStyle="bold"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </TableRow>
+    </TableLayout>
 </FrameLayout>
