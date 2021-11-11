@@ -1,24 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="10dp"
     tools:context=".ui.application.AppDialogFragment">
 
     <TableLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp">
+        android:layout_height="200dp"
+        android:layout_gravity="center_horizontal|center">
 
         <TableRow
-            android:layout_width="match_parent"
-            android:background="#dadada">
+            android:layout_width="match_parent">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:gravity="center"
+                android:layout_span="5"
+                android:textSize="13dp"
+                android:text="※ 나무 이름을 클릭하면 신청이 완료됩니다." />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:background="@drawable/rectangle_shadow">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:fontFamily="@font/nanumsquare_ac_eb"
                 android:text="구이름" />
 
             <TextView
@@ -26,6 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:gravity="center"
+                android:fontFamily="@font/nanumsquare_ac_eb"
                 android:text="가로수길명" />
 
             <TextView
@@ -33,6 +50,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:gravity="center"
+                android:fontFamily="@font/nanumsquare_ac_eb"
                 android:text="위치" />
 
             <TextView
@@ -40,6 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:gravity="center"
+                android:fontFamily="@font/nanumsquare_ac_eb"
                 android:text="나무번호" />
 
             <TextView
@@ -47,6 +66,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:gravity="center"
+                android:fontFamily="@font/nanumsquare_ac_eb"
                 android:text="나무종류" />
         </TableRow>
         <TableRow
@@ -153,4 +173,4 @@
         </TableRow>
     </TableLayout>
 
-</FrameLayout>
+</HorizontalScrollView>

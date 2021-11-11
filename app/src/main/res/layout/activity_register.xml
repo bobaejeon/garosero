@@ -30,7 +30,7 @@
         android:text="SEOUL GAROSU"
         android:textAlignment="center"
         android:textSize="25dp"
-        android:textStyle="bold"
+        android:fontFamily="@font/nanumsquare_ac_eb"
         android:textColor="#55C595"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
