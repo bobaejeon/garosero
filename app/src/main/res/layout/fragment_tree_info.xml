@@ -5,9 +5,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.TreeInfoFragment">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -17,7 +14,8 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/activity_margin_default">
+                android:layout_margin="@dimen/activity_margin_default"
+                android:backgroundTint="@color/gray_default">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -25,15 +23,18 @@
                     android:padding="@dimen/activity_padding_default"
                     android:orientation="vertical">
                     <ImageView
+                        android:layout_margin="@dimen/activity_margin_small"
                         android:layout_width="match_parent"
                         android:layout_height="200dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/ic_baseline_image_24"/>
+                        android:src="@drawable/mid_tree"/>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="나무고유번호"
+                        android:textStyle="bold"
+                        android:textSize="15sp"
                         android:gravity="center"/>
 
                     <TextView
@@ -46,7 +47,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="99999"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="@color/green_textColor"/>
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -56,14 +59,18 @@
                 android:layout_marginLeft="@dimen/activity_margin_default"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="내 나무정보"/>
+                android:text="내 나무정보"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
 
             <TableLayout
+                android:paddingStart="@dimen/activity_padding_default"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/activity_margin_default">
                 <TableRow>
                     <TextView
+                        android:textStyle="bold"
                         android:text="수목명"
                         android:layout_margin="5dp"/>
                     <TextView
@@ -72,6 +79,7 @@
                 </TableRow>
                 <TableRow>
                     <TextView
+                        android:textStyle="bold"
                         android:text="가로명"
                         android:layout_margin="5dp"/>
                     <TextView
@@ -80,6 +88,7 @@
                 </TableRow>
                 <TableRow>
                     <TextView
+                        android:textStyle="bold"
                         android:text="구명"
                         android:layout_margin="5dp"/>
                     <TextView
@@ -88,6 +97,7 @@
                 </TableRow>
                 <TableRow>
                     <TextView
+                        android:textStyle="bold"
                         android:text="위치"
                         android:layout_margin="5dp"/>
                     <TextView
@@ -97,7 +107,4 @@
             </TableLayout>
 
         </LinearLayout>
-    </ScrollView>
-
-
 </FrameLayout>
