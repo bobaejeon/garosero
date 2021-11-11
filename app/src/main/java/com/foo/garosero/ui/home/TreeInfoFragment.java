@@ -53,7 +53,7 @@ public class TreeInfoFragment extends Fragment {
                     for(DataSnapshot snap : snapshot.getChildren()){ // 데이터 리스트 추출
                         UserTreesData userTreesData = snap.getValue(UserTreesData.class); //나무의 세부데이터
                         String name = snap.getKey(); //나무이름
-//                        Log.d("treeInfo", num+") "+name+" "+userTreesData.getRoad().toString());
+//                        Log.d("treeInfo", num+") "+name+" "+userTreesData.getRoad().toString()); //잘 들어옴
 
                         num++;
                     }
