@@ -13,6 +13,7 @@
 
             <!-- 나무정보 -->
             <androidx.cardview.widget.CardView
+                app:cardCornerRadius="12dp"
                 android:backgroundTint="@color/gray_default"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -26,16 +27,16 @@
 
                     <ImageView
                         android:layout_width="match_parent"
-                        android:layout_height="200dp"
+                        android:layout_height="153dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/mid_tree"
+                        android:src="@drawable/big_tree"
                         android:layout_margin="@dimen/activity_margin_small"/>
 
                     <TextView
                         android:paddingBottom="@dimen/activity_padding_default"
                         android:layout_width="match_parent"
                         android:layout_height="34dp"
-                        android:text="은행 나무"
+                        android:text="나무 이름"
                         android:gravity="center"/>
 
                     <TextView
@@ -98,7 +99,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/activity_margin_default"
                 android:layout_marginBottom="@dimen/activity_margin_small"
-                android:layout_marginRight="@dimen/activity_margin_default">
+                android:layout_marginRight="@dimen/activity_margin_default"
+                app:cardCornerRadius="12dp">
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
@@ -128,8 +130,8 @@
 
                     <ImageView
                         android:id="@+id/imageView"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="43dp"
+                        android:layout_height="43dp"
                         android:scaleType="centerCrop"
                         android:background="@drawable/circle_green"
                         android:gravity="center_vertical"
@@ -146,7 +148,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/activity_margin_default"
                 android:layout_marginBottom="@dimen/activity_margin_small"
-                android:layout_marginRight="@dimen/activity_margin_default">
+                android:layout_marginRight="@dimen/activity_margin_default"
+                app:cardCornerRadius="12dp">
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
@@ -176,8 +179,8 @@
 
                     <ImageView
                         android:id="@+id/imageView2"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="43dp"
+                        android:layout_height="43dp"
                         android:scaleType="centerCrop"
                         android:background="@drawable/circle_green"
                         android:gravity="center_vertical"
@@ -194,7 +197,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/activity_margin_default"
                 android:layout_marginBottom="@dimen/activity_margin_small"
-                android:layout_marginRight="@dimen/activity_margin_default">
+                android:layout_marginRight="@dimen/activity_margin_default"
+                app:cardCornerRadius="12dp">
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
@@ -224,8 +228,8 @@
 
                     <ImageView
                         android:id="@+id/imageView3"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="43dp"
+                        android:layout_height="43dp"
                         android:scaleType="centerCrop"
                         android:background="@drawable/circle_green"
                         android:gravity="center_vertical"
