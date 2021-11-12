@@ -60,20 +60,21 @@
             </androidx.cardview.widget.CardView>
 
             <!-- Table Data -->
-            <TextView
-                android:layout_marginLeft="@dimen/activity_margin_default"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="내 나무정보"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:paddingBottom="@dimen/activity_padding_default"/>
-
             <TableLayout
+                android:id="@+id/treeInfo_TableLayout_treeinfo"
                 android:paddingStart="@dimen/activity_padding_default"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/activity_margin_default">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="내 나무정보"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:paddingBottom="@dimen/activity_padding_default"/>
+
                 <TableRow>
                     <TextView
                         android:textStyle="bold"

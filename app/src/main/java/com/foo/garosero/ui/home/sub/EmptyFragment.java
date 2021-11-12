@@ -1,6 +1,5 @@
-package com.foo.garosero.ui.home.empty;
+package com.foo.garosero.ui.home.sub;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,7 +11,6 @@ import android.view.ViewGroup;
 import com.foo.garosero.MainActivity;
 import com.foo.garosero.R;
 import com.foo.garosero.ui.application.ApplicationFragment;
-import com.foo.garosero.ui.home.TreeExplainActivity;
 
 public class EmptyFragment extends Fragment {
     View root;

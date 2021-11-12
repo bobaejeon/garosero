@@ -14,10 +14,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TableLayout;
 
 import com.foo.garosero.R;
 import com.foo.garosero.data.UserTreesData;
-import com.foo.garosero.ui.home.empty.EmptyFragment;
+import com.foo.garosero.ui.home.sub.EmptyFragment;
+import com.foo.garosero.ui.home.sub.TodoFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,6 +33,8 @@ public class TreeInfoFragment extends Fragment {
     DatabaseReference databaseReference;
 
     ImageView treeCharacter;
+    TableLayout tableLayout;
+    FrameLayout frameLayout;
 
     View root;
 
@@ -45,8 +49,6 @@ public class TreeInfoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
-        View view = inflater.inflate(R.layout.fragment_tree_info, container, false);
 
         //String uid = firebaseAuth.getInstance().getUid();
         String uid = "GpnsOr4HRgPluWvUBqPsg4Gt8FQ2"; //테스트용
@@ -81,12 +83,24 @@ public class TreeInfoFragment extends Fragment {
     }
 
     private void initView() {
-        // 나무 정보 없을때 빈화면 출력
         treeCharacter = root.findViewById(R.id.treeInfo_ImageView_treeCharacter);
-        treeCharacter.setBackground(ContextCompat.getDrawable(root.getContext(), R.drawable.empty_tree));
-        FrameLayout frameLayout = root.findViewById(R.id.treeInfo_FrameLayout);
-        replaceFragment(new EmptyFragment());
-        // frameLayout.setVisibility(View.GONE);
+        tableLayout = root.findViewById(R.id.treeInfo_TableLayout_treeinfo);
+        frameLayout = root.findViewById(R.id.treeInfo_FrameLayout);
+
+        // 1. 나무 정보 없을때
+        setBackgroundImageview(treeCharacter, R.drawable.empty_tree);
+        tableLayout.setVisibility(View.GONE);
+        frameLayout.setVisibility(View.VISIBLE);
+
+        // 2. 나무 정보 있을 때
+        setBackgroundImageview(treeCharacter, R.drawable.mid_tree);
+        tableLayout.setVisibility(View.VISIBLE);
+        frameLayout.setVisibility(View.GONE);
+    }
+
+    // 이미지 뷰 채우기
+    private void setBackgroundImageview(ImageView imageView, int source){
+        imageView.setBackground(ContextCompat.getDrawable(root.getContext(), source));
     }
 
     // 프래그먼트 재설정
