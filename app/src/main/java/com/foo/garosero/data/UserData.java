@@ -31,12 +31,12 @@ public class UserData implements Serializable {
     public UserData(){}
     public UserData(String name){
         this.district = "";
-        this.kind = "아직 나무가 없어요";
+        this.kind = "";
         this.location = "";
         this.road = "";
         this.start_date = "";
         this.name = name;
-        this.tree_name = "아직 나무가 없어요";
+        this.tree_name = "";
     }
 
     public String getDistrict() {
