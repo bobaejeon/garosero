@@ -80,5 +80,16 @@ public class UserData implements Serializable {
         this.start_date = start_date;
     }
 
-
+    @Override
+    public String toString() {
+        return "UserData{" +
+                "name='" + name + '\'' +
+                ", district='" + district + '\'' +
+                ", kind='" + kind + '\'' +
+                ", location='" + location + '\'' +
+                ", road='" + road + '\'' +
+                ", start_date='" + start_date + '\'' +
+                ", tree_name='" + tree_name + '\'' +
+                '}';
+    }
 }

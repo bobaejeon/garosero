@@ -68,54 +68,59 @@ public class TreeInfoFragment extends Fragment {
         tableLayout = root.findViewById(R.id.treeInfo_TableLayout_treeinfo);
         frameLayout = root.findViewById(R.id.treeInfo_FrameLayout);
 
-        uid = FirebaseAuth.getInstance().getUid();
-        database = FirebaseDatabase.getInstance().getReference("Users/"+uid);
+        if (HomeViewModel.getDatabase()==null){
+            uid = FirebaseAuth.getInstance().getUid();
+            database = FirebaseDatabase.getInstance().getReference("Users/"+uid);
+            HomeViewModel.setDatabase(database);
 
-        ValueEventListener postListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
-                    UserData ud = dataSnapshot.getValue(UserData.class);
+            ValueEventListener postListener = new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.exists()){
+                        UserData ud = dataSnapshot.getValue(UserData.class);
+                        HomeViewModel.setUserData(ud);
+                        Log.e("체크", HomeViewModel.getUserData().toString());
 
-                    tv_tree_name.setText(ud.getTree_name());
-                    tv_road.setText(ud.getRoad());
-                    tv_dist.setText(ud.getDistrict());
-                    tv_loc.setText(ud.getLocation());
-                    tv_kind.setText(ud.getKind());
+/*                        tv_tree_name.setText(ud.getTree_name());
+                        tv_road.setText(ud.getRoad());
+                        tv_dist.setText(ud.getDistrict());
+                        tv_loc.setText(ud.getLocation());
+                        tv_kind.setText(ud.getKind());
 
-                    String carbon_amt;
-                    switch (ud.getKind()){
-                        case "은행나무":
-                            carbon_amt = "33.7kg";
-                            break;
-                        case "소나무":
-                            carbon_amt = "47.5kg";
-                            break;
-                        case "양버즘나무":
-                            carbon_amt = "361.6kg";
-                            break;
-                        default:
-                            carbon_amt = "없음";
+                        String carbon_amt;
+                        switch (ud.getKind()){
+                            case "은행나무":
+                                carbon_amt = "33.7kg";
+                                break;
+                            case "소나무":
+                                carbon_amt = "47.5kg";
+                                break;
+                            case "양버즘나무":
+                                carbon_amt = "361.6kg";
+                                break;
+                            default:
+                                carbon_amt = "없음";
+                        }
+                        tv_carbon_amt.setText(carbon_amt);*/
+                    } else {
+                        Log.e("MainActivity", "no data");
                     }
-                    tv_carbon_amt.setText(carbon_amt);
-
-                    // 나무정보 있을때 OR 나무 정보 없을때
-                    initView();
-                } else {
-                    Log.e("MainActivity", "no data");
                 }
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Getting Post failed, log a message
-                Log.w("MainActivity", "onCancelled", databaseError.toException());
-            }
-        };
-        database.addListenerForSingleValueEvent(postListener);
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    // Getting Post failed, log a message
+                    Log.w("MainActivity", "onCancelled", databaseError.toException());
+                }
+            };
+            database.addListenerForSingleValueEvent(postListener);
 
-        // 데이터 전달받아 표시하기 끝
+            // 데이터 전달받아 표시하기 끝
+        }
 
+        // 나무정보 있을때 OR 나무 정보 없을때
+        initView();
+        initCardView(HomeViewModel.getUserData());
         return root;
     }
 
@@ -124,11 +129,12 @@ public class TreeInfoFragment extends Fragment {
         tableLayout = root.findViewById(R.id.treeInfo_TableLayout_treeinfo);
         frameLayout = root.findViewById(R.id.treeInfo_FrameLayout);
 
-        if (tv_tree_name.getText().toString().equals(getString(R.string.noTree))){
+        if (HomeViewModel.getUserData().tree_name.equals(getString(R.string.noTree))){
             // 1. 나무 정보 없을때
             setBackgroundImageview(treeCharacter, R.drawable.empty_tree);
             tableLayout.setVisibility(View.GONE);
             frameLayout.setVisibility(View.VISIBLE);
+            replaceFragment(new EmptyFragment());
         }
         else {
             // 2. 나무 정보 있을 때
@@ -148,5 +154,30 @@ public class TreeInfoFragment extends Fragment {
         FragmentManager fragmentManager = getChildFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.treeInfo_FrameLayout, fragment).commit();
+    }
+
+    // cardview 다시쓰기
+    private void initCardView(UserData ud){
+        tv_tree_name.setText(ud.getTree_name());
+        tv_road.setText(ud.getRoad());
+        tv_dist.setText(ud.getDistrict());
+        tv_loc.setText(ud.getLocation());
+        tv_kind.setText(ud.getKind());
+
+        String carbon_amt;
+        switch (ud.getKind()){
+            case "은행나무":
+                carbon_amt = "33.7kg";
+                break;
+            case "소나무":
+                carbon_amt = "47.5kg";
+                break;
+            case "양버즘나무":
+                carbon_amt = "361.6kg";
+                break;
+            default:
+                carbon_amt = "없음";
+        }
+        tv_carbon_amt.setText(carbon_amt);
     }
 }

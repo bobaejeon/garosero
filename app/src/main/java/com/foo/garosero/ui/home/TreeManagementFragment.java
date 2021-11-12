@@ -40,14 +40,9 @@ public class TreeManagementFragment extends Fragment {
     DatabaseReference database;
     String uid;
     TextView tv_tree_name, tv_tree_day;
-
-    TextView ans1;
-    TextView ans2;
-    TextView ans3;
-    ImageView icon1;
-    ImageView icon2;
-    ImageView icon3;
     ImageView treeCharacter;
+    UserData ud;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,60 +55,63 @@ public class TreeManagementFragment extends Fragment {
                              Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_tree_management, container, false);
         treeCharacter = root.findViewById(R.id.treeManagement_ImageView_treeCharacter);
-        FrameLayout frameLayout = root.findViewById(R.id.treeManagement_FrameLayout);
 
         // 데이터 전달받아 표시하기 시작 (BB)
         tv_tree_name = root.findViewById(R.id.treeManagement_TextView_treeName);
         tv_tree_day = root.findViewById(R.id.treeManagement_TextView_treeDay);
 
-        uid = FirebaseAuth.getInstance().getUid();
-        database = FirebaseDatabase.getInstance().getReference("Users/"+uid);
+        if (HomeViewModel.getDatabase()==null){
+            uid = FirebaseAuth.getInstance().getUid();
+            database = FirebaseDatabase.getInstance().getReference("Users/"+uid);
+            HomeViewModel.setDatabase(database);
 
-        ValueEventListener postListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
-                    UserData ud = dataSnapshot.getValue(UserData.class);
+            ValueEventListener postListener = new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.exists()){
+                        ud = dataSnapshot.getValue(UserData.class);
+                        HomeViewModel.setUserData(ud);
 
-                    tv_tree_name.setText(ud.getTree_name());
-                    Calendar calendar = Calendar.getInstance();
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                    long calDateDays = 0;
+                        /*tv_tree_name.setText(ud.getTree_name());
+                        Calendar calendar = Calendar.getInstance();
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                        long calDateDays = 0;
 
-                    try {
-                        Date currDate = calendar.getTime();
-                        Date lastDate = sdf.parse(ud.getStart_date());
-                        long calDate = currDate.getTime() - lastDate.getTime();
-                        calDateDays = calDate / ( 24*60*60*1000);
-                        String str = ud.getName()+"님과 함께한지 "+Math.abs(calDateDays)+"일째";
-                        tv_tree_day.setText(str);
-                        replaceFragment(new TodoFragment());
-                    } catch (ParseException e) {
-                        Log.e("TreeManagementFrag",e.toString());
+                        try {
+                            Date currDate = calendar.getTime();
+                            Date lastDate = sdf.parse(ud.getStart_date());
+                            long calDate = currDate.getTime() - lastDate.getTime();
+                            calDateDays = calDate / ( 24*60*60*1000);
+                            String str = ud.getName()+"님과 함께한지 "+Math.abs(calDateDays)+"일째";
+                            tv_tree_day.setText(str);
+                            replaceFragment(new TodoFragment());
+                        } catch (ParseException e) {
+                            Log.e("TreeManagementFrag",e.toString());
+                        }*/
+                    }
+                    else {
+                        Log.e("MainActivity", "no data");
                     }
                 }
-                else {
-                    Log.e("MainActivity", "no data");
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    // Getting Post failed, log a message
+                    Log.w("MainActivity", "onCancelled", databaseError.toException());
                 }
+            };
+            database.addListenerForSingleValueEvent(postListener);
+            // 데이터 전달받아 표시하기 끝
+        }
 
-                // 나무정보 있을때 OR 나무 정보 없을때
-                initView();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Getting Post failed, log a message
-                Log.w("MainActivity", "onCancelled", databaseError.toException());
-            }
-        };
-        database.addListenerForSingleValueEvent(postListener);
-        // 데이터 전달받아 표시하기 끝
-
+        // 나무정보 있을때 OR 나무 정보 없을때
+        initView();
+        initCardView(HomeViewModel.getUserData());
         return root;
     }
 
     private void initView() {
-        if (tv_tree_name.getText().toString().equals(getString(R.string.noTree))) {
+        if (HomeViewModel.getUserData().tree_name.equals(getString(R.string.noTree))) {
             // 1. 나무 정보 없을때
             setBackgroundImageview(treeCharacter, R.drawable.empty_tree);
             replaceFragment(new EmptyFragment());
@@ -135,5 +133,27 @@ public class TreeManagementFragment extends Fragment {
         FragmentManager fragmentManager = getChildFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.treeManagement_FrameLayout, fragment).commit();
+    }
+
+    // cardview 채우기
+    private void initCardView(UserData ud){
+        tv_tree_name = root.findViewById(R.id.treeManagement_TextView_treeName);
+        tv_tree_day = root.findViewById(R.id.treeManagement_TextView_treeDay);
+        tv_tree_name.setText(ud.getTree_name());
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        long calDateDays = 0;
+
+        try {
+            Date currDate = calendar.getTime();
+            Date lastDate = sdf.parse(ud.getStart_date());
+            long calDate = currDate.getTime() - lastDate.getTime();
+            calDateDays = calDate / ( 24*60*60*1000);
+            String str = ud.getName()+"님과 함께한지 "+Math.abs(calDateDays)+"일째";
+            tv_tree_day.setText(str);
+            replaceFragment(new TodoFragment());
+        } catch (ParseException e) {
+            Log.e("TreeManagementFrag",e.toString());
+        }
     }
 }

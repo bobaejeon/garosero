@@ -20,6 +20,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.foo.garosero.data.UserData;
 import com.foo.garosero.ui.application.ApplicationFragment;
 import com.foo.garosero.ui.home.HomeFragment;
+import com.foo.garosero.ui.home.HomeViewModel;
 import com.foo.garosero.ui.information.InformationFragment;
 import com.foo.garosero.ui.visualization.VisualizationFragment;
 import com.google.android.material.navigation.NavigationView;
@@ -86,6 +87,12 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.item_logout: //logout 후 login activity로 redirect
                         FirebaseAuth.getInstance().signOut();
+
+                        // 싱글턴 객체 초기화
+                        HomeViewModel.setDatabase(null);
+                        HomeViewModel.setUserData(null);
+
+                        // intent
                         Toast.makeText(MainActivity.this, "로그아웃되었습니다.", Toast.LENGTH_LONG);
                         startActivity(new Intent(MainActivity.this, LoginActivity.class));
                         finish();

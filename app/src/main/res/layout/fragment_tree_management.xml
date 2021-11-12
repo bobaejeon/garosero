@@ -30,7 +30,7 @@
                         android:layout_width="119dp"
                         android:layout_height="153dp"
                         android:layout_gravity="center"
-                        android:background="@drawable/big_tree"
+                        android:background="@drawable/mid_tree"
                         android:layout_margin="@dimen/activity_margin_small"/>
 
                     <EditText
