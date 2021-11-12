@@ -16,4 +16,5 @@
     <string name="action_cancel">취소</string>
     <string name="prompt_password_check">비밀번호 확인</string>
     <string name="prompt_name">이름</string>
+    <string name="noTree">아직 나무가 없어요</string>
 </resources>

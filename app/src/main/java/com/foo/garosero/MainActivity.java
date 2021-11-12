@@ -2,9 +2,11 @@ package com.foo.garosero;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -15,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.foo.garosero.data.UserData;
 import com.foo.garosero.ui.application.ApplicationFragment;
 import com.foo.garosero.ui.home.HomeFragment;
 import com.foo.garosero.ui.information.InformationFragment;
@@ -22,12 +25,22 @@ import com.foo.garosero.ui.visualization.VisualizationFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     ImageButton menuButton;
+
+    // db에서 값을 받아오고 표시하기 위함
+    DatabaseReference database;
+    String uid;
+
 
     private long lastTimeBackPressed; //뒤로가기 버튼이 클릭된 시간
 
@@ -39,6 +52,9 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         navigationView = (NavigationView)findViewById(R.id.navigation_view);
         menuButton = findViewById(R.id.memu);
+
+        // nav header의 이름, 나무를 유저db에서 불러옴
+        getUserData();
 
         // 프래그먼트 초기설정
         replaceFragment(new HomeFragment());
@@ -72,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
                         FirebaseAuth.getInstance().signOut();
                         Toast.makeText(MainActivity.this, "로그아웃되었습니다.", Toast.LENGTH_LONG);
                         startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                        finish();
                         break;
                 }
                 drawerLayout.closeDrawer(GravityCompat.END);
@@ -100,6 +117,38 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "'뒤로' 버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT).show();
             lastTimeBackPressed = System.currentTimeMillis();
         }
+    }
+
+    public void getUserData(){
+        View header = navigationView.getHeaderView(0);
+        TextView tv_name = header.findViewById(R.id.tv_name);
+        TextView tv_info = header.findViewById(R.id.tv_info);
+
+        uid = FirebaseAuth.getInstance().getUid();
+        database = FirebaseDatabase.getInstance().getReference("Users/"+uid);
+        ValueEventListener postListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    UserData ud = dataSnapshot.getValue(UserData.class);
+                    if (ud.getKind().endsWith("나무")) {
+                        tv_name.setText(ud.getKind());
+                    } else {
+                        tv_name.setText("");
+                    }
+                    tv_info.setText(ud.getName());
+                } else {
+                    Log.e("MainActivity", "no data");
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w("MainActivity", "onCancelled", databaseError.toException());
+            }
+        };
+        database.addListenerForSingleValueEvent(postListener);
     }
 
 }
