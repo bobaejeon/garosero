@@ -3,8 +3,8 @@
     <string name="app_title">SEOUL GAROSU</string>
 
     <string name="title_activity_login">LoginActivity</string>
-    <string name="prompt_email">이메일</string>
-    <string name="prompt_password">패스워드</string>
+    <string name="prompt_email">이메일(형식을 지켜주세요)</string>
+    <string name="prompt_password">패스워드(6자리 이상)</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="welcome">"Welcome !"</string>
