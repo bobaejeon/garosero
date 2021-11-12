@@ -6,15 +6,19 @@ import android.os.Bundle;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.foo.garosero.R;
+import com.foo.garosero.ui.home.empty.EmptyFragment;
 
 public class TreeManagementFragment extends Fragment implements View.OnClickListener {
     View root;
@@ -22,7 +26,6 @@ public class TreeManagementFragment extends Fragment implements View.OnClickList
     TextView ans1;
     TextView ans2;
     TextView ans3;
-    TextView treeDay;
     ImageView icon1;
     ImageView icon2;
     ImageView icon3;
@@ -53,7 +56,9 @@ public class TreeManagementFragment extends Fragment implements View.OnClickList
         // 나무 정보 없을때 빈화면 출력
         treeCharacter = root.findViewById(R.id.treeManagement_ImageView_treeCharacter);
         setBackgroundImageview(treeCharacter, R.drawable.empty_tree);
-
+        FrameLayout frameLayout = root.findViewById(R.id.treeManagement_FrameLayout);
+        replaceFragment(new EmptyFragment());
+        // frameLayout.setVisibility(View.GONE);
         return root;
     }
 
@@ -114,4 +119,10 @@ public class TreeManagementFragment extends Fragment implements View.OnClickList
         imageView.setBackground(ContextCompat.getDrawable(root.getContext(), source));
     }
 
+    // 프래그먼트 재설정
+    public void replaceFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getChildFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.treeManagement_FrameLayout, fragment).commit();
+    }
 }

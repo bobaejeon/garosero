@@ -3,15 +3,21 @@ package com.foo.garosero.ui.home;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import com.foo.garosero.R;
 import com.foo.garosero.data.UserTreesData;
+import com.foo.garosero.ui.home.empty.EmptyFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,6 +29,8 @@ public class TreeInfoFragment extends Fragment {
     FirebaseAuth firebaseAuth;
     FirebaseDatabase database;
     DatabaseReference databaseReference;
+
+    ImageView treeCharacter;
 
     View root;
 
@@ -68,6 +76,23 @@ public class TreeInfoFragment extends Fragment {
         });
 
         root = inflater.inflate(R.layout.fragment_tree_info, container, false);
+        initView();
         return root;
+    }
+
+    private void initView() {
+        // 나무 정보 없을때 빈화면 출력
+        treeCharacter = root.findViewById(R.id.treeInfo_ImageView_treeCharacter);
+        treeCharacter.setBackground(ContextCompat.getDrawable(root.getContext(), R.drawable.empty_tree));
+        FrameLayout frameLayout = root.findViewById(R.id.treeInfo_FrameLayout);
+        replaceFragment(new EmptyFragment());
+        // frameLayout.setVisibility(View.GONE);
+    }
+
+    // 프래그먼트 재설정
+    public void replaceFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getChildFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.treeInfo_FrameLayout, fragment).commit();
     }
 }

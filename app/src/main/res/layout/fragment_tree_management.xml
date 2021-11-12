@@ -249,5 +249,11 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
+            <!-- 나무가 없을때 -->
+            <FrameLayout
+                android:id="@+id/treeManagement_FrameLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
         </LinearLayout>
 </FrameLayout>

@@ -47,7 +47,7 @@
             android:paddingBottom="@dimen/activity_padding_default"/>
 
         <Button
-
+            android:id="@+id/empty_Button_application"
             android:background="@drawable/button_background"
             android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
