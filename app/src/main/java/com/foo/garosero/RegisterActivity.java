@@ -84,12 +84,6 @@ public class RegisterActivity extends AppCompatActivity {
                                     DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
                                     UserData ud = new UserData(name);
                                     ref.child("Users").child(uid).setValue(ud);
-//                                    Map<String, Object> childUpdates = new HashMap<>();
-//                                    childUpdates.put("/Users/"+uid+"/name", name);
-//                                    // 나무 종류 등 입력
-//                                    childUpdates.put("/Users/"+uid+"/tree", "");
-//
-//                                    ref.updateChildren(childUpdates);
                                     Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                                     startActivity(intent);
                                     finish();
