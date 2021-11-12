@@ -22,9 +22,11 @@ public class TreeManagementFragment extends Fragment implements View.OnClickList
     TextView ans1;
     TextView ans2;
     TextView ans3;
+    TextView treeDay;
     ImageView icon1;
     ImageView icon2;
     ImageView icon3;
+    ImageView treeCharacter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,9 +50,14 @@ public class TreeManagementFragment extends Fragment implements View.OnClickList
         root.findViewById(R.id.treeManagement_CardView_todo2).setOnClickListener(this);
         root.findViewById(R.id.treeManagement_CardView_todo3).setOnClickListener(this);
 
+        // 나무 정보 없을때 빈화면 출력
+        treeCharacter = root.findViewById(R.id.treeManagement_ImageView_treeCharacter);
+        setBackgroundImageview(treeCharacter, R.drawable.empty_tree);
+
         return root;
     }
 
+    // cardView 클릭 이벤트 지정
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -66,36 +73,45 @@ public class TreeManagementFragment extends Fragment implements View.OnClickList
         }
     }
 
+    // 다이어로그 띄우기
     private void showDialog(String title, TextView textView, ImageView imageView){
         AlertDialog.Builder dlg = new AlertDialog.Builder(getActivity());
         dlg.setTitle(title);
         final String[] option = {"양호", "보통", "미흡"};
 
-        dlg.setSingleChoiceItems(option, 0, new DialogInterface.OnClickListener() {
+        dlg.setItems(option, new DialogInterface.OnClickListener() {
+
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 textView.setText(option[which]);
                 switch (textView.getText().toString()){
                     case "양호" :
-                        imageView.setBackground(ContextCompat.getDrawable(root.getContext(), R.drawable.circle_green));
+                        setBackgroundImageview(imageView, R.drawable.circle_green);
                         break;
                     case "보통" :
-                        imageView.setBackground(ContextCompat.getDrawable(root.getContext(), R.drawable.circle_yellow));
+                        setBackgroundImageview(imageView, R.drawable.circle_yellow);
                         break;
                     case "미흡" :
-                        imageView.setBackground(ContextCompat.getDrawable(root.getContext(), R.drawable.circle_red));
+                        setBackgroundImageview(imageView, R.drawable.circle_red);
                         break;
-                }
-            }
-        });
 
-        dlg.setPositiveButton("확인",new DialogInterface.OnClickListener(){
-            public void onClick(DialogInterface dialog, int which) {
-                //토스트 메시지
+                }
                 Toast.makeText(getActivity(),"응답이 제출되었습니다.",Toast.LENGTH_SHORT).show();
             }
         });
+
+        dlg.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss(); //다이어로그 없애기
+            }
+        });
         dlg.show();
+    }
+
+    // 이미지 뷰 채우기
+    private void setBackgroundImageview(ImageView imageView, int source){
+        imageView.setBackground(ContextCompat.getDrawable(root.getContext(), source));
     }
 
 }

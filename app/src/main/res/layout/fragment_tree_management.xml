@@ -26,20 +26,24 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:layout_width="match_parent"
+                        android:id="@+id/treeManagement_ImageView_treeCharacter"
+                        android:layout_width="119dp"
                         android:layout_height="153dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/big_tree"
+                        android:background="@drawable/big_tree"
                         android:layout_margin="@dimen/activity_margin_small"/>
 
-                    <TextView
+                    <EditText
+                        android:id="@+id/treeManagement_TextView_treeName"
                         android:paddingBottom="@dimen/activity_padding_default"
                         android:layout_width="match_parent"
-                        android:layout_height="34dp"
-                        android:text="나무 이름"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:hint="나무이름을 지어주세요!"
                         android:gravity="center"/>
 
                     <TextView
+                        android:id="@+id/treeManagement_TextView_treeDay"
                         android:textStyle="bold"
                         android:textSize="20sp"
                         android:layout_width="match_parent"
