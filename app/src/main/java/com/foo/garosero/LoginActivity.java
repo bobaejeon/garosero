@@ -109,6 +109,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onBackPressed() { //뒤로가기 했을 때
         // 두번 클릭시 종료
         if (System.currentTimeMillis() - lastTimeBackPressed < 2000) {
+<<<<<<< HEAD
+=======
+            Toast.makeText(this, "앱을 종료합니다.", Toast.LENGTH_SHORT).show();
+>>>>>>> f154611b1a1b05c22f90c67df00f395260c8fd34
             finishAffinity();           // 해당 어플리케이션의 루트 액티비티를 종료
             System.runFinalization();   // 쓰레드 종료
             System.exit(0);       // 현재의 액티비티를 종료
