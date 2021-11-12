@@ -1,17 +1,28 @@
 package com.foo.garosero.ui.home;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.foo.garosero.R;
-import com.foo.garosero.data.UserTreesData;
+import com.foo.garosero.data.UserData;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.TableLayout;
+import android.widget.TextView;
+
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.foo.garosero.R;
+import com.foo.garosero.ui.home.sub.EmptyFragment;
+import com.foo.garosero.ui.home.sub.TodoFragment;
+import com.foo.garosero.data.UserData;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -20,12 +31,17 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class TreeInfoFragment extends Fragment {
-    FirebaseAuth firebaseAuth;
-    FirebaseDatabase database;
-    DatabaseReference databaseReference;
+    ImageView treeCharacter;
+    TableLayout tableLayout;
+    FrameLayout frameLayout;
 
     View root;
 
+    // db에서 값을 받아오고 표시하기 위함
+    DatabaseReference database;
+    String uid;
+
+    TextView tv_tree_name, tv_carbon_amt, tv_kind, tv_road, tv_dist, tv_loc;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,36 +54,130 @@ public class TreeInfoFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        View view = inflater.inflate(R.layout.fragment_tree_info, container, false);
+        root = inflater.inflate(R.layout.fragment_tree_info, container, false);
 
-        //String uid = firebaseAuth.getInstance().getUid();
-        String uid = "GpnsOr4HRgPluWvUBqPsg4Gt8FQ2"; //테스트용
-        database = FirebaseDatabase.getInstance();
-        databaseReference = database.getReference("Users/"+uid+"/trees");
+        // 데이터 전달받아 표시하기 시작 (BB)
+        tv_tree_name = root.findViewById(R.id.tv_tree_name);
+        tv_carbon_amt = root.findViewById(R.id.tv_carbon_amt);
+        tv_kind = root.findViewById(R.id.tv_kind);
+        tv_road = root.findViewById(R.id.tv_road);
+        tv_dist = root.findViewById(R.id.tv_dist);
+        tv_loc = root.findViewById(R.id.tv_loc);
 
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    int num = 1;
-                    for(DataSnapshot snap : snapshot.getChildren()){ // 데이터 리스트 추출
-                        UserTreesData userTreesData = snap.getValue(UserTreesData.class); //나무의 세부데이터
-                        String name = snap.getKey(); //나무이름
-//                        Log.d("treeInfo", num+") "+name+" "+userTreesData.getRoad().toString()); //잘 들어옴
+        treeCharacter = root.findViewById(R.id.treeInfo_ImageView_treeCharacter);
+        tableLayout = root.findViewById(R.id.treeInfo_TableLayout_treeinfo);
+        frameLayout = root.findViewById(R.id.treeInfo_FrameLayout);
 
-                        num++;
+        if (HomeViewModel.getDatabase()==null){
+            uid = FirebaseAuth.getInstance().getUid();
+            database = FirebaseDatabase.getInstance().getReference("Users/"+uid);
+            HomeViewModel.setDatabase(database);
+
+            ValueEventListener postListener = new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.exists()){
+                        UserData ud = dataSnapshot.getValue(UserData.class);
+                        HomeViewModel.setUserData(ud);
+                        Log.e("체크", HomeViewModel.getUserData().toString());
+
+/*                        tv_tree_name.setText(ud.getTree_name());
+                        tv_road.setText(ud.getRoad());
+                        tv_dist.setText(ud.getDistrict());
+                        tv_loc.setText(ud.getLocation());
+                        tv_kind.setText(ud.getKind());
+
+                        String carbon_amt;
+                        switch (ud.getKind()){
+                            case "은행나무":
+                                carbon_amt = "33.7kg";
+                                break;
+                            case "소나무":
+                                carbon_amt = "47.5kg";
+                                break;
+                            case "양버즘나무":
+                                carbon_amt = "361.6kg";
+                                break;
+                            default:
+                                carbon_amt = "없음";
+                        }
+                        tv_carbon_amt.setText(carbon_amt);*/
+                    } else {
+                        Log.e("MainActivity", "no data");
                     }
                 }
-                Log.e("treeInfo", "no data");
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.e("treeInfo", String.valueOf(error.toException()));
-            }
-        });
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    // Getting Post failed, log a message
+                    Log.w("MainActivity", "onCancelled", databaseError.toException());
+                }
+            };
+            database.addListenerForSingleValueEvent(postListener);
 
-        root = inflater.inflate(R.layout.fragment_tree_info, container, false);
+            // 데이터 전달받아 표시하기 끝
+        }
+
+        // 나무정보 있을때 OR 나무 정보 없을때
+        initView();
+        initCardView(HomeViewModel.getUserData());
         return root;
+    }
+
+    private void initView() {
+        treeCharacter = root.findViewById(R.id.treeInfo_ImageView_treeCharacter);
+        tableLayout = root.findViewById(R.id.treeInfo_TableLayout_treeinfo);
+        frameLayout = root.findViewById(R.id.treeInfo_FrameLayout);
+
+        if (HomeViewModel.getUserData().tree_name.equals(getString(R.string.noTree))){
+            // 1. 나무 정보 없을때
+            setBackgroundImageview(treeCharacter, R.drawable.empty_tree);
+            tableLayout.setVisibility(View.GONE);
+            frameLayout.setVisibility(View.VISIBLE);
+            replaceFragment(new EmptyFragment());
+        }
+        else {
+            // 2. 나무 정보 있을 때
+            setBackgroundImageview(treeCharacter, R.drawable.mid_tree);
+            tableLayout.setVisibility(View.VISIBLE);
+            frameLayout.setVisibility(View.GONE);
+        }
+    }
+
+    // 이미지 뷰 채우기
+    private void setBackgroundImageview(ImageView imageView, int source){
+        imageView.setBackground(ContextCompat.getDrawable(root.getContext(), source));
+    }
+
+    // 프래그먼트 재설정
+    public void replaceFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getChildFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.treeInfo_FrameLayout, fragment).commit();
+    }
+
+    // cardview 다시쓰기
+    private void initCardView(UserData ud){
+        tv_tree_name.setText(ud.getTree_name());
+        tv_road.setText(ud.getRoad());
+        tv_dist.setText(ud.getDistrict());
+        tv_loc.setText(ud.getLocation());
+        tv_kind.setText(ud.getKind());
+
+        String carbon_amt;
+        switch (ud.getKind()){
+            case "은행나무":
+                carbon_amt = "33.7kg";
+                break;
+            case "소나무":
+                carbon_amt = "47.5kg";
+                break;
+            case "양버즘나무":
+                carbon_amt = "361.6kg";
+                break;
+            default:
+                carbon_amt = "없음";
+        }
+        tv_carbon_amt.setText(carbon_amt);
     }
 }
