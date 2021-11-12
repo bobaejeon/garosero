@@ -2,6 +2,7 @@ package com.foo.garosero;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 
 import android.content.Intent;
 import android.os.Build;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.foo.garosero.data.AsteriskPasswordTransformationMethod;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -32,6 +34,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText et_email, et_password;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference ref;
+
+    private long lastTimeBackPressed; //뒤로가기 버튼이 클릭된 시간
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +85,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                             startActivity(intent);
                                             finish();
 
-                                        }else Log.e("LoginActivity","data doesnt exist");
+                                        }else Log.e("LoginActivity","data oesnt exist");
                                     }
 
                                     @Override
@@ -99,5 +103,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
         }
 
+    }
+
+    @Override
+    public void onBackPressed() { //뒤로가기 했을 때
+        // 두번 클릭시 종료
+        if (System.currentTimeMillis() - lastTimeBackPressed < 2000) {
+            finish();
+            return;
+        }
+        Toast.makeText(this, "'뒤로' 버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT).show();
+        lastTimeBackPressed = System.currentTimeMillis();
     }
 }

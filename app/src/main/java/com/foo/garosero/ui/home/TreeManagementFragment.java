@@ -1,12 +1,6 @@
 package com.foo.garosero.ui.home;
 
 import android.os.Bundle;
-
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,8 +9,15 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.foo.garosero.R;
 import com.foo.garosero.data.UserData;
+import com.foo.garosero.ui.home.sub.EmptyFragment;
+import com.foo.garosero.ui.home.sub.TodoFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,6 +31,7 @@ import java.util.Calendar;
 import java.util.Date;
 import com.foo.garosero.ui.home.sub.EmptyFragment;
 import com.foo.garosero.ui.home.sub.TodoFragment;
+
 
 public class TreeManagementFragment extends Fragment {
     View root;
@@ -72,38 +74,30 @@ public class TreeManagementFragment extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
                     UserData ud = dataSnapshot.getValue(UserData.class);
+
                     tv_tree_name.setText(ud.getTree_name());
+                    Calendar calendar = Calendar.getInstance();
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    long calDateDays = 0;
 
-                    // 1. 나무정보 데이터가 없는 경우
-                    if(ud.getStart_date().equals("")){
-                        setBackgroundImageview(treeCharacter, R.drawable.empty_tree);
-                        replaceFragment(new EmptyFragment());
+                    try {
+                        Date currDate = calendar.getTime();
+                        Date lastDate = sdf.parse(ud.getStart_date());
+                        long calDate = currDate.getTime() - lastDate.getTime();
+                        calDateDays = calDate / ( 24*60*60*1000);
+                        String str = ud.getName()+"님과 함께한지 "+Math.abs(calDateDays)+"일째";
+                        tv_tree_day.setText(str);
+                        replaceFragment(new TodoFragment());
+                    } catch (ParseException e) {
+                        Log.e("TreeManagementFrag",e.toString());
                     }
-
-                    // 2. 나무정보 데이터가 있는 경우
-                    else{
-                        setBackgroundImageview(treeCharacter, R.drawable.mid_tree);
-
-                        Calendar calendar = Calendar.getInstance();
-                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                        long calDateDays = 0;
-
-                        try {
-                            Date currDate = calendar.getTime();
-                            Date lastDate = sdf.parse(ud.getStart_date());
-                            long calDate = currDate.getTime() - lastDate.getTime();
-                            calDateDays = calDate / ( 24*60*60*1000);
-                            String str = ud.getName()+"님과 함께한지 "+Math.abs(calDateDays)+"일째";
-                            tv_tree_day.setText(str);
-                            replaceFragment(new TodoFragment());
-                        } catch (ParseException e) {
-                            Log.e("TreeManagementFrag",e.toString());
-                        }
-                    }
-
-                } else {
+                }
+                else {
                     Log.e("MainActivity", "no data");
                 }
+
+                // 나무정보 있을때 OR 나무 정보 없을때
+                initView();
             }
 
             @Override
@@ -116,6 +110,19 @@ public class TreeManagementFragment extends Fragment {
         // 데이터 전달받아 표시하기 끝
 
         return root;
+    }
+
+    private void initView() {
+        if (tv_tree_name.getText().toString().equals(getString(R.string.noTree))) {
+            // 1. 나무 정보 없을때
+            setBackgroundImageview(treeCharacter, R.drawable.empty_tree);
+            replaceFragment(new EmptyFragment());
+        }
+        else {
+            // 2. 나무 정보 있을 때
+            setBackgroundImageview(treeCharacter, R.drawable.mid_tree);
+            replaceFragment(new TodoFragment());
+        }
     }
 
     // 이미지 뷰 채우기

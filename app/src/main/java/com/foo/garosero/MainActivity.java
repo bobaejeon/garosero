@@ -88,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
                         FirebaseAuth.getInstance().signOut();
                         Toast.makeText(MainActivity.this, "로그아웃되었습니다.", Toast.LENGTH_LONG);
                         startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                        finish();
                         break;
                 }
                 drawerLayout.closeDrawer(GravityCompat.END);

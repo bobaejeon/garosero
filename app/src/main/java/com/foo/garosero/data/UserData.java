@@ -36,7 +36,7 @@ public class UserData implements Serializable {
         this.road = "";
         this.start_date = "";
         this.name = name;
-        this.tree_name = "";
+        this.tree_name = "아직 나무가 없어요";
     }
 
     public String getDistrict() {

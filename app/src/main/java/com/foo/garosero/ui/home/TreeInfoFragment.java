@@ -1,13 +1,6 @@
 package com.foo.garosero.ui.home;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,10 +12,17 @@ import com.foo.garosero.data.UserData;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TableLayout;
+import android.widget.TextView;
+
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.foo.garosero.R;
 import com.foo.garosero.ui.home.sub.EmptyFragment;
 import com.foo.garosero.ui.home.sub.TodoFragment;
+import com.foo.garosero.data.UserData;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,7 +31,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class TreeInfoFragment extends Fragment {
-
     ImageView treeCharacter;
     TableLayout tableLayout;
     FrameLayout frameLayout;
@@ -78,49 +77,30 @@ public class TreeInfoFragment extends Fragment {
                 if(dataSnapshot.exists()){
                     UserData ud = dataSnapshot.getValue(UserData.class);
 
-                    // 1. 나무정보 데이터가 없는 경우
-                    if(ud.getRoad().equals("")){
-                        // view 수정
-                        setBackgroundImageview(treeCharacter, R.drawable.empty_tree);
-                        tableLayout.setVisibility(View.GONE);
-                        frameLayout.setVisibility(View.VISIBLE);
+                    tv_tree_name.setText(ud.getTree_name());
+                    tv_road.setText(ud.getRoad());
+                    tv_dist.setText(ud.getDistrict());
+                    tv_loc.setText(ud.getLocation());
+                    tv_kind.setText(ud.getKind());
+
+                    String carbon_amt;
+                    switch (ud.getKind()){
+                        case "은행나무":
+                            carbon_amt = "33.7kg";
+                            break;
+                        case "소나무":
+                            carbon_amt = "47.5kg";
+                            break;
+                        case "양버즘나무":
+                            carbon_amt = "361.6kg";
+                            break;
+                        default:
+                            carbon_amt = "없음";
                     }
+                    tv_carbon_amt.setText(carbon_amt);
 
-                    // 2. 나무정보 데이터가 있는 경우
-                    else{
-                        // view 수정
-                        setBackgroundImageview(treeCharacter, R.drawable.mid_tree);
-                        tableLayout.setVisibility(View.VISIBLE);
-                        frameLayout.setVisibility(View.GONE);
-
-                        // data불러와 표시
-                        tv_tree_name.setText(ud.getTree_name());
-                        tv_road.setText(ud.getRoad());
-                        tv_dist.setText(ud.getDistrict());
-                        tv_loc.setText(ud.getLocation());
-
-                        if (ud.getKind().endsWith("나무")) {
-                            tv_kind.setText(ud.getKind());
-                        } else {
-                            tv_kind.setText("");
-                        }
-
-                        String carbon_amt;
-                        switch (ud.getKind()){
-                            case "은행나무":
-                                carbon_amt = "33.7kg";
-                                break;
-                            case "소나무":
-                                carbon_amt = "47.5kg";
-                                break;
-                            case "양버즘나무":
-                                carbon_amt = "361.6kg";
-                                break;
-                            default:
-                                carbon_amt = "???";
-                        }
-                        tv_carbon_amt.setText(carbon_amt);
-                    }
+                    // 나무정보 있을때 OR 나무 정보 없을때
+                    initView();
                 } else {
                     Log.e("MainActivity", "no data");
                 }
@@ -139,21 +119,24 @@ public class TreeInfoFragment extends Fragment {
         return root;
     }
 
-//    private void initView() {
-//        treeCharacter = root.findViewById(R.id.treeInfo_ImageView_treeCharacter);
-//        tableLayout = root.findViewById(R.id.treeInfo_TableLayout_treeinfo);
-//        frameLayout = root.findViewById(R.id.treeInfo_FrameLayout);
-//
-//        // 1. 나무 정보 없을때
-//        setBackgroundImageview(treeCharacter, R.drawable.empty_tree);
-//        tableLayout.setVisibility(View.GONE);
-//        frameLayout.setVisibility(View.VISIBLE);
-//
-//        // 2. 나무 정보 있을 때
-//        setBackgroundImageview(treeCharacter, R.drawable.mid_tree);
-//        tableLayout.setVisibility(View.VISIBLE);
-//        frameLayout.setVisibility(View.GONE);
-//    }
+    private void initView() {
+        treeCharacter = root.findViewById(R.id.treeInfo_ImageView_treeCharacter);
+        tableLayout = root.findViewById(R.id.treeInfo_TableLayout_treeinfo);
+        frameLayout = root.findViewById(R.id.treeInfo_FrameLayout);
+
+        if (tv_tree_name.getText().toString().equals(getString(R.string.noTree))){
+            // 1. 나무 정보 없을때
+            setBackgroundImageview(treeCharacter, R.drawable.empty_tree);
+            tableLayout.setVisibility(View.GONE);
+            frameLayout.setVisibility(View.VISIBLE);
+        }
+        else {
+            // 2. 나무 정보 있을 때
+            setBackgroundImageview(treeCharacter, R.drawable.mid_tree);
+            tableLayout.setVisibility(View.VISIBLE);
+            frameLayout.setVisibility(View.GONE);
+        }
+    }
 
     // 이미지 뷰 채우기
     private void setBackgroundImageview(ImageView imageView, int source){
