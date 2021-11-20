@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.home.TreeInfoFragment">
+    tools:context=".ui.home.child.TreeInfoFragment">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,19 +29,19 @@
                         android:layout_margin="@dimen/activity_margin_small"
                         android:layout_width="119dp"
                         android:layout_height="153dp"
-                        android:layout_gravity="center"
-                        android:background="@drawable/mid_tree"/>
+                        android:layout_gravity="center"/>
 
+                    <!-- 나무고유번호 -->
                     <TextView
                         android:id="@+id/tv_tree_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="나무고유번호"
                         android:paddingBottom="@dimen/activity_padding_default"
                         android:textStyle="bold"
                         android:textSize="15sp"
                         android:gravity="center"/>
 
+                    <!-- 이산화탄소 흡수량 -->
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -53,7 +53,6 @@
                         android:id="@+id/tv_carbon_amt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="없음"
                         android:gravity="center"
                         android:textStyle="bold"
                         android:textColor="@color/green_textColor"/>
@@ -61,65 +60,6 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Table Data -->
-            <TableLayout
-                android:id="@+id/treeInfo_TableLayout_treeinfo"
-                android:paddingStart="@dimen/activity_padding_default"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_margin_default">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="내 나무정보"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:paddingBottom="@dimen/activity_padding_default"/>
-
-                <TableRow>
-                    <TextView
-                        android:textStyle="bold"
-                        android:text="수목명"
-                        android:layout_margin="5dp"/>
-                    <TextView
-                        android:id="@+id/tv_kind"
-                        android:text="은행 나무"
-                        android:layout_margin="5dp"/>
-                </TableRow>
-                <TableRow>
-                    <TextView
-                        android:textStyle="bold"
-                        android:text="가로명"
-                        android:layout_margin="5dp"/>
-                    <TextView
-                        android:id="@+id/tv_road"
-                        android:text="덕수궁길"
-                        android:layout_margin="5dp"/>
-                </TableRow>
-                <TableRow>
-                    <TextView
-                        android:textStyle="bold"
-                        android:text="구명"
-                        android:layout_margin="5dp"/>
-                    <TextView
-                        android:id="@+id/tv_dist"
-                        android:text="중구"
-                        android:layout_margin="5dp"/>
-                </TableRow>
-                <TableRow>
-                    <TextView
-                        android:textStyle="bold"
-                        android:text="위치"
-                        android:layout_margin="5dp"/>
-                    <TextView
-                        android:id="@+id/tv_loc"
-                        android:text="경찰서"
-                        android:layout_margin="5dp"/>
-                </TableRow>
-            </TableLayout>
-
-            <!-- 나무가 없을때 -->
             <FrameLayout
                 android:id="@+id/treeInfo_FrameLayout"
                 android:layout_width="match_parent"

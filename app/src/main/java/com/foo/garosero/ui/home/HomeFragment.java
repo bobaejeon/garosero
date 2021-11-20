@@ -1,6 +1,11 @@
 package com.foo.garosero.ui.home;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
@@ -10,23 +15,18 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
-
 import com.foo.garosero.R;
+import com.foo.garosero.mviewmodel.myViewModel;
+import com.foo.garosero.ui.home.child.TreeInfoFragment;
+import com.foo.garosero.ui.home.child.TreeManagementFragment;
+import com.foo.garosero.ui.home.child.TreeTipFragment;
 
 public class HomeFragment extends Fragment {
 
-    private View root;
-    private HomeViewModel model;
-    private TextView home_TextView_pageTitle;
-    private TextView home_TextView_explain;
-    private Button home_Button_treeInfo;
-    private Button home_Button_treeManagement;
-    private Button home_Button_treeTip;
+    View root;
+    myViewModel model;
+    TextView home_TextView_pageTitle, home_TextView_explain;
+    Button home_Button_treeInfo, home_Button_treeManagement, home_Button_treeTip;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,7 +49,7 @@ public class HomeFragment extends Fragment {
         home_Button_treeTip = root.findViewById(R.id.home_Button_treeTip);
 
         // LiveData
-        model = new ViewModelProvider(this).get(HomeViewModel.class);
+        model = new ViewModelProvider(this).get(myViewModel.class);
         final Observer<String> titleObserver = new Observer<String>() { // page title
             @Override
             public void onChanged(@Nullable final String newtext) {
@@ -81,8 +81,7 @@ public class HomeFragment extends Fragment {
                 home_TextView_explain.setText(newtext);
             }
         };
-        HomeViewModel.getExplain().observe(getActivity(), explainObserver);
-
+        myViewModel.getExplain().observe(getActivity(), explainObserver);
 
         // tab button : change Fragment
         home_Button_treeInfo.setOnClickListener(new View.OnClickListener() {

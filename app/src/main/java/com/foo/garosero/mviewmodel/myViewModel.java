@@ -1,16 +1,16 @@
-package com.foo.garosero.ui.home;
+package com.foo.garosero.mviewmodel;
+
+import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.foo.garosero.data.UserData;
-import com.google.firebase.database.DatabaseReference;
 
-public class HomeViewModel extends ViewModel {
+public class myViewModel extends ViewModel {
     private MutableLiveData<String> pageTitle;
     public static MutableLiveData<String> explain;
-    public static DatabaseReference database;
-    public static UserData userData;
+    public static MutableLiveData<UserData> userData;
 
     public MutableLiveData<String> getPageTitle() {
         if (pageTitle == null){
@@ -32,20 +32,16 @@ public class HomeViewModel extends ViewModel {
         getExplain().setValue(explain);
     }
 
-    public static DatabaseReference getDatabase() {
-        return database;
-    }
-
-    public static void setDatabase(DatabaseReference database) {
-        HomeViewModel.database = database;
-    }
-
-    public static UserData getUserData() {
-        if (userData==null) userData = new UserData("");
+    public static MutableLiveData<UserData> getUserData() {
+        if (userData==null) {
+            userData = new MutableLiveData<UserData>();
+            UserData ud = new UserData("");
+            userData.setValue(ud);
+        }
         return userData;
     }
 
     public static void setUserData(UserData userData) {
-        HomeViewModel.userData = userData;
+        myViewModel.userData.setValue(userData);
     }
 }

@@ -2,10 +2,8 @@ package com.foo.garosero;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,9 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.foo.garosero.data.AsteriskPasswordTransformationMethod;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -55,7 +50,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         btn_login.setOnClickListener(this);
         btn_signup.setOnClickListener(this);
         et_password.setTransformationMethod(new AsteriskPasswordTransformationMethod());
+
+        // 로그인 되어 있으면 main Activity로 이동
+        /*if (firebaseAuth.getCurrentUser()!=null) {
+            Toast.makeText(LoginActivity.this, "로그인되었습니다.", Toast.LENGTH_LONG);
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            finish();
+        }*/
     }
+
     @Override
     public void onClick(View view) throws IllegalArgumentException{
         if(view==btn_signup){
@@ -80,10 +83,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                                         if(snapshot.exists()){
                                             Log.e("LoginActivity","data does exist");
-                                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-//                                            intent.putExtra("current_user", uid);
+                                            /*Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                            intent.putExtra("current_user", uid);
                                             startActivity(intent);
-                                            finish();
+                                            finish();*/
 
                                         }else Log.e("LoginActivity","data oesnt exist");
                                     }
@@ -110,9 +113,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         // 두번 클릭시 종료
         if (System.currentTimeMillis() - lastTimeBackPressed < 2000) {
             Toast.makeText(this, "앱을 종료합니다.", Toast.LENGTH_SHORT).show();
-            finishAffinity();           // 해당 어플리케이션의 루트 액티비티를 종료
-            System.runFinalization();   // 쓰레드 종료
-            System.exit(0);       // 현재의 액티비티를 종료
             return;
         }
         Toast.makeText(this, "'뒤로' 버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT).show();

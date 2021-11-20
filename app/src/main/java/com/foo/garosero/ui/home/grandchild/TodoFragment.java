@@ -1,4 +1,4 @@
-package com.foo.garosero.ui.home.sub;
+package com.foo.garosero.ui.home.grandchild;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -19,12 +19,8 @@ import com.foo.garosero.R;
 public class TodoFragment extends Fragment implements View.OnClickListener {
     View root;
 
-    TextView ans1;
-    TextView ans2;
-    TextView ans3;
-    ImageView icon1;
-    ImageView icon2;
-    ImageView icon3;
+    TextView ans1, ans2, ans3;
+    ImageView icon1, icon2, icon3;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

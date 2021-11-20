@@ -1,4 +1,4 @@
-package com.foo.garosero.mywebview;
+package com.foo.garosero.myUtil;
 
 import android.graphics.Bitmap;
 import android.view.View;

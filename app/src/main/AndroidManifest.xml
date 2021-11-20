@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
-            android:name=".ui.home.TreeExplainActivity"
+            android:name=".ui.home.child.TreeExplainActivity"
             android:exported="false" />
         <activity
             android:name=".RegisterActivity"

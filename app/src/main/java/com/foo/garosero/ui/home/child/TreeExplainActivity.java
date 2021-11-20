@@ -1,4 +1,4 @@
-package com.foo.garosero.ui.home;
+package com.foo.garosero.ui.home.child;
 
 import android.os.Bundle;
 import android.view.View;
@@ -6,7 +6,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.foo.garosero.R;
-import com.foo.garosero.mywebview.WebviewHelper;
+import com.foo.garosero.myUtil.WebviewHelper;
 
 public class TreeExplainActivity extends AppCompatActivity {
 
