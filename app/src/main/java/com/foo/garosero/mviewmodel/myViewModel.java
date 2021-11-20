@@ -1,7 +1,5 @@
 package com.foo.garosero.mviewmodel;
 
-import android.util.Log;
-
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -9,7 +7,6 @@ import com.foo.garosero.data.UserData;
 
 public class myViewModel extends ViewModel {
     private MutableLiveData<String> pageTitle;
-    public static MutableLiveData<String> explain;
     public static MutableLiveData<UserData> userData;
 
     public MutableLiveData<String> getPageTitle() {
@@ -18,18 +15,6 @@ public class myViewModel extends ViewModel {
             pageTitle.setValue("");
         }
         return pageTitle;
-    }
-
-    public static MutableLiveData<String> getExplain() {
-        if (explain == null){
-            explain = new MutableLiveData<String>();
-            explain.setValue("");
-        }
-        return explain;
-    }
-
-    public static void setExplain(String explain) {
-        getExplain().setValue(explain);
     }
 
     public static MutableLiveData<UserData> getUserData() {

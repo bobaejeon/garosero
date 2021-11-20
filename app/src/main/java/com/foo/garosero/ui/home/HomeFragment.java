@@ -62,26 +62,21 @@ public class HomeFragment extends Fragment {
 
                 switch (newtext){
                     case "내 나무 관리" :
+                        home_TextView_explain.setText(getText(R.string.home_explain_manage));
                         home_Button_treeManagement.setBackground(ContextCompat.getDrawable(root.getContext(), R.drawable.button_focus));
                         break;
                     case "나무 관리 TIP" :
+                        home_TextView_explain.setText(getText(R.string.home_explain_tip));
                         home_Button_treeTip.setBackground(ContextCompat.getDrawable(root.getContext(), R.drawable.button_focus));
                         break;
                     case "내 나무 정보":
+                        home_TextView_explain.setText(getText(R.string.home_explain_info));
                         home_Button_treeInfo.setBackground(ContextCompat.getDrawable(root.getContext(), R.drawable.button_focus));
                         break;
                 }
             }
         };
         model.getPageTitle().observe(getActivity(), titleObserver);
-
-        final Observer<String> explainObserver = new Observer<String>() { // explain
-            @Override
-            public void onChanged(@Nullable final String newtext) {
-                home_TextView_explain.setText(newtext);
-            }
-        };
-        myViewModel.getExplain().observe(getActivity(), explainObserver);
 
         // tab button : change Fragment
         home_Button_treeInfo.setOnClickListener(new View.OnClickListener() {

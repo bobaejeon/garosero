@@ -34,12 +34,6 @@ public class TreeManagementFragment extends Fragment {
     UserData ud;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        myViewModel.setExplain("입양한 나무는 어떤 상태일까요?");
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_tree_management, container, false);
