@@ -1,4 +1,4 @@
-package com.foo.garosero.ui.home.sub;
+package com.foo.garosero.ui.home.grandchild;
 
 import android.os.Bundle;
 
@@ -16,16 +16,8 @@ public class EmptyFragment extends Fragment {
     View root;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         root = inflater.inflate(R.layout.fragment_empty, container, false);
 
         // 버튼 클릭시 신청 페이지로 연결

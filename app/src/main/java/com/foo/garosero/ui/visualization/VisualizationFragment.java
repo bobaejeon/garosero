@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 
 import com.foo.garosero.R;
-import com.foo.garosero.mywebview.WebviewHelper;
+import com.foo.garosero.myUtil.WebviewHelper;
 
 public class VisualizationFragment extends Fragment {
     View root;

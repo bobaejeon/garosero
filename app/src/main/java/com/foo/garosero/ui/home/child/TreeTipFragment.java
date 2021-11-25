@@ -1,4 +1,4 @@
-package com.foo.garosero.ui.home;
+package com.foo.garosero.ui.home.child;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.foo.garosero.R;
-import com.foo.garosero.mywebview.WebviewHelper;
+import com.foo.garosero.myUtil.WebviewHelper;
+import com.foo.garosero.mviewmodel.myViewModel;
 
 public class TreeTipFragment extends Fragment implements View.OnClickListener {
     View root;
@@ -18,8 +19,6 @@ public class TreeTipFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // page explain text
-        HomeViewModel.setExplain("우리 나무를 지키기 위한 팁들!");
     }
 
     @Override
