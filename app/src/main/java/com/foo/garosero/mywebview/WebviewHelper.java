@@ -9,16 +9,7 @@ import android.widget.ProgressBar;
 
 public class WebviewHelper {
     // url 모음
-<<<<<<< HEAD
-    public static String URL_visualization = "https://618cdf09145ae20008f961dc--garosero.netlify.app/datavisualization";    // 가로수 정보 시각화
-    public static String URL_information = "https://618cdf09145ae20008f961dc--garosero.netlify.app/caretreeintroduce";      // 나무돌보미란?
-    public static String URL_TreeTip_ginkgo = "https://618cdf09145ae20008f961dc--garosero.netlify.app/caretreeintroduce";   // 은행나무
-    public static String URL_TreeTip_pine = "https://618cdf09145ae20008f961dc--garosero.netlify.app/caretreeintroduce";     // 소나무
-    public static String URL_TreeTip_zelkova = "https://618cdf09145ae20008f961dc--garosero.netlify.app/caretreeintroduce";  // 느티나무
-    public static String URL_TreeTip_cherry = "https://618cdf09145ae20008f961dc--garosero.netlify.app/caretreeintroduce";   // 벚나무
-    public static String URL_TreeTip_poplar = "https://618cdf09145ae20008f961dc--garosero.netlify.app/caretreeintroduce";   // 이팝나무
-    public static String URL_TreeTip_apricot = "https://618cdf09145ae20008f961dc--garosero.netlify.app/caretreeintroduce";  // 살구나무
-=======
+
     public static String URL_visualization = "https://618e46a416eac000078e9aa8--garosero.netlify.app/datavisualization";    // 가로수 정보 시각화
     public static String URL_information = "https://618cdf09145ae20008f961dc--garosero.netlify.app/caretreeintroduce";      // 나무돌보미란?
     public static String URL_TreeTip_ginkgo = "https://618e46a416eac000078e9aa8--garosero.netlify.app/ginkgo";   // 은행나무
@@ -27,7 +18,6 @@ public class WebviewHelper {
     public static String URL_TreeTip_cherry = "https://618e46a416eac000078e9aa8--garosero.netlify.app/kingcherry";   // 벚나무
     public static String URL_TreeTip_poplar = "https://618e46a416eac000078e9aa8--garosero.netlify.app/poplartree";   // 이팝나무
     public static String URL_TreeTip_apricot = "https://618e46a416eac000078e9aa8--garosero.netlify.app/apricottree";  // 살구나무
->>>>>>> f154611b1a1b05c22f90c67df00f395260c8fd34
 
     // 웹뷰 초기화 함수
     public void initWebView(WebView wView, ProgressBar pBar, String mURL){
