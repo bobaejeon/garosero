@@ -17,16 +17,17 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.foo.garosero.R;
 import com.foo.garosero.mviewmodel.myViewModel;
+import com.foo.garosero.ui.home.child.MyDiaryFragment;
 import com.foo.garosero.ui.home.child.TreeInfoFragment;
 import com.foo.garosero.ui.home.child.TreeManagementFragment;
-import com.foo.garosero.ui.home.child.TreeTipFragment;
+import com.foo.garosero.ui.treetip.TreeTipFragment;
 
 public class HomeFragment extends Fragment {
 
     View root;
     myViewModel model;
-    TextView home_TextView_pageTitle, home_TextView_explain;
-    Button home_Button_treeInfo, home_Button_treeManagement, home_Button_treeTip;
+    TextView home_TextView_pageTitle;
+    Button home_Button_treeInfo, home_Button_treeManagement, home_Button_diary;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,10 +44,9 @@ public class HomeFragment extends Fragment {
         replaceFragment(new TreeInfoFragment());
         // init view
         home_TextView_pageTitle = root.findViewById(R.id.home_TextView_pageTitle);
-        home_TextView_explain = root.findViewById(R.id.home_TextView_explain);
         home_Button_treeInfo = root.findViewById(R.id.home_Button_treeInfo);
         home_Button_treeManagement = root.findViewById(R.id.home_Button_treeManagement);
-        home_Button_treeTip = root.findViewById(R.id.home_Button_treeTip);
+        home_Button_diary = root.findViewById(R.id.home_Button_diary);
 
         // LiveData
         model = new ViewModelProvider(this).get(myViewModel.class);
@@ -58,19 +58,16 @@ public class HomeFragment extends Fragment {
                 // focus Button
                 home_Button_treeInfo.setBackground(ContextCompat.getDrawable(root.getContext(), R.drawable.button_back));
                 home_Button_treeManagement.setBackground(ContextCompat.getDrawable(root.getContext(), R.drawable.button_back));
-                home_Button_treeTip.setBackground(ContextCompat.getDrawable(root.getContext(), R.drawable.button_back));
+                home_Button_diary.setBackground(ContextCompat.getDrawable(root.getContext(), R.drawable.button_back));
 
                 switch (newtext){
                     case "내 나무 관리" :
-                        home_TextView_explain.setText(getText(R.string.home_explain_manage));
                         home_Button_treeManagement.setBackground(ContextCompat.getDrawable(root.getContext(), R.drawable.button_focus));
                         break;
-                    case "나무 관리 TIP" :
-                        home_TextView_explain.setText(getText(R.string.home_explain_tip));
-                        home_Button_treeTip.setBackground(ContextCompat.getDrawable(root.getContext(), R.drawable.button_focus));
+                    case "내 기록" :
+                        home_Button_diary.setBackground(ContextCompat.getDrawable(root.getContext(), R.drawable.button_focus));
                         break;
                     case "내 나무 정보":
-                        home_TextView_explain.setText(getText(R.string.home_explain_info));
                         home_Button_treeInfo.setBackground(ContextCompat.getDrawable(root.getContext(), R.drawable.button_focus));
                         break;
                 }
@@ -95,12 +92,12 @@ public class HomeFragment extends Fragment {
                 model.getPageTitle().setValue(home_Button_treeManagement.getText().toString());
             }
         });
-        home_Button_treeTip.setOnClickListener(new View.OnClickListener() {
+        home_Button_diary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 나무 관리 tip
-                replaceFragment(new TreeTipFragment());
-                model.getPageTitle().setValue(home_Button_treeTip.getText().toString());
+                // 다이어리
+                replaceFragment(new MyDiaryFragment());
+                model.getPageTitle().setValue(home_Button_diary.getText().toString());
             }
         });
 

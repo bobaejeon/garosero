@@ -1,4 +1,4 @@
-package com.foo.garosero.ui.home.child;
+package com.foo.garosero.ui.treetip;
 
 import android.os.Bundle;
 import android.view.View;

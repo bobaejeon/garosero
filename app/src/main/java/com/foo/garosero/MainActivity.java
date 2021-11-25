@@ -24,6 +24,7 @@ import com.foo.garosero.ui.application.ApplicationFragment;
 import com.foo.garosero.ui.home.HomeFragment;
 import com.foo.garosero.mviewmodel.myViewModel;
 import com.foo.garosero.ui.information.InformationFragment;
+import com.foo.garosero.ui.treetip.TreeTipFragment;
 import com.foo.garosero.ui.visualization.VisualizationFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -90,6 +91,10 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.item_visualization:
                         VisualizationFragment visualizationFrag = new VisualizationFragment();
                         replaceFragment(visualizationFrag);
+                        break;
+                    case R.id.item_treeTip:
+                        TreeTipFragment treeTipFragment = new TreeTipFragment();
+                        replaceFragment(treeTipFragment);
                         break;
                     case R.id.item_logout:
                         //logout 후 login activity로 redirect
