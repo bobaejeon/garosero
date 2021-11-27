@@ -81,10 +81,10 @@
                 android:layout_weight="1"/>
 
             <Button
-                android:id="@+id/home_Button_treeTip"
+                android:id="@+id/home_Button_diary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="나무 관리 TIP"
+                android:text="내 기록"
                 android:layout_weight="1"/>
         </LinearLayout>
 

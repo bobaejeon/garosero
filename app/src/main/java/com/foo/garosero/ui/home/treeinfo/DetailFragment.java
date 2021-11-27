@@ -1,4 +1,4 @@
-package com.foo.garosero.ui.home.grandchild;
+package com.foo.garosero.ui.home.treeinfo;
 
 import android.os.Bundle;
 

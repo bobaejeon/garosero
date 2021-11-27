@@ -52,11 +52,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         et_password.setTransformationMethod(new AsteriskPasswordTransformationMethod());
 
         // 로그인 되어 있으면 main Activity로 이동
-        /*if (firebaseAuth.getCurrentUser()!=null) {
+        if (firebaseAuth.getCurrentUser()!=null) {
             Toast.makeText(LoginActivity.this, "로그인되었습니다.", Toast.LENGTH_LONG);
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
             finish();
-        }*/
+        }
     }
 
     @Override

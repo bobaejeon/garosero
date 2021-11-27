@@ -16,13 +16,13 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
 
 import com.foo.garosero.myUtil.ServerHelper;
 import com.foo.garosero.data.UserData;
 import com.foo.garosero.ui.application.ApplicationFragment;
 import com.foo.garosero.ui.home.HomeFragment;
 import com.foo.garosero.mviewmodel.myViewModel;
+import com.foo.garosero.ui.treetip.TreeTipFragment;
 import com.foo.garosero.ui.information.InformationFragment;
 import com.foo.garosero.ui.visualization.VisualizationFragment;
 import com.google.android.material.navigation.NavigationView;
@@ -90,6 +90,10 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.item_visualization:
                         VisualizationFragment visualizationFrag = new VisualizationFragment();
                         replaceFragment(visualizationFrag);
+                        break;
+                    case R.id.item_treeTip:
+                        TreeTipFragment treeTipFragment = new TreeTipFragment();
+                        replaceFragment(treeTipFragment);
                         break;
                     case R.id.item_logout:
                         //logout 후 login activity로 redirect
