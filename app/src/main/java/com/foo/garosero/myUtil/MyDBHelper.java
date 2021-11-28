@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class MyDBHelper extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 1;
-    public static final String DATABASE_NAME = "d23";
+    public static final String DATABASE_NAME = "d231";
     private static final String SQL_DELETE_DIARY = "DROP TABLE IF EXISTS " + DATABASE_NAME;
     private static final String SQL_CREATE_DIARY =
             "CREATE TABLE " + DATABASE_NAME +
@@ -27,7 +27,15 @@ public class MyDBHelper extends SQLiteOpenHelper {
                     "schedule  TEXT, \n" +
                     "persons   INTEGER, \n" +
                     "content   TEXT, \n" +
-                    "memo      TEXT)";
+                    "memo      TEXT, \n" +
+                    "picture   TEXT)";
+
+    private static String COL_DIARYID = "diaryID";
+    private static String COL_SCHEDULE = "schedule";
+    private static String COL_PERSONS = "persons";
+    private static String COL_CONTENT = "content";
+    private static String COL_MEMO = "memo";
+    private static String COL_PICTURE = "picture";
 
     public MyDBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -64,8 +72,11 @@ public class MyDBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put("schedule", data.getSchedule());
-        values.put("memo", data.getMemo());
+        values.put(COL_SCHEDULE, data.getSchedule());
+        values.put(COL_MEMO, data.getMemo());
+        values.put(COL_CONTENT, data.getContent());
+        values.put(COL_PERSONS, data.getPersons());
+        values.put(COL_PICTURE, data.getPicture());
 
         long newRowId = db.insert(DATABASE_NAME, null, values);
     }
@@ -83,6 +94,7 @@ public class MyDBHelper extends SQLiteOpenHelper {
             data.setPersons(cursor.getInt(2));
             data.setContent(cursor.getString(3));
             data.setMemo(cursor.getString(4));
+            data.setPicture(cursor.getString(5));
             result.add(data);
         }
 
@@ -100,10 +112,12 @@ public class MyDBHelper extends SQLiteOpenHelper {
     public void update(DiaryData data){
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("memo", data.getMemo());
-        values.put("schedule", data.getSchedule());
-        values.put("content", data.getContent());
-        values.put("persons", data.getPersons());
+        values.put(COL_SCHEDULE, data.getSchedule());
+        values.put(COL_MEMO, data.getMemo());
+        values.put(COL_CONTENT, data.getContent());
+        values.put(COL_PERSONS, data.getPersons());
+        values.put(COL_PICTURE, data.getPicture());
+
         db.update(DATABASE_NAME, values, "diaryID=?", new String[]{String.valueOf(data.getDiaryID())});
     }
 }

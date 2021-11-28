@@ -2,18 +2,17 @@ package com.foo.garosero.ui.home.diary;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.foo.garosero.R;
 import com.foo.garosero.data.DiaryData;
 import com.foo.garosero.mviewmodel.DiaryViewModel;
@@ -73,6 +72,13 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.ViewHolder>{
         holder.tv_memo.setText(data.getMemo());
         holder.tv_schedule.setText(data.getSchedule());
 
+        // 이미지 띄우기
+        try {
+            Glide.with(holder.iv_picture.getContext())
+                    .load(mData.get(position).getPicture()).into(holder.iv_picture);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override

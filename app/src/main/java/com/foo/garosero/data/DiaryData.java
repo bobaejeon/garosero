@@ -8,7 +8,7 @@ public class DiaryData {
     private int persons = 0;
     private String content = "";
     private String memo = "";
-    private Bitmap picture = null;
+    private String picture = "";
 
     public DiaryData() {
 
@@ -54,11 +54,11 @@ public class DiaryData {
         this.memo = memo;
     }
 
-    public Bitmap getPicture() {
+    public String getPicture() {
         return picture;
     }
 
-    public void setPicture(Bitmap picture) {
+    public void setPicture(String picture) {
         this.picture = picture;
     }
 

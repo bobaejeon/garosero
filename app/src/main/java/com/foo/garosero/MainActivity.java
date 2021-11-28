@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         menuButton = findViewById(R.id.memu);
 
         // 서버에서 정보 받아오기
-        ServerHelper.initServer();
+        //ServerHelper.initServer();
 
         // live data
         final Observer<UserData> userDataObserver = new Observer<UserData>() {

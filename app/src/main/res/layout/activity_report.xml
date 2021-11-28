@@ -92,11 +92,11 @@
 
         <!-- 활동사진 -->
         <ImageView
+            android:background="@color/gray_default"
             android:id="@+id/report_ImageView_picture"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_margin="7dp"
-            android:background="@color/gray_default" />
+            android:layout_margin="7dp" />
 
         <TextView
             android:layout_width="wrap_content"
