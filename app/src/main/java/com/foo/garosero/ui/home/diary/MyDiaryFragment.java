@@ -26,25 +26,20 @@ public class MyDiaryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         root = inflater.inflate(R.layout.fragment_my_diary, container, false);
         recyclerView = root.findViewById(R.id.diary_RecyclerView);
-
-        connectSQLIte();
-        initRecyclerView();
 
         return root;
     }
 
-    // connect SQLite
-    private void connectSQLIte(){
+    public void initRecyclerView(){
+        // connect SQLite
         MyDBHelper dbHelper = new MyDBHelper(root.getContext());
-        arr_diary = dbHelper.getResult();
-    }
+        arr_diary = dbHelper.getAll();
 
-    // Recyclerview
-    private void initRecyclerView(){
+        // Recyclerview
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
         DiaryAdapter adapter = new DiaryAdapter(arr_diary);
         recyclerView.setAdapter(adapter);
 
@@ -56,6 +51,11 @@ public class MyDiaryFragment extends Fragment {
                 startActivity(intent);
             }
         });
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        initRecyclerView(); // RecyclerView 갱신
     }
 }

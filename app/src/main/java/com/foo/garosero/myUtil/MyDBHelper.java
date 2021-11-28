@@ -59,7 +59,7 @@ public class MyDBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    // INSERT DATA
+    // CREATE
     public void insert(DiaryData data) {
         SQLiteDatabase db = getWritableDatabase();
 
@@ -70,8 +70,8 @@ public class MyDBHelper extends SQLiteOpenHelper {
         long newRowId = db.insert(DATABASE_NAME, null, values);
     }
 
-    // SELECT ALL
-    public ArrayList<DiaryData> getResult() {
+    // READ
+    public ArrayList<DiaryData> getAll() {
         SQLiteDatabase db = getReadableDatabase();
         ArrayList<DiaryData> result = new ArrayList<DiaryData>();
 
@@ -90,16 +90,20 @@ public class MyDBHelper extends SQLiteOpenHelper {
         return result;
     }
 
-    // DROP TABLE
-    public void dropTable(){
+    // DELETE (ID)
+    public void delete(int id){
         SQLiteDatabase db = getWritableDatabase();
-        onUpgrade(db, 1, 1);
-        onCreate(db);
+        db.delete(DATABASE_NAME, "diaryID=?", new String[]{String.valueOf(id)});
     }
 
-    // DELETE ID
-    public void deleteTable(int id){
+    // UPDATE (ID)
+    public void update(DiaryData data){
         SQLiteDatabase db = getWritableDatabase();
-        db.delete(DATABASE_NAME, "diaryID=?", new String[id]);
+        ContentValues values = new ContentValues();
+        values.put("memo", data.getMemo());
+        values.put("schedule", data.getSchedule());
+        values.put("content", data.getContent());
+        values.put("persons", data.getPersons());
+        db.update(DATABASE_NAME, values, "diaryID=?", new String[]{String.valueOf(data.getDiaryID())});
     }
 }

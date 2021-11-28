@@ -3,17 +3,12 @@ package com.foo.garosero.data;
 import android.graphics.Bitmap;
 
 public class DiaryData {
-    private int diaryID;
-    private String schedule;
-    private int persons;
-    private String content;
-    private String memo;
-    private Bitmap picture;
-
-    public DiaryData(String schedule, String memo) {
-        this.schedule = schedule;
-        this.memo = memo;
-    }
+    private int diaryID = 0;
+    private String schedule = "";
+    private int persons = 0;
+    private String content = "";
+    private String memo = "";
+    private Bitmap picture = null;
 
     public DiaryData() {
 
