@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.foo.garosero.data.UserData;
 
-public class myViewModel extends ViewModel {
+public class HomeViewModel extends ViewModel {
     private MutableLiveData<String> pageTitle;
     public static MutableLiveData<UserData> userData;
 
@@ -27,6 +27,6 @@ public class myViewModel extends ViewModel {
     }
 
     public static void setUserData(UserData userData) {
-        myViewModel.userData.setValue(userData);
+        HomeViewModel.userData.setValue(userData);
     }
 }

@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.foo.garosero.R;
 import com.foo.garosero.data.UserData;
-import com.foo.garosero.mviewmodel.myViewModel;
+import com.foo.garosero.mviewmodel.HomeViewModel;
 
 public class DetailFragment extends Fragment {
     View root;
@@ -34,7 +34,7 @@ public class DetailFragment extends Fragment {
         tv_loc = root.findViewById(R.id.tv_loc);
 
         // init view
-        ud = myViewModel.getUserData().getValue();
+        ud = HomeViewModel.getUserData().getValue();
         tv_road.setText(ud.getRoad());
         tv_dist.setText(ud.getDistrict());
         tv_loc.setText(ud.getLocation());

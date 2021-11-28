@@ -16,7 +16,7 @@ import androidx.lifecycle.Observer;
 
 import com.foo.garosero.R;
 import com.foo.garosero.data.UserData;
-import com.foo.garosero.mviewmodel.myViewModel;
+import com.foo.garosero.mviewmodel.HomeViewModel;
 import com.foo.garosero.ui.home.empty.EmptyFragment;
 
 public class TreeInfoFragment extends Fragment {
@@ -45,12 +45,12 @@ public class TreeInfoFragment extends Fragment {
             @Override
             public void onChanged(UserData userData) {
                 // 유저 정보 가져오기
-                ud = myViewModel.getUserData().getValue();
+                ud = HomeViewModel.getUserData().getValue();
                 // 뷰 로딩
                 initView();
             }
         };
-        myViewModel.getUserData().observe(getActivity(), userDataObserver);
+        HomeViewModel.getUserData().observe(getActivity(), userDataObserver);
 
         return root;
     }

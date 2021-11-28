@@ -21,7 +21,7 @@ import com.foo.garosero.myUtil.ServerHelper;
 import com.foo.garosero.data.UserData;
 import com.foo.garosero.ui.application.ApplicationFragment;
 import com.foo.garosero.ui.home.HomeFragment;
-import com.foo.garosero.mviewmodel.myViewModel;
+import com.foo.garosero.mviewmodel.HomeViewModel;
 import com.foo.garosero.ui.treetip.TreeTipFragment;
 import com.foo.garosero.ui.information.InformationFragment;
 import com.foo.garosero.ui.visualization.VisualizationFragment;
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
                 initView();
             }
         };
-        myViewModel.getUserData().observe(MainActivity.this, userDataObserver);
+        HomeViewModel.getUserData().observe(MainActivity.this, userDataObserver);
 
         // 프래그먼트 초기설정
         replaceFragment(new HomeFragment());
@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
                         // 싱글턴 객체 초기화
                         UserData empty_ud = new UserData();
-                        myViewModel.setUserData(empty_ud);
+                        HomeViewModel.setUserData(empty_ud);
 
                         // intent
                         Toast.makeText(MainActivity.this, "로그아웃되었습니다.", Toast.LENGTH_LONG);
@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
         TextView tv_name = header.findViewById(R.id.tv_name);
         TextView tv_info = header.findViewById(R.id.tv_info);
 
-        UserData ud = myViewModel.getUserData().getValue();
+        UserData ud = HomeViewModel.getUserData().getValue();
         Log.e("MainActivity", ud.toString());
         if (ud.isEmpty()) {
             tv_name.setText("");

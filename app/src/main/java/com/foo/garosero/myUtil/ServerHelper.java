@@ -3,7 +3,7 @@ package com.foo.garosero.myUtil;
 import android.util.Log;
 
 import com.foo.garosero.data.UserData;
-import com.foo.garosero.mviewmodel.myViewModel;
+import com.foo.garosero.mviewmodel.HomeViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,7 +25,7 @@ public class ServerHelper {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
                     UserData ud = dataSnapshot.getValue(UserData.class);
-                    myViewModel.setUserData(ud);
+                    HomeViewModel.setUserData(ud);
 
                 } else {
                     Log.e("ServerManager", "no data");

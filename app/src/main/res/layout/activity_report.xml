@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.home.diary.ReportActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="24dp">
+
+        <!-- 참여 형식 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="활동 결과 기록하기"
+            android:textStyle="bold"
+            android:textSize="30dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="10dp"
+            android:text="참여 형식"
+            android:textSize="20dp"/>
+
+        <!-- CheckBox -->
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="20dp">
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/cb_indi"
+                android:text="개인" />
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/cb_team"
+                android:text="단체"/>
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/cb_school"
+                android:text="학교"/>
+        </RadioGroup>
+
+        <!-- EditText-->
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="7dp"
+            android:padding="10dp"
+            android:background="@drawable/border_bottom"
+            android:id="@+id/report_EditText_schedule"
+            android:hint="활동일시"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="7dp"
+            android:padding="10dp"
+            android:background="@drawable/border_bottom"
+            android:id="@+id/report_EditText_persons"
+            android:inputType="text"
+            android:hint="활동인원"/>
+
+        <!-- 활동결과 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="10dp"
+            android:text="활동결과"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/report_TextView_todo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="선택한 항목"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="7dp"
+            android:padding="10dp"
+            android:background="@drawable/border_bottom"
+            android:id="@+id/report_EditText_memo"
+            android:hint="활동소감"/>
+
+        <!-- 활동사진 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="10dp"
+            android:text="활동사진"
+            android:textSize="20dp" />
+
+        <ImageView
+            android:layout_margin="7dp"
+            android:id="@+id/report_ImageView_picture"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@color/gray_default"/>
+
+        <Button
+            android:id="@+id/report_Button_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="저장하기" />
+    </LinearLayout>
+</ScrollView>
