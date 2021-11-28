@@ -1,4 +1,4 @@
-package com.foo.garosero.ui.home.child;
+package com.foo.garosero.ui.treetip;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 
 import com.foo.garosero.R;
 import com.foo.garosero.myUtil.WebviewHelper;
-import com.foo.garosero.mviewmodel.myViewModel;
 
 public class TreeTipFragment extends Fragment implements View.OnClickListener {
     View root;
@@ -63,7 +62,7 @@ public class TreeTipFragment extends Fragment implements View.OnClickListener {
     }
 
     private void startWebView(String mURL){
-        Intent intent = new Intent(getActivity(),TreeExplainActivity.class);
+        Intent intent = new Intent(getActivity(), TreeExplainActivity.class);
         intent.putExtra("mURL", mURL);
         startActivity(intent);
     }
