@@ -73,22 +73,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             if (task.isSuccessful()) {
                                 uid = Objects.requireNonNull(firebaseAuth.getCurrentUser()).getUid();
                                 Log.e("LoginActivity",uid);
-                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                intent.putExtra("current_user", uid);
-                                startActivity(intent);
-                                finish();
+                                Intent intent = new Intent(LoginActivity.this, InitialActivity.class);
 
                                 ValueEventListener eventListener = new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                                         if(snapshot.exists()){
-                                            Log.e("LoginActivity","data does exist");
-                                            /*Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                            intent.putExtra("current_user", uid);
+                                            Log.e("LoginActivity","data exist");
                                             startActivity(intent);
-                                            finish();*/
+                                            finish();
 
-                                        }else Log.e("LoginActivity","data oesnt exist");
+                                        }else Log.e("LoginActivity","data doesnt exist");
                                     }
 
                                     @Override

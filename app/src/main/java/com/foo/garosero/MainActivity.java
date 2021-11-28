@@ -17,8 +17,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 
+import com.foo.garosero.data.UserInfo;
 import com.foo.garosero.myUtil.ServerHelper;
-import com.foo.garosero.data.UserData;
 import com.foo.garosero.ui.application.ApplicationFragment;
 import com.foo.garosero.ui.home.HomeFragment;
 import com.foo.garosero.mviewmodel.myViewModel;
@@ -49,15 +49,15 @@ public class MainActivity extends AppCompatActivity {
         ServerHelper.initServer();
 
         // live data
-        final Observer<UserData> userDataObserver = new Observer<UserData>() {
+        final Observer<UserInfo> userDataObserver = new Observer<UserInfo>() {
             @Override
-            public void onChanged(UserData userData) {
-                if (userData.name!="")
+            public void onChanged(UserInfo userData) {
+                if (!userData.getName().equals(""))
                 // 로그인 중이면 뷰 로딩
                 initView();
             }
         };
-        myViewModel.getUserData().observe(MainActivity.this, userDataObserver);
+        myViewModel.getUserInfo().observe(MainActivity.this, userDataObserver);
 
         // 프래그먼트 초기설정
         replaceFragment(new HomeFragment());
@@ -100,8 +100,8 @@ public class MainActivity extends AppCompatActivity {
                         FirebaseAuth.getInstance().signOut();
 
                         // 싱글턴 객체 초기화
-                        UserData empty_ud = new UserData();
-                        myViewModel.setUserData(empty_ud);
+                        UserInfo empty_ud = new UserInfo();
+                        myViewModel.setUserInfo(empty_ud);
 
                         // intent
                         Toast.makeText(MainActivity.this, "로그아웃되었습니다.", Toast.LENGTH_LONG);
@@ -137,14 +137,17 @@ public class MainActivity extends AppCompatActivity {
         TextView tv_name = header.findViewById(R.id.tv_name);
         TextView tv_info = header.findViewById(R.id.tv_info);
 
-        UserData ud = myViewModel.getUserData().getValue();
+        UserInfo ud = myViewModel.getUserInfo().getValue();
         Log.e("MainActivity", ud.toString());
-        if (ud.isEmpty()) {
-            tv_name.setText("");
-        } else {
-            tv_name.setText(ud.getKind());
-        }
-        tv_info.setText(ud.getName());
+
+        // 나무가 여러 그루일 수 있으므로 나무종류는 안쓰는 게 좋겠다?!
+//        if (ud.isEmpty()) {
+//            tv_name.setText("");
+//        } else {
+//            tv_name.setText(ud.getKind());
+//        }
+        tv_name.setText(ud.getName());
+        tv_info.setText("");
     }
 
     public void replaceFragment(Fragment fragment){
