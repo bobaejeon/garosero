@@ -4,28 +4,28 @@ public class TreeInfo {
     public TreeInfo() {
     }
 
-    public String getGu_nm() {
-        return gu_nm;
+    public String getDistrict() {
+        return district;
     }
 
-    public void setGu_nm(String gu_nm) {
-        this.gu_nm = gu_nm;
+    public void setDistrict(String district) {
+        this.district = district;
     }
 
-    public String getLc() {
-        return lc;
+    public String getLocation() {
+        return location;
     }
 
-    public void setLc(String lc) {
-        this.lc = lc;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
-    public String getWdpt_nm() {
-        return wdpt_nm;
+    public String getRoad() {
+        return road;
     }
 
-    public void setWdpt_nm(String wdpt_nm) {
-        this.wdpt_nm = wdpt_nm;
+    public void setRoad(String road) {
+        this.road = road;
     }
 
     public String getWidth_nm() {
@@ -60,9 +60,9 @@ public class TreeInfo {
         this.end_date = end_date;
     }
 
-    public String gu_nm;
-    public String lc;
-    public String wdpt_nm;
+    public String district;
+    public String location;
+    public String road;
     public String width_nm;
     public String start_date;
     public String uid;
@@ -110,9 +110,9 @@ public class TreeInfo {
     @Override
     public String toString() {
         return "TreeInfo{" +
-                "gu_nm='" + gu_nm + '\'' +
-                ", lc='" + lc + '\'' +
-                ", wdpt_nm='" + wdpt_nm + '\'' +
+                "gu_nm='" + district + '\'' +
+                ", lc='" + location + '\'' +
+                ", wdpt_nm='" + road + '\'' +
                 ", width_nm='" + width_nm + '\'' +
                 ", start_date='" + start_date + '\'' +
                 ", uid='" + uid + '\'' +

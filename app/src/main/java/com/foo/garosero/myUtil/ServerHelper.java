@@ -32,7 +32,7 @@ public class ServerHelper {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
-                    String name = dataSnapshot.child("User/"+uid).child("name").getValue().toString();
+                    String name = dataSnapshot.child("Users/"+uid).child("name").getValue().toString();
                     for(DataSnapshot snap : dataSnapshot.child("Trees_taken").getChildren()){
                         TreeInfo ti = snap.getValue(TreeInfo.class);
                         if(ti.getUid().equals(uid)){
