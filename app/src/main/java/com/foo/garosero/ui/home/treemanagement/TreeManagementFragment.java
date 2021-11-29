@@ -17,7 +17,7 @@ import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.foo.garosero.R;
-import com.foo.garosero.TreeManagementAdapter;
+import com.foo.garosero.ui.home.treemanagement.TreeManagementAdapter;
 import com.foo.garosero.data.UserData;
 import com.foo.garosero.data.UserInfo;
 import com.foo.garosero.mviewmodel.HomeViewModel;

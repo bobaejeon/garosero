@@ -1,4 +1,4 @@
-package com.foo.garosero;
+package com.foo.garosero.ui.home.treemanagement;
 
 import android.content.Context;
 import android.util.Log;
@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.foo.garosero.R;
 import com.foo.garosero.data.UserInfo;
 
 import java.text.ParseException;

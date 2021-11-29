@@ -16,12 +16,8 @@ import androidx.lifecycle.Observer;
 
 import com.foo.garosero.R;
 import com.foo.garosero.data.UserData;
-<<<<<<< HEAD
 import com.foo.garosero.data.UserInfo;
-import com.foo.garosero.mviewmodel.myViewModel;
-=======
 import com.foo.garosero.mviewmodel.HomeViewModel;
->>>>>>> a287e4bf0ab7225aa847c03cfeae1d33546720f3
 import com.foo.garosero.ui.home.empty.EmptyFragment;
 
 public class TreeInfoFragment extends Fragment {
@@ -50,20 +46,12 @@ public class TreeInfoFragment extends Fragment {
             @Override
             public void onChanged(UserInfo userData) {
                 // 유저 정보 가져오기
-<<<<<<< HEAD
-                ud = myViewModel.getUserInfo().getValue();
-=======
-                ud = HomeViewModel.getUserData().getValue();
->>>>>>> a287e4bf0ab7225aa847c03cfeae1d33546720f3
+                ud = HomeViewModel.getUserInfo().getValue();
                 // 뷰 로딩
                 // initView();
             }
         };
-<<<<<<< HEAD
-        myViewModel.getUserInfo().observe(getActivity(), userDataObserver);
-=======
-        HomeViewModel.getUserData().observe(getActivity(), userDataObserver);
->>>>>>> a287e4bf0ab7225aa847c03cfeae1d33546720f3
+        HomeViewModel.getUserInfo().observe(getActivity(), userDataObserver);
 
         return root;
     }

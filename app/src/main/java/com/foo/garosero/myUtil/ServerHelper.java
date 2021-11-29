@@ -40,8 +40,8 @@ public class ServerHelper {
                             list.add(ti);
                         }
                     }
-                    Log.d("InitServer- trees list", list.toString());
                     UserInfo ud = new UserInfo(name,list);
+                    Log.d("InitServer", ud.toString());
                     HomeViewModel.setUserInfo(ud);
 
                 } else {
