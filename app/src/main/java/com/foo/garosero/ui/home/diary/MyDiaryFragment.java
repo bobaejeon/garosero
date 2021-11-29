@@ -29,16 +29,7 @@ public class MyDiaryFragment extends Fragment {
 
         root = inflater.inflate(R.layout.fragment_my_diary, container, false);
         recyclerView = root.findViewById(R.id.diary_RecyclerView);
-
-        Button button = root.findViewById(R.id.temp_button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ReportActivity.class);
-                intent.putExtra("report_mode","create");
-                startActivity(intent);
-            }
-        });
+        
 
         // read diary from server
         DiaryHelper diaryHelper = new DiaryHelper();
