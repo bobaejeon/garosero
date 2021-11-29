@@ -18,12 +18,11 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 
 import com.foo.garosero.data.UserInfo;
-import com.foo.garosero.myUtil.ServerHelper;
+import com.foo.garosero.mviewmodel.HomeViewModel;
 import com.foo.garosero.ui.application.ApplicationFragment;
 import com.foo.garosero.ui.home.HomeFragment;
-import com.foo.garosero.mviewmodel.HomeViewModel;
-import com.foo.garosero.ui.treetip.TreeTipFragment;
 import com.foo.garosero.ui.information.InformationFragment;
+import com.foo.garosero.ui.treetip.TreeTipFragment;
 import com.foo.garosero.ui.visualization.VisualizationFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;

@@ -10,9 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.foo.garosero.R;
-import com.foo.garosero.data.UserData;
 import com.foo.garosero.data.UserInfo;
-import com.foo.garosero.mviewmodel.HomeViewModel;
 
 public class DetailFragment extends Fragment {
     View root;

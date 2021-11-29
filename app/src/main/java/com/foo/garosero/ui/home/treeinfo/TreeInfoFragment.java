@@ -15,10 +15,8 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 
 import com.foo.garosero.R;
-import com.foo.garosero.data.UserData;
 import com.foo.garosero.data.UserInfo;
 import com.foo.garosero.mviewmodel.HomeViewModel;
-import com.foo.garosero.ui.home.empty.EmptyFragment;
 
 public class TreeInfoFragment extends Fragment {
     View root;

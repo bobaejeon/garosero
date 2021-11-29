@@ -4,7 +4,6 @@ import android.util.Log;
 
 import com.foo.garosero.data.TreeInfo;
 import com.foo.garosero.data.UserInfo;
-import com.foo.garosero.data.UserData;
 import com.foo.garosero.mviewmodel.HomeViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;

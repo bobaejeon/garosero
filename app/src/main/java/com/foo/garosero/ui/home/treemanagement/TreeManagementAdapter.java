@@ -1,6 +1,5 @@
 package com.foo.garosero.ui.home.treemanagement;
 
-import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +9,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
-import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.foo.garosero.R;
@@ -47,7 +45,11 @@ public class TreeManagementAdapter extends RecyclerView.Adapter<TreeManagementAd
 
     @Override
     public int getItemCount() {
-        return ud.getTreeList().size();
+        try{
+            return ud.getTreeList().size();
+        } catch (Exception e){
+            return 0;
+        }
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
