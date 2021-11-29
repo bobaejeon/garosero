@@ -21,7 +21,7 @@ import com.foo.garosero.data.UserInfo;
 import com.foo.garosero.myUtil.ServerHelper;
 import com.foo.garosero.ui.application.ApplicationFragment;
 import com.foo.garosero.ui.home.HomeFragment;
-import com.foo.garosero.mviewmodel.myViewModel;
+import com.foo.garosero.mviewmodel.HomeViewModel;
 import com.foo.garosero.ui.treetip.TreeTipFragment;
 import com.foo.garosero.ui.information.InformationFragment;
 import com.foo.garosero.ui.visualization.VisualizationFragment;
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         menuButton = findViewById(R.id.memu);
 
         // 서버에서 정보 받아오기
-        ServerHelper.initServer();
+//        ServerHelper.initServer();
 
         // live data
         final Observer<UserInfo> userDataObserver = new Observer<UserInfo>() {
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
                 initView();
             }
         };
-        myViewModel.getUserInfo().observe(MainActivity.this, userDataObserver);
+        HomeViewModel.getUserInfo().observe(MainActivity.this, userDataObserver);
 
         // 프래그먼트 초기설정
         replaceFragment(new HomeFragment());
@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
                         // 싱글턴 객체 초기화
                         UserInfo empty_ud = new UserInfo();
-                        myViewModel.setUserInfo(empty_ud);
+                        HomeViewModel.setUserInfo(empty_ud);
 
                         // intent
                         Toast.makeText(MainActivity.this, "로그아웃되었습니다.", Toast.LENGTH_LONG);
@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
         TextView tv_name = header.findViewById(R.id.tv_name);
         TextView tv_info = header.findViewById(R.id.tv_info);
 
-        UserInfo ud = myViewModel.getUserInfo().getValue();
+        UserInfo ud = HomeViewModel.getUserInfo().getValue();
         Log.e("MainActivity", ud.toString());
 
         // 나무가 여러 그루일 수 있으므로 나무종류는 안쓰는 게 좋겠다?!

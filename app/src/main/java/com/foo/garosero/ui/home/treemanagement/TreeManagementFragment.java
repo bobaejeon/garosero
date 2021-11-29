@@ -20,7 +20,7 @@ import com.foo.garosero.R;
 import com.foo.garosero.TreeManagementAdapter;
 import com.foo.garosero.data.UserData;
 import com.foo.garosero.data.UserInfo;
-import com.foo.garosero.mviewmodel.myViewModel;
+import com.foo.garosero.mviewmodel.HomeViewModel;
 import com.foo.garosero.ui.home.empty.EmptyFragment;
 
 import java.text.ParseException;
@@ -56,12 +56,12 @@ public class TreeManagementFragment extends Fragment {
             @Override
             public void onChanged(UserInfo userData) {
                 // 유저 정보 가져오기
-                ud = myViewModel.getUserInfo().getValue();
+                ud = HomeViewModel.getUserInfo().getValue();
                 // 뷰 로딩
                 initView(ud);
             }
         };
-        myViewModel.getUserInfo().observe(getActivity(), userDataObserver);
+        HomeViewModel.getUserInfo().observe(getActivity(), userDataObserver);
 
         return root;
     }

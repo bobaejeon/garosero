@@ -12,10 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.PagerAdapter;
 
 import com.foo.garosero.data.UserInfo;
-import com.foo.garosero.mviewmodel.myViewModel;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

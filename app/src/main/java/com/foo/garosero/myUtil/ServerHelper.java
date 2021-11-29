@@ -4,7 +4,8 @@ import android.util.Log;
 
 import com.foo.garosero.data.TreeInfo;
 import com.foo.garosero.data.UserInfo;
-import com.foo.garosero.mviewmodel.myViewModel;
+import com.foo.garosero.data.UserData;
+import com.foo.garosero.mviewmodel.HomeViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -41,7 +42,7 @@ public class ServerHelper {
                     }
                     Log.d("InitServer- trees list", list.toString());
                     UserInfo ud = new UserInfo(name,list);
-                    myViewModel.setUserInfo(ud);
+                    HomeViewModel.setUserInfo(ud);
 
                 } else {
                     Log.e("ServerManager", "no data");

@@ -16,7 +16,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.foo.garosero.R;
-import com.foo.garosero.mviewmodel.myViewModel;
+import com.foo.garosero.mviewmodel.HomeViewModel;
 import com.foo.garosero.ui.home.diary.MyDiaryFragment;
 import com.foo.garosero.ui.home.treeinfo.TreeInfoFragment;
 import com.foo.garosero.ui.home.treemanagement.TreeManagementFragment;
@@ -24,7 +24,7 @@ import com.foo.garosero.ui.home.treemanagement.TreeManagementFragment;
 public class HomeFragment extends Fragment {
 
     View root;
-    myViewModel model;
+    HomeViewModel model;
     TextView home_TextView_pageTitle, home_TextView_explain;
     Button home_Button_treeInfo, home_Button_treeManagement, home_Button_diary;
 
@@ -49,7 +49,7 @@ public class HomeFragment extends Fragment {
         home_Button_diary = root.findViewById(R.id.home_Button_diary);
 
         // LiveData
-        model = new ViewModelProvider(this).get(myViewModel.class);
+        model = new ViewModelProvider(this).get(HomeViewModel.class);
         final Observer<String> titleObserver = new Observer<String>() { // page title
             @Override
             public void onChanged(@Nullable final String newtext) {
@@ -62,15 +62,15 @@ public class HomeFragment extends Fragment {
 
                 switch (newtext){
                     case "내 나무 관리" :
-                        home_TextView_explain.setText(getText(R.string.home_explain_manage));
+                        home_TextView_explain.setText("입양한 나무는 어떤 상태일까요?");
                         home_Button_treeManagement.setBackground(ContextCompat.getDrawable(root.getContext(), R.drawable.button_focus));
                         break;
                     case "내 기록" :
-                        home_TextView_explain.setText(getText(R.string.home_my_diary));
+                        home_TextView_explain.setText("");
                         home_Button_diary.setBackground(ContextCompat.getDrawable(root.getContext(), R.drawable.button_focus));
                         break;
                     case "내 나무 정보":
-                        home_TextView_explain.setText(getText(R.string.home_explain_info));
+                        home_TextView_explain.setText("입양한 나무의 정보를 확인하세요!");
                         home_Button_treeInfo.setBackground(ContextCompat.getDrawable(root.getContext(), R.drawable.button_focus));
                         break;
                 }

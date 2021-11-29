@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.foo.garosero">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -14,6 +16,10 @@
         <activity
             android:name=".InitialActivity"
             android:exported="false" />
+        <activity
+            android:name=".ui.home.diary.ReportActivity"
+            android:exported="false" />
+
         <activity
             android:name=".ui.treetip.TreeExplainActivity"
             android:exported="false" />

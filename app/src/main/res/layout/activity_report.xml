@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".ui.home.diary.ReportActivity">
+
+    <LinearLayout
+        android:padding="24dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- 뒤로가기 버튼 -->
+        <ImageButton
+            android:id="@+id/report_ImageButton_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_baseline_keyboard_backspace_24"
+            android:layout_marginBottom="@dimen/activity_margin_small"/>
+
+        <!-- 참여 형식 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="활동 결과 기록하기"
+            android:textStyle="bold"
+            android:textSize="30dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="10dp"
+            android:text="참여 형식"
+            android:textSize="20dp"/>
+
+        <!-- EditText-->
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="7dp"
+            android:padding="10dp"
+            android:background="@drawable/border_bottom"
+            android:id="@+id/report_EditText_schedule"
+            android:hint="활동일시"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="7dp"
+            android:padding="10dp"
+            android:background="@drawable/border_bottom"
+            android:id="@+id/report_EditText_persons"
+            android:inputType="numberDecimal"
+            android:hint="활동인원"/>
+
+        <!-- 활동결과 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="10dp"
+            android:text="활동결과"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/report_TextView_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="선택한 항목"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="7dp"
+            android:padding="10dp"
+            android:background="@drawable/border_bottom"
+            android:id="@+id/report_EditText_memo"
+            android:hint="활동소감"/>
+
+        <!-- 활동사진 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="10dp"
+            android:text="활동사진"
+            android:textSize="20dp" />
+
+        <!-- 활동사진 -->
+        <ImageView
+            android:background="@color/gray_default"
+            android:id="@+id/report_ImageView_picture"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_margin="7dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="10dp"
+            android:text="나무"
+            android:textSize="20dp" />
+
+        <!-- button set1 : create diary -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/report_Button_insert"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="저장"
+                android:layout_margin="10dp"/>
+
+            <Button
+                android:id="@+id/report_Button_cancel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="취소"
+                android:layout_margin="10dp"/>
+        </LinearLayout>
+
+        <!-- button set2 : update diary -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/report_Button_update"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="수정"
+                android:layout_margin="10dp"/>
+
+            <Button
+                android:id="@+id/report_Button_delete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="삭제"
+                android:layout_margin="10dp"/>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
