@@ -47,7 +47,7 @@ public class TreeInfoFragment extends Fragment {
                 // 유저 정보 가져오기
                 ud = HomeViewModel.getUserData().getValue();
                 // 뷰 로딩
-                initView();
+                //initView();
             }
         };
         HomeViewModel.getUserData().observe(getActivity(), userDataObserver);
@@ -55,9 +55,9 @@ public class TreeInfoFragment extends Fragment {
         return root;
     }
 
-    private void initView() {
-        tv_tree_name.setText(ud.getTree_name());
-        tv_carbon_amt.setText(ud.getCarbon_amt());
+    /*private void initView() {
+        *//*tv_tree_name.setText(ud.getTree_name());
+        tv_carbon_amt.setText(ud.getCarbon_amt());*//*
 
         if (ud.isEmpty()){
             // 1. 나무 정보 없을때
@@ -71,7 +71,7 @@ public class TreeInfoFragment extends Fragment {
             DetailFragment detailFragment = new DetailFragment();
             replaceFragment(detailFragment);
         }
-    }
+    }*/
 
     // 이미지 뷰 채우기
     public void setBackgroundImageview(ImageView imageView, int source){

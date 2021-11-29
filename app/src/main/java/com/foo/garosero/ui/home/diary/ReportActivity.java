@@ -1,17 +1,16 @@
 package com.foo.garosero.ui.home.diary;
 
-import android.Manifest;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -21,11 +20,7 @@ import com.bumptech.glide.Glide;
 import com.foo.garosero.R;
 import com.foo.garosero.data.DiaryData;
 import com.foo.garosero.mviewmodel.DiaryViewModel;
-import com.foo.garosero.myUtil.MyDBHelper;
-import com.gun0912.tedpermission.PermissionListener;
-import com.gun0912.tedpermission.TedPermission;
-
-import java.util.List;
+import com.foo.garosero.myUtil.DiaryHelper;
 
 public class ReportActivity extends AppCompatActivity implements View.OnClickListener {
     EditText et_schedule, et_memo, et_persons;
@@ -34,7 +29,6 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
     ImageButton ibt_back;
     ImageView iv_picture;
 
-    MyDBHelper dbHelper;
     DiaryData data;
     String imageUri;
 
@@ -42,8 +36,6 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report);
-        // SQL connection
-        dbHelper = new MyDBHelper(ReportActivity.this);
 
         // init view
         tv_content = findViewById(R.id.report_TextView_content);
@@ -64,23 +56,6 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
         bt_cancel.setOnClickListener(this);
         ibt_back.setOnClickListener(this);
 
-        // permission
-        PermissionListener permissionListener = new PermissionListener() {
-            @Override
-            public void onPermissionGranted() {
-            }
-
-            @Override
-            public void onPermissionDenied(List<String> deniedPermissions) {
-                Toast.makeText(ReportActivity.this, "권한이 승인되지 않은 경우, 예기치 않은 오류가 발생할 수 있습니다.", Toast.LENGTH_LONG).show();
-            }
-        };
-        TedPermission.with(this)
-                .setPermissionListener(permissionListener)
-                .setDeniedMessage("권한이 거부되었습니다. 사용을 원하시면 설정에서 해당 권한을 직접 허용해주세요.")
-                .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                .check();
-
         // 사진 가져오기
         iv_picture.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,14 +68,20 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
         });
 
         // show data
-        if (DiaryViewModel.isEmpty()==false){
+        String report_mode = "create";
+        try{
+            report_mode = getIntent().getStringExtra("report_mode");
+        }catch (Exception e){
+        }
+        if (report_mode.equals("update")){
             // set Data
             data = DiaryViewModel.getDiaryData();
             tv_content.setText(data.getContent());
             et_memo.setText(data.getMemo());
             et_schedule.setText(data.getSchedule());
             et_persons.setText(String.valueOf(data.getPersons()));
-            Glide.with(getApplicationContext()).load(data.getPicture()).into(iv_picture);
+            if (data.getPicture().equals("")!=true)
+                Glide.with(getApplicationContext()).load(data.getPicture()).into(iv_picture);
 
             // setVisibility
             bt_insert.setVisibility(View.GONE);
@@ -124,34 +105,32 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     // Button Click Event : access db
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onClick(View v) {
+        data = setDiaryData();
+        DiaryHelper diaryHelper = new DiaryHelper();
+
         switch (v.getId()){
             case R.id.report_Button_insert: // insert data
-                setDiaryData();
-                dbHelper.insert(data);
+                diaryHelper.insertDiaryToServer(data);
                 break;
 
             case R.id.report_Button_delete: // delete data
-                if (data!= null){
-                    dbHelper.delete(data.getDiaryID());
-                }
+                diaryHelper.deleteDiaryFromServer(data);
                 break;
 
             case R.id.report_Button_update: // update data
-                setDiaryData();
-                dbHelper.update(data);
+                diaryHelper.updateDiaryToServer(data);
                 break;
         }
-        // empty diaryData
-        DiaryViewModel.setEmpty();
 
         // finish Activity
         finish();
     }
 
     // 폼에 적힌 내용으로 업데이트
-    private void setDiaryData(){
+    private DiaryData setDiaryData(){
         data = new DiaryData();
         data.setMemo(et_memo.getText().toString());
         data.setSchedule(et_schedule.getText().toString());
@@ -163,5 +142,7 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
         } catch (Exception e){
             data.setPersons(0);
         }
+
+        return data;
     }
 }

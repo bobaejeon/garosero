@@ -34,11 +34,11 @@ public class DetailFragment extends Fragment {
         tv_loc = root.findViewById(R.id.tv_loc);
 
         // init view
-        ud = HomeViewModel.getUserData().getValue();
+        /*ud = HomeViewModel.getUserData().getValue();
         tv_road.setText(ud.getRoad());
         tv_dist.setText(ud.getDistrict());
         tv_loc.setText(ud.getLocation());
-        tv_kind.setText(ud.getKind());
+        tv_kind.setText(ud.getKind());*/
         return root;
     }
 }

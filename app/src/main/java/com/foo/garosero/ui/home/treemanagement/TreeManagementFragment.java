@@ -48,7 +48,7 @@ public class TreeManagementFragment extends Fragment {
                 // 유저 정보 가져오기
                 ud = HomeViewModel.getUserData().getValue();
                 // 뷰 로딩
-                initView();
+                //initView();
             }
         };
         HomeViewModel.getUserData().observe(getActivity(), userDataObserver);
@@ -56,9 +56,9 @@ public class TreeManagementFragment extends Fragment {
         return root;
     }
 
-    private void initView() {
-        tv_tree_name.setText(ud.getTree_name());
-        tv_tree_day.setText(getTreeDay());
+    /*private void initView() {
+        *//*tv_tree_name.setText(ud.getTree_name());
+        tv_tree_day.setText(getTreeDay());*//*
 
         if (ud.isEmpty()) {
             // 1. 나무 정보 없을때
@@ -72,9 +72,9 @@ public class TreeManagementFragment extends Fragment {
             TodoFragment todoFragment = new TodoFragment();
             replaceFragment(todoFragment);
         }
-    }
+    }*/
 
-    private String getTreeDay(){
+    /*private String getTreeDay(){
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         long calDateDays = 0;
@@ -95,7 +95,7 @@ public class TreeManagementFragment extends Fragment {
             Log.e("TreeManagementFrag",e.toString());
         }
         return tree_day;
-    }
+    }*/
 
     // 이미지 뷰 채우기
     public void setBackgroundImageview(ImageView imageView, int source){
