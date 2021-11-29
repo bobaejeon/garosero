@@ -30,7 +30,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:gravity="center_vertical"
                     android:text="나무 물주기"
                     android:textStyle="bold"
                     android:textColor="@color/green_textColor"
@@ -38,27 +37,27 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/treeManagement_TextView_ans1"
+                <CheckBox
+                    android:id="@+id/treeManagement_cb_todo1"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:text="양호"
-                    android:textStyle="bold"
-                    android:padding="@dimen/activity_padding_default"
-                    app:layout_constraintEnd_toStartOf="@+id/treeManagement_imageView_ans1" />
-
-                <ImageView
-                    android:id="@+id/treeManagement_imageView_ans1"
-                    android:layout_width="43dp"
-                    android:layout_height="43dp"
-                    android:scaleType="centerCrop"
-                    android:background="@drawable/circle_green"
-                    android:gravity="center_vertical"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="top"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:buttonTint="@color/green_textColor"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="나무에 물을 주세요"
+                    android:gravity="bottom"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"/>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
@@ -81,7 +80,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:gravity="center_vertical"
                     android:text="낙엽 치우기"
                     android:textStyle="bold"
                     android:textColor="@color/green_textColor"
@@ -89,27 +87,27 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/treeManagement_TextView_ans2"
+                <CheckBox
+                    android:id="@+id/treeManagement_cb_todo2"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:text="양호"
-                    android:textStyle="bold"
-                    android:padding="@dimen/activity_padding_default"
-                    app:layout_constraintEnd_toStartOf="@+id/treeManagement_imageView_ans2" />
-
-                <ImageView
-                    android:id="@+id/treeManagement_imageView_ans2"
-                    android:layout_width="43dp"
-                    android:layout_height="43dp"
-                    android:scaleType="centerCrop"
-                    android:background="@drawable/circle_green"
-                    android:gravity="center_vertical"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="top"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:buttonTint="@color/green_textColor"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="낙엽을 치워주세요"
+                    android:gravity="bottom"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"/>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
@@ -132,37 +130,52 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:text="훼손된 시설물 신고하기"
+                    android:text="훼손된 시설물 확인하기"
                     android:textStyle="bold"
                     android:textColor="@color/green_textColor"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/treeManagement_TextView_ans3"
+                <CheckBox
+                    android:id="@+id/treeManagement_cb_todo3"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:text="양호"
-                    android:textStyle="bold"
-                    android:padding="@dimen/activity_padding_default"
-                    app:layout_constraintEnd_toStartOf="@+id/treeManagement_imageView_ans3" />
-
-                <ImageView
-                    android:id="@+id/treeManagement_imageView_ans3"
-                    android:layout_width="43dp"
-                    android:layout_height="43dp"
-                    android:scaleType="centerCrop"
-                    android:background="@drawable/circle_green"
-                    android:gravity="center_vertical"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="top"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:buttonTint="@color/green_textColor"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="주변 시설물을 확인해주세요"
+                    android:gravity="bottom"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"/>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="parent"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginEnd="48dp"
+            android:layout_marginBottom="60dp"
+            android:background="@drawable/button_background"
+            android:text="결과 보고하기"
+            android:textColor="#FFFFFF"
+            tools:ignore="ButtonStyle" />
 
     </LinearLayout>
 

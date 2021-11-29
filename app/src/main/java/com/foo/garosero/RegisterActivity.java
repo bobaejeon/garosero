@@ -13,7 +13,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.foo.garosero.data.AsteriskPasswordTransformationMethod;
-import com.foo.garosero.data.DiaryData;
 import com.foo.garosero.data.UserData;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -83,9 +82,8 @@ public class RegisterActivity extends AppCompatActivity {
                                     String name = et_name.getText().toString();
 
                                     DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-                                    UserData ud = new UserData(name);
-                                    ref.child("Users").child(uid).setValue(ud);
-
+//                                    UserData ud = new UserData(name);
+                                    ref.child("Users").child(uid).child("name").setValue(name);
                                     Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                                     startActivity(intent);
                                     finish();

@@ -1,6 +1,5 @@
 package com.foo.garosero;
 
-import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,21 +17,16 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 
+import com.foo.garosero.data.UserInfo;
 import com.foo.garosero.myUtil.ServerHelper;
-import com.foo.garosero.data.UserData;
 import com.foo.garosero.ui.application.ApplicationFragment;
 import com.foo.garosero.ui.home.HomeFragment;
 import com.foo.garosero.mviewmodel.HomeViewModel;
-import com.foo.garosero.ui.home.diary.ReportActivity;
 import com.foo.garosero.ui.treetip.TreeTipFragment;
 import com.foo.garosero.ui.information.InformationFragment;
 import com.foo.garosero.ui.visualization.VisualizationFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.gun0912.tedpermission.PermissionListener;
-import com.gun0912.tedpermission.TedPermission;
-
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -51,38 +45,19 @@ public class MainActivity extends AppCompatActivity {
         navigationView = (NavigationView)findViewById(R.id.navigation_view);
         menuButton = findViewById(R.id.memu);
 
-        // permission
-        PermissionListener permissionListener = new PermissionListener() {
-            @Override
-            public void onPermissionGranted() {
-            }
-
-            @Override
-            public void onPermissionDenied(List<String> deniedPermissions) {
-                Toast.makeText(MainActivity.this, "권한이 승인되지 않은 경우, 예기치 않은 오류가 발생할 수 있습니다.", Toast.LENGTH_LONG).show();
-            }
-        };
-        TedPermission.with(this)
-                .setPermissionListener(permissionListener)
-                .setDeniedMessage("권한이 거부되었습니다. 사용을 원하시면 설정에서 해당 권한을 직접 허용해주세요.")
-                .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                .setPermissions(Manifest.permission.READ_EXTERNAL_STORAGE)
-                .setPermissions(Manifest.permission.INTERNET)
-                .check();
-
         // 서버에서 정보 받아오기
-        //ServerHelper.initServer();
+//        ServerHelper.initServer();
 
         // live data
-        final Observer<UserData> userDataObserver = new Observer<UserData>() {
+        final Observer<UserInfo> userDataObserver = new Observer<UserInfo>() {
             @Override
-            public void onChanged(UserData userData) {
-                if (userData.name!="") {}
+            public void onChanged(UserInfo userData) {
+                if (!userData.getName().equals(""))
                 // 로그인 중이면 뷰 로딩
-                // initView();
+                initView();
             }
         };
-        HomeViewModel.getUserData().observe(MainActivity.this, userDataObserver);
+        HomeViewModel.getUserInfo().observe(MainActivity.this, userDataObserver);
 
         // 프래그먼트 초기설정
         replaceFragment(new HomeFragment());
@@ -125,8 +100,8 @@ public class MainActivity extends AppCompatActivity {
                         FirebaseAuth.getInstance().signOut();
 
                         // 싱글턴 객체 초기화
-                        UserData empty_ud = new UserData();
-                        HomeViewModel.setUserData(empty_ud);
+                        UserInfo empty_ud = new UserInfo();
+                        HomeViewModel.setUserInfo(empty_ud);
 
                         // intent
                         Toast.makeText(MainActivity.this, "로그아웃되었습니다.", Toast.LENGTH_LONG);
@@ -157,20 +132,23 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /*public void initView(){
+    public void initView(){
         View header = navigationView.getHeaderView(0);
         TextView tv_name = header.findViewById(R.id.tv_name);
         TextView tv_info = header.findViewById(R.id.tv_info);
 
-        UserData ud = HomeViewModel.getUserData().getValue();
+        UserInfo ud = HomeViewModel.getUserInfo().getValue();
         Log.e("MainActivity", ud.toString());
-        if (ud.isEmpty()) {
-            tv_name.setText("");
-        } else {
-            //tv_name.setText(ud.getKind());
-        }
-        //tv_info.setText(ud.getName());
-    }*/
+
+        // 나무가 여러 그루일 수 있으므로 나무종류는 안쓰는 게 좋겠다?!
+//        if (ud.isEmpty()) {
+//            tv_name.setText("");
+//        } else {
+//            tv_name.setText(ud.getKind());
+//        }
+        tv_name.setText(ud.getName());
+        tv_info.setText("");
+    }
 
     public void replaceFragment(Fragment fragment){
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
