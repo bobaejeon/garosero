@@ -63,19 +63,17 @@ public class DiaryHelper {
     public void updateDiaryToServer(DiaryData diaryData){
         if (diaryData==null) return;
 
-//        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-//        String uid = FirebaseAuth.getInstance().getUid();
-//
-//        Log.d("diaryupdate", diaryData.toString());
-//        ref.child("Users").child(uid).child("diaries").child(diaryData.getDiaryID()).updateChildren(diaryData.getHash());
-        deleteDiaryFromServer(diaryData);
-        insertDiaryToServer(diaryData);
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+        String uid = FirebaseAuth.getInstance().getUid();
+
+        ref.child("Users").child(uid).child("diaries").child(diaryData.getDiaryID()).updateChildren(diaryData.getHash());
     }
 
     public void deleteDiaryFromServer(DiaryData diaryData){
         if (diaryData==null) return;
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         String uid = FirebaseAuth.getInstance().getUid();
+
         ref.child("Users").child(uid).child("diaries").child(diaryData.getDiaryID()).removeValue();
     }
 

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -87,6 +88,8 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
             bt_cancel.setVisibility(View.GONE);
         } else {
             // setVisibility
+            // report_mode == create ? set new data
+            data = new DiaryData();
             bt_update.setVisibility(View.GONE);
             bt_delete.setVisibility(View.GONE);
         }
@@ -128,9 +131,8 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
         finish();
     }
 
-    // 폼에 적힌 내용으로 업데이트
+    // 폼에 적힌 내용으로 업데이트 -> diary id는 변하지 않음
     private DiaryData setDiaryData(){
-        data = new DiaryData();
         data.setMemo(et_memo.getText().toString());
         data.setSchedule(et_schedule.getText().toString());
         data.setContent(tv_content.getText().toString());
@@ -141,7 +143,6 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
         } catch (Exception e){
             data.setPersons(0);
         }
-
         return data;
     }
 }
