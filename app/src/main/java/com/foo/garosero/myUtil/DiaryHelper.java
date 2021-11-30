@@ -53,12 +53,21 @@ public class DiaryHelper {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd-HH-ss-SSS");
         String now = format.format(date);
 
-        ref.child("Users").child(uid).child("diaries").child(now).setValue(diaryData);
+        // diaryData에도 ID 업데이트(BB)
+        diaryData.setDiaryID(now);
+
+        ref.child("Users").child(uid).child("diaries").child(now).setValue(diaryData.getHash());
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void updateDiaryToServer(DiaryData diaryData){
         if (diaryData==null) return;
+
+//        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+//        String uid = FirebaseAuth.getInstance().getUid();
+//
+//        Log.d("diaryupdate", diaryData.toString());
+//        ref.child("Users").child(uid).child("diaries").child(diaryData.getDiaryID()).updateChildren(diaryData.getHash());
         deleteDiaryFromServer(diaryData);
         insertDiaryToServer(diaryData);
     }

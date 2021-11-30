@@ -17,16 +17,11 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.foo.garosero.R;
 import com.foo.garosero.data.UserInfo;
 import com.foo.garosero.mviewmodel.HomeViewModel;
+import com.foo.garosero.ui.home.empty.EmptyFragment;
 
 
 public class TreeManagementFragment extends Fragment {
     View root;
-
-    TextView tv_tree_name, tv_tree_day;
-    ImageView treeCharacter;
-
-    ViewPager2 viewPager;
-    TreeManagementAdapter pagerAdapter;
 
     UserInfo ud;
 
@@ -34,12 +29,6 @@ public class TreeManagementFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_tree_management, container, false);
-//
-//        treeCharacter = root.findViewById(R.id.treeManagement_ImageView_treeCharacter);
-//        tv_tree_name = root.findViewById(R.id.treeManagement_TextView_treeName);
-//        tv_tree_day = root.findViewById(R.id.treeManagement_TextView_treeDay);
-//
-        viewPager = root.findViewById(R.id.viewPager);
 
         // live data
         final Observer<UserInfo> userDataObserver = new Observer<UserInfo>() {
@@ -58,25 +47,16 @@ public class TreeManagementFragment extends Fragment {
 
     private void initView(UserInfo ud) {
         Log.d("treemanage", ud.toString());
-        pagerAdapter = new TreeManagementAdapter(ud);
-        viewPager.setAdapter(pagerAdapter);
-        TodoFragment todoFragment = new TodoFragment();
-        replaceFragment(todoFragment);
-//        tv_tree_name.setText(ud.getTree_name());
-//        tv_tree_day.setText(getTreeDay());
-//
-//        if (ud.isEmpty()) {
-//            // 1. 나무 정보 없을때
-//            setBackgroundImageview(treeCharacter, R.drawable.empty_tree);
-//            EmptyFragment emptyFragment = new EmptyFragment();
-//            replaceFragment(emptyFragment);
-//        }
-//        else {
-//            // 2. 나무 정보 있을 때
-//            setBackgroundImageview(treeCharacter, R.drawable.mid_tree);
-//            TodoFragment todoFragment = new TodoFragment();
-//            replaceFragment(todoFragment);
-//        }
+        if (ud.isEmpty()) {
+            // 1. 나무 정보 없을때
+            EmptyFragment emptyFragment = new EmptyFragment();
+            replaceFragment(emptyFragment);
+        }
+        else {
+            // 2. 나무 정보 있을 때
+            TodoFragment todoFragment = new TodoFragment();
+            replaceFragment(todoFragment);
+        }
     }
 
 //    private String getTreeDay(){
@@ -101,11 +81,6 @@ public class TreeManagementFragment extends Fragment {
 //        }
 //        return tree_day;
 //    }
-
-    // 이미지 뷰 채우기
-    public void setBackgroundImageview(ImageView imageView, int source){
-        imageView.setBackground(ContextCompat.getDrawable(root.getContext(), source));
-    }
 
     // 프래그먼트 바꾸기
     public void replaceFragment(Fragment fragment) {

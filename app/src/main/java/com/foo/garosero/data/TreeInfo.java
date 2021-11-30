@@ -12,8 +12,36 @@ public class TreeInfo {
     public String end_date;
     public String tree_id;
     public String tree_name;
+    public String kind;
+
+    public String getKind() {
+        return kind;
+    }
+
+    public void setKind(String kind) {
+        this.kind = kind;
+    }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    public double getLng() {
+        return lng;
+    }
+
+    public void setLng(double lng) {
+        this.lng = lng;
+    }
+
     public int level;
     public int xp;
+    public double lat;
+    public double lng;
 
     public String getDistrict() {
         return district;

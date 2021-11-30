@@ -17,6 +17,9 @@ public class UserInfo {
                 '}';
     }
 
+    public boolean isEmpty() {
+        return this.treeList == null;
+    }
     public void setName(String name) {
         this.name = name;
     }

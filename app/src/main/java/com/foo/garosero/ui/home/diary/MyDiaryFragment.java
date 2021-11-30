@@ -29,7 +29,7 @@ public class MyDiaryFragment extends Fragment {
 
         root = inflater.inflate(R.layout.fragment_my_diary, container, false);
         recyclerView = root.findViewById(R.id.diary_RecyclerView);
-        
+
 
         // read diary from server
         DiaryHelper diaryHelper = new DiaryHelper();

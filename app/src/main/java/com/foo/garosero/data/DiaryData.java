@@ -74,4 +74,15 @@ public class DiaryData {
                 ", picture='" + picture + '\'' +
                 '}';
     }
+
+    public Map<String, Object> getHash(){
+        Map<String, Object> hash = new HashMap<>();
+        hash.put("diaryID", this.diaryID);
+        hash.put("schedule", this.schedule);
+        hash.put("persons", this.persons);
+        hash.put("content", this.content);
+        hash.put("memo", this.memo);
+        hash.put("picture", this.picture);
+        return hash;
+    }
 }
