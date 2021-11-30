@@ -2,6 +2,7 @@ package com.foo.garosero;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,13 +28,19 @@ import com.foo.garosero.ui.visualization.VisualizationFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
+import static android.speech.tts.TextToSpeech.ERROR;
+
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity {
 
     DrawerLayout drawerLayout;
     NavigationView navigationView;
-    ImageButton menuButton;
+    ImageButton bt_menu, bt_qrcode;
 
     private long lastTimeBackPressed; //뒤로가기 버튼이 클릭된 시간
+
+    private TextToSpeech tts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +49,8 @@ public class MainActivity extends AppCompatActivity {
 
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         navigationView = (NavigationView)findViewById(R.id.navigation_view);
-        menuButton = findViewById(R.id.memu);
+        bt_menu = findViewById(R.id.memu);
+        bt_qrcode = findViewById(R.id.main_ImageButton_qrcode);
 
         // 서버에서 정보 받아오기
 //        ServerHelper.initServer();
@@ -61,14 +69,22 @@ public class MainActivity extends AppCompatActivity {
         // 프래그먼트 초기설정
         replaceFragment(new HomeFragment());
 
+        // QR code Icon click 시
+        bt_qrcode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                speak("테스트");
+            }
+        });
+
         // 메뉴 아이콘 클릭 시
-        menuButton.setOnClickListener(new View.OnClickListener() {
+        bt_menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 drawerLayout.openDrawer(GravityCompat.END);
             }
         });
-        
+
         // 드로어블 Navigation Item 클릭 시
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -152,6 +168,25 @@ public class MainActivity extends AppCompatActivity {
     public void replaceFragment(Fragment fragment){
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.mfragment_main, fragment).commit();
+    }
+
+    private void speak(String text) {
+        // tts 설정
+        tts = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if (status != ERROR){
+                    int result = tts.setLanguage(Locale.KOREA); // 언어 선택
+                    if(result == TextToSpeech.LANG_NOT_SUPPORTED || result == TextToSpeech.LANG_MISSING_DATA){
+                        Log.e("TTS", "This Language is not supported");
+                    }else{
+                        tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, null);
+                    }
+                }else{
+                    Log.e("TTS", "Initialization Failed!");
+                }
+            }
+        });
     }
 
 }
