@@ -4,12 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.TableLayout;
-import android.widget.TextView;
 
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
@@ -19,13 +14,12 @@ import com.foo.garosero.R;
 import com.foo.garosero.data.UserInfo;
 import com.foo.garosero.mviewmodel.HomeViewModel;
 import com.foo.garosero.ui.home.empty.EmptyFragment;
-import com.foo.garosero.ui.home.treemanagement.TreeManagementAdapter;
 
 public class TreeInfoFragment extends Fragment {
     View root;
 
     ViewPager2 viewPager;
-    TreeManagementAdapter pagerAdapter;
+    TreeInfoAdapter pagerAdapter;
 
     UserInfo ud;
 
@@ -59,7 +53,7 @@ public class TreeInfoFragment extends Fragment {
         }
         else {
             // 2. 나무 정보 있을 때
-            pagerAdapter = new TreeManagementAdapter(ud);
+            pagerAdapter = new TreeInfoAdapter(ud);
             viewPager.setAdapter(pagerAdapter);
         }
     }

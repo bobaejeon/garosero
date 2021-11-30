@@ -1,5 +1,7 @@
-package com.foo.garosero.ui.home.treemanagement;
+package com.foo.garosero.ui.home.treeinfo;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,23 +17,32 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.foo.garosero.R;
 import com.foo.garosero.data.TreeInfo;
 import com.foo.garosero.data.UserInfo;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
-public class TreeManagementAdapter extends RecyclerView.Adapter<TreeManagementAdapter.ViewHolder> {
+public class TreeInfoAdapter extends RecyclerView.Adapter<TreeInfoAdapter.ViewHolder> {
     UserInfo ud;
 
 
-    public TreeManagementAdapter(UserInfo ud){
+    public TreeInfoAdapter(UserInfo ud){
         this.ud = ud;
     }
     @NonNull
     @Override
-    public TreeManagementAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.tree_management_view_pager, parent, false);
+    public TreeInfoAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.tree_info_view_pager, parent, false);
         return new ViewHolder(view);
     }
 
@@ -44,9 +55,9 @@ public class TreeManagementAdapter extends RecyclerView.Adapter<TreeManagementAd
         holder.progressBar.setProgress(treeInfo.getXp()%10);
         holder.tv_desc_title.setText(getDescTitle(treeInfo.getRoad(),treeInfo.getKind()));
         holder.tv_desc_content.setText(getDescContents(treeInfo.getKind()));
-        /* todo 수정 */
-//        setBackgroundImageview(holder.treeCharacter, R.drawable.mid_tree);
+        setBackgroundImageview(holder.treeCharacter, treeInfo.getKind(), treeInfo.getLevel());
 
+        //todo tree_name을 변경하는 경우 firebase update
     }
 
     @Override
@@ -78,7 +89,37 @@ public class TreeManagementAdapter extends RecyclerView.Adapter<TreeManagementAd
 
 
     // 이미지 뷰 채우기
-    public void setBackgroundImageview(ImageView imageView, int source){
+    public void setBackgroundImageview(ImageView imageView, String kind, int level){
+        int source;
+        if (level == 1){
+            source = R.drawable.tree_lv1;
+        } else if(level == 2){
+            source = R.drawable.tree_lv2;
+        } else{
+            switch (kind) {
+                case "은행나무":
+                    source = R.drawable.tree_lv3_ginkgo;
+                    break;
+                case "소나무":
+                    source = R.drawable.tree_lv3_pine;
+                    break;
+                case "왕벚나무":
+                    source = R.drawable.tree_lv3_cherry;
+                    break;
+                case "살구나무":
+                    source = R.drawable.tree_lv3_apricot;
+                    break;
+                case "느티나무":
+                    source = R.drawable.tree_lv3_zelkova;
+                    break;
+                case "이팝나무":
+                    source = R.drawable.tree_lv3_popular;
+                    break;
+                default:
+                    source = R.drawable.big_tree;
+                    break;
+            }
+        }
         imageView.setBackground(ContextCompat.getDrawable(imageView.getContext(), source));
     }
 
