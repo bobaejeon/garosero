@@ -49,6 +49,7 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.ViewHolder>{
 
                     // start ReportActivity
                     Intent intent = new Intent(itemView.getContext(), ReportActivity.class);
+                    intent.putExtra("report_mode", "update");
                     itemView.getContext().startActivity(intent);
                 }
             });
@@ -74,8 +75,8 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.ViewHolder>{
 
         // 이미지 띄우기
         try {
-            Glide.with(holder.iv_picture.getContext())
-                    .load(mData.get(position).getPicture()).into(holder.iv_picture);
+            if (data.getPicture().equals("")!=true)
+                Glide.with(holder.iv_picture.getContext()).load(data.getPicture()).into(holder.iv_picture);
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -83,6 +84,10 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.ViewHolder>{
 
     @Override
     public int getItemCount() {
-        return mData.size();
+        try {
+            return mData.size();
+        }catch(Exception e){
+            return 0;
+        }
     }
 }

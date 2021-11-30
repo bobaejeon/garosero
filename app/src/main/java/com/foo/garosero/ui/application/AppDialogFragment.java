@@ -1,9 +1,5 @@
 package com.foo.garosero.ui.application;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.Fragment;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,10 +10,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.foo.garosero.R;
+
 /* todo fragment_dialog 레이아웃 수정 필요 -> 리사이클뷰로 구현 */
 public class AppDialogFragment extends DialogFragment implements View.OnClickListener {
     TableRow row1, row2, row3;

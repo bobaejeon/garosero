@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!-- 나무정보 -->
+    <androidx.cardview.widget.CardView
+        app:cardCornerRadius="12dp"
+        android:backgroundTint="@color/gray_default"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_margin_default">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/activity_padding_default"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/treeManagement_ImageView_treeCharacter"
+                android:layout_width="119dp"
+                android:layout_height="153dp"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/activity_margin_small"/>
+
+            <EditText
+                android:id="@+id/treeManagement_TextView_treeName"
+                android:paddingBottom="@dimen/activity_padding_default"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="나무이름을 지어주세요!"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/treeManagement_TextView_treeDay"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"/>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- ProgressBar -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_margin_default"
+        android:layout_marginRight="@dimen/activity_margin_default"
+        android:layout_marginBottom="@dimen/activity_margin_default">
+
+        <ImageView
+            android:id="@+id/treeManagement_ImageView_count"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/circle_green"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:id="@+id/treeManagement_TextView_count"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/treeManagement_ImageView_count"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/treeManagement_ImageView_count" />
+
+        <ProgressBar
+            android:scaleY="4"
+            android:progress="5"
+            android:progressTint="#55C595"
+            android:max="10"
+            android:id="@+id/treeManagement_ProgressBar"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/activity_padding_default"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/treeManagement_ImageView_count"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="내 나무정보"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_marginTop="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"/>
+
+    <androidx.cardview.widget.CardView
+        app:cardCornerRadius="12dp"
+        android:backgroundTint="@color/gray_default"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_margin_default">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/activity_padding_default"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/treeManagement_TextView_treeTitle"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:text="덕수궁길에 있는 은행나무"/>
+
+            <TextView
+                android:id="@+id/treeManagement_TextView_treeDesc"
+                android:textSize="15sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:text="가을이 되면 낙엽이 지기 전에 잎사귀가 샛노랗게 물들어 아름답고 다른 여러 장점이 있어 가로수로 많이 심는다. 은행나무에서 은행은 그 열매가 '은빛이 나는 살구'라는 뜻에서 은행나무라고 불리게 되었다고 합니다."/>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

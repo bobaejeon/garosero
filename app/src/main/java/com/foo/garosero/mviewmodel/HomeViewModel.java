@@ -3,11 +3,11 @@ package com.foo.garosero.mviewmodel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.foo.garosero.data.UserData;
+import com.foo.garosero.data.UserInfo;
 
 public class HomeViewModel extends ViewModel {
     private MutableLiveData<String> pageTitle;
-    public static MutableLiveData<UserData> userData;
+    public static MutableLiveData<UserInfo> userInfo;
 
     public MutableLiveData<String> getPageTitle() {
         if (pageTitle == null){
@@ -17,16 +17,16 @@ public class HomeViewModel extends ViewModel {
         return pageTitle;
     }
 
-    public static MutableLiveData<UserData> getUserData() {
-        if (userData==null) {
-            userData = new MutableLiveData<UserData>();
-            UserData ud = new UserData("");
-            userData.setValue(ud);
+    public static MutableLiveData<UserInfo> getUserInfo() {
+        if (userInfo ==null) {
+            userInfo = new MutableLiveData<UserInfo>();
+            UserInfo ud = new UserInfo("",null);
+            userInfo.setValue(ud);
         }
-        return userData;
+        return userInfo;
     }
 
-    public static void setUserData(UserData userData) {
-        HomeViewModel.userData.setValue(userData);
+    public static void setUserInfo(UserInfo userInfo) {
+        HomeViewModel.userInfo.setValue(userInfo);
     }
 }

@@ -1,9 +1,10 @@
 package com.foo.garosero.data;
 
-import android.graphics.Bitmap;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DiaryData {
-    private int diaryID = 0;
+    private String diaryID = "";
     private String schedule = "";
     private int persons = 0;
     private String content = "";
@@ -14,11 +15,11 @@ public class DiaryData {
 
     }
 
-    public int getDiaryID() {
+    public String getDiaryID() {
         return diaryID;
     }
 
-    public void setDiaryID(int diaryID) {
+    public void setDiaryID(String diaryID) {
         this.diaryID = diaryID;
     }
 
@@ -65,12 +66,23 @@ public class DiaryData {
     @Override
     public String toString() {
         return "DiaryData{" +
-                "diaryID=" + diaryID +
+                "diaryID='" + diaryID + '\'' +
                 ", schedule='" + schedule + '\'' +
                 ", persons=" + persons +
                 ", content='" + content + '\'' +
                 ", memo='" + memo + '\'' +
-                ", picture=" + picture +
+                ", picture='" + picture + '\'' +
                 '}';
+    }
+
+    public Map<String, Object> getHash(){
+        Map<String, Object> hash = new HashMap<>();
+        hash.put("diaryID", this.diaryID);
+        hash.put("schedule", this.schedule);
+        hash.put("persons", this.persons);
+        hash.put("content", this.content);
+        hash.put("memo", this.memo);
+        hash.put("picture", this.picture);
+        return hash;
     }
 }

@@ -14,8 +14,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
+            android:name=".InitialActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.home.diary.ReportActivity"
             android:exported="false" />
+
         <activity
             android:name=".ui.treetip.TreeExplainActivity"
             android:exported="false" />
