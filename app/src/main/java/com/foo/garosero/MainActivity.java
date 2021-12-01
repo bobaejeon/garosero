@@ -164,7 +164,8 @@ public class MainActivity extends AppCompatActivity {
                         speak(ud.getName()+"님의 "+tree.getTree_name()+"입니다");
                         return;
                     }
-                    Log.e("QR", answer+"/"+treeId+"/"+treeId.equals(answer));
+                    Toast.makeText(MainActivity.this, ud.getName()+"님의 나무가 아닙니다", Toast.LENGTH_SHORT).show();
+                    //Log.e("MainActivity-QR", answer+"/"+treeId);
                 }
             }
 

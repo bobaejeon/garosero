@@ -1,5 +1,8 @@
 package com.foo.garosero.data;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class TreeInfo {
     public TreeInfo() {
     }

@@ -162,6 +162,7 @@ public class TreeInfoAdapter extends RecyclerView.Adapter<TreeInfoAdapter.ViewHo
     }
 
     private String getTreeDay(String start_date){
+        if (start_date==null) return "";
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         long calDateDays = 0;
@@ -189,6 +190,7 @@ public class TreeInfoAdapter extends RecyclerView.Adapter<TreeInfoAdapter.ViewHo
     }
 
     private String getDescContents(String kind){
+        if (kind==null) return "";
         String res;
         switch (kind){
             case "은행나무":

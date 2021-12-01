@@ -73,7 +73,7 @@ public class HomeFragment extends Fragment {
                         home_Button_treeManagement.setBackground(ContextCompat.getDrawable(root.getContext(), R.drawable.button_focus));
                         break;
                     case "내 기록" :
-                        home_TextView_explain.setText("");
+                        home_TextView_explain.setText("나무와 어떤 추억을 쌓았을까요?");
                         home_Button_diary.setBackground(ContextCompat.getDrawable(root.getContext(), R.drawable.button_focus));
                         break;
                     case "내 나무 정보":
