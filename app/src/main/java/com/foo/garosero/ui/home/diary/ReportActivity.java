@@ -1,5 +1,7 @@
 package com.foo.garosero.ui.home.diary;
 
+import static com.foo.garosero.myUtil.ImageHelper.showImage;
+
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,7 +19,6 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.bumptech.glide.Glide;
 import com.foo.garosero.R;
 import com.foo.garosero.data.DiaryData;
 import com.foo.garosero.data.TreeInfo;
@@ -25,7 +26,6 @@ import com.foo.garosero.mviewmodel.DiaryViewModel;
 import com.foo.garosero.mviewmodel.HomeViewModel;
 import com.foo.garosero.myUtil.DiaryHelper;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,10 +38,10 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
     ImageButton ibt_back;
     ImageView iv_picture;
 
-    DiaryData data;
-    String imageUri;
+    DiaryData oldDiary, newDiary;
 
     Map<CheckBox, TreeInfo> checkTreeMap;
+    String imageUrl = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +88,9 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
         }catch (Exception e){
         }
 
+        // 가져온 데이터 저장
+        oldDiary = DiaryViewModel.getDiaryData();
+
         // show data
         String report_mode = "create";
         try{
@@ -96,21 +99,18 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
         }
         if (report_mode.equals("update")){
             // set Data on form
-            data = DiaryViewModel.getDiaryData();
-            tv_content.setText(data.getContent());
-            et_memo.setText(data.getMemo());
-            et_schedule.setText(data.getSchedule());
-            et_persons.setText(String.valueOf(data.getPersons()));
-            if (data.getPicture().equals("")!=true){
-                try{
-                    Glide.with(getApplicationContext()).load(data.getPicture()).into(iv_picture);
-                }catch (Exception e){
-                    Log.w("ReportActivity", "해당 경로에 파일이 존재하지 않습니다.");
-                }
+            tv_content.setText(oldDiary.getContent());
+            et_memo.setText(oldDiary.getMemo());
+            et_schedule.setText(oldDiary.getSchedule());
+            et_persons.setText(String.valueOf(oldDiary.getPersons()));
+            if (oldDiary.getPicture().equals("")!=true){
+                // 이미지 띄우기
+                imageUrl = oldDiary.getPicture();
+                showImage(getApplicationContext(), imageUrl, iv_picture);
             }
 
             // set tree check box
-            Set<String> chosenTrees = data.getTrees().keySet();
+            Set<String> chosenTrees = oldDiary.getTrees().keySet();
             for (CheckBox checkBox : checkTreeMap.keySet()){
                 TreeInfo tree = checkTreeMap.get(checkBox);
                 if (chosenTrees.contains(tree.getTree_id())){
@@ -124,7 +124,6 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
 
         } else {
             // report_mode == create ? set new data
-            data = new DiaryData();
             // setVisibility
             bt_insert.setVisibility(View.VISIBLE);
             bt_cancel.setVisibility(View.VISIBLE);
@@ -137,12 +136,10 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent mdata) {
         super.onActivityResult(requestCode, resultCode, mdata);
         if (requestCode == 0 && resultCode == RESULT_OK){
-            imageUri = mdata.getData().toString();
-            try{
-                Glide.with(getApplicationContext()).load(mdata.getData()).into(iv_picture);
-            }catch (Exception e){
-                Log.w("ReportActivity", "해당 경로에 파일이 존재하지 않습니다.");
-            }
+            // 이미지 띄우기
+            imageUrl = mdata.getData().toString();
+            showImage(getApplicationContext(), imageUrl, iv_picture);
+            Log.e("Report", mdata.getData().toString());
         }
     }
 
@@ -150,22 +147,21 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onClick(View v) {
-        data = setDiaryData();
         DiaryHelper diaryHelper = new DiaryHelper();
 
         switch (v.getId()){
             case R.id.report_Button_insert: // insert data
-                getChosenTree();
-                //diaryHelper.insertDiaryToServer(data);
-                diaryHelper.insertDiaryToServer(data);
+                newDiary = setDiaryData();
+                diaryHelper.insertDiaryToServer(newDiary);
                 break;
 
             case R.id.report_Button_delete: // delete data
-                diaryHelper.deleteDiaryFromServer(data);
+                diaryHelper.deleteDiaryFromServer(oldDiary);
                 break;
 
             case R.id.report_Button_update: // update data
-                diaryHelper.updateDiaryToServer(data);
+                newDiary = setDiaryData();
+                diaryHelper.updateDiaryToServer(oldDiary, newDiary);
                 break;
         }
 
@@ -175,15 +171,18 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
 
     // 폼에 적힌 내용으로 업데이트 -> diary id는 변하지 않음
     private DiaryData setDiaryData(){
-        data.setMemo(et_memo.getText().toString());
-        data.setSchedule(et_schedule.getText().toString());
-        data.setContent(tv_content.getText().toString());
-        if (imageUri!= null) data.setPicture(imageUri);
+        newDiary = new DiaryData();
+        newDiary.setDiaryID(oldDiary.getDiaryID());
+        newDiary.setMemo(et_memo.getText().toString());
+        newDiary.setSchedule(et_schedule.getText().toString());
+        newDiary.setContent(tv_content.getText().toString());
+        newDiary.getPicture();
+        if (imageUrl!=null) newDiary.setPicture(imageUrl);
 
         try {
-            data.setPersons(Integer.parseInt(et_persons.getText().toString()));
+            newDiary.setPersons(Integer.parseInt(et_persons.getText().toString()));
         } catch (Exception e){
-            data.setPersons(0);
+            newDiary.setPersons(0);
         }
 
         // 나무 등록 : 나무 아이디 값만 저장
@@ -192,9 +191,9 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
         for (TreeInfo tree : chosenTree) {
             treeMap.put(tree.tree_id, tree.tree_id);
         }
-        data.setTrees(treeMap);
+        newDiary.setTrees(treeMap);
 
-        return data;
+        return newDiary;
     }
 
     // 소유하고 있는 나무 표시하기

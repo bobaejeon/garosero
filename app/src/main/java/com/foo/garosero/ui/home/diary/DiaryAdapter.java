@@ -1,5 +1,7 @@
 package com.foo.garosero.ui.home.diary;
 
+import static com.foo.garosero.myUtil.ImageHelper.showImage;
+
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -17,6 +19,7 @@ import com.bumptech.glide.Glide;
 import com.foo.garosero.R;
 import com.foo.garosero.data.DiaryData;
 import com.foo.garosero.mviewmodel.DiaryViewModel;
+import com.foo.garosero.myUtil.WebviewHelper;
 
 import java.util.ArrayList;
 
@@ -75,13 +78,7 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.ViewHolder>{
         holder.tv_schedule.setText(data.getSchedule());
 
         // 이미지 띄우기
-        if (data.getPicture().equals("")!=true){
-            try{
-                Glide.with(holder.iv_picture.getContext()).load(data.getPicture()).into(holder.iv_picture);
-            }catch (Exception e){
-                Log.w("DiaryAdapter", "해당 경로에 파일이 존재하지 않습니다.");
-            }
-        }
+        showImage(holder.iv_picture.getContext(), data.getPicture(), holder.iv_picture);
     }
 
     @Override
