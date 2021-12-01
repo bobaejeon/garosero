@@ -17,6 +17,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.foo.garosero.data.TreeInfo;
 import com.foo.garosero.data.UserInfo;
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     ImageButton bt_menu, bt_qrcode;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     private long lastTimeBackPressed; //뒤로가기 버튼이 클릭된 시간
 
@@ -134,6 +136,16 @@ public class MainActivity extends AppCompatActivity {
                 }
                 drawerLayout.closeDrawer(GravityCompat.END);
                 return false;
+            }
+        });
+
+        // SwipeRefreshLayout
+        swipeRefreshLayout = findViewById(R.id.main_SwipeRefreshLayout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                ServerHelper.initServer();
+                swipeRefreshLayout.setRefreshing(false); // 새로고침 완료
             }
         });
     }
