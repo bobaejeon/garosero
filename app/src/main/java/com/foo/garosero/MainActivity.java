@@ -2,6 +2,7 @@ package com.foo.garosero;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,8 +18,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 
+import com.foo.garosero.data.TreeInfo;
 import com.foo.garosero.data.UserInfo;
 import com.foo.garosero.mviewmodel.HomeViewModel;
+import com.foo.garosero.myUtil.ServerHelper;
 import com.foo.garosero.ui.application.ApplicationFragment;
 import com.foo.garosero.ui.home.HomeFragment;
 import com.foo.garosero.ui.information.InformationFragment;
@@ -26,14 +29,24 @@ import com.foo.garosero.ui.treetip.TreeTipFragment;
 import com.foo.garosero.ui.visualization.VisualizationFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
+
+import static android.speech.tts.TextToSpeech.ERROR;
+
+import java.util.ArrayList;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
     DrawerLayout drawerLayout;
     NavigationView navigationView;
-    ImageButton menuButton;
+    ImageButton bt_menu, bt_qrcode;
 
     private long lastTimeBackPressed; //뒤로가기 버튼이 클릭된 시간
+
+    private TextToSpeech tts;
+    public UserInfo ud;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +55,11 @@ public class MainActivity extends AppCompatActivity {
 
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         navigationView = (NavigationView)findViewById(R.id.navigation_view);
-        menuButton = findViewById(R.id.memu);
+        bt_menu = findViewById(R.id.memu);
+        bt_qrcode = findViewById(R.id.main_ImageButton_qrcode);
 
         // 서버에서 정보 받아오기
-//        ServerHelper.initServer();
+        ServerHelper.initServer();
 
         // live data
         final Observer<UserInfo> userDataObserver = new Observer<UserInfo>() {
@@ -61,14 +75,24 @@ public class MainActivity extends AppCompatActivity {
         // 프래그먼트 초기설정
         replaceFragment(new HomeFragment());
 
+        // QR code Icon click 시
+        bt_qrcode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                IntentIntegrator qrScan = new IntentIntegrator(MainActivity.this);
+                qrScan.setOrientationLocked(false); // 가로 /세로 변경 가능
+                qrScan.initiateScan();
+            }
+        });
+
         // 메뉴 아이콘 클릭 시
-        menuButton.setOnClickListener(new View.OnClickListener() {
+        bt_menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 drawerLayout.openDrawer(GravityCompat.END);
             }
         });
-        
+
         // 드로어블 Navigation Item 클릭 시
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -114,6 +138,34 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    // QR code Reader
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (result != null) {
+            //qrcode 가 없으면
+            if (result.getContents() == null) {
+                Toast.makeText(MainActivity.this, "취소", Toast.LENGTH_SHORT).show();
+            } else {
+                //qrcode 결과가 있으면
+                String answer = result.getContents().trim();
+                ArrayList<TreeInfo> treeList = ud.getTreeList();
+
+                for (TreeInfo tree : treeList){
+                    String treeId = tree.getTree_id().trim();
+                    if (treeId.equals(answer)){
+                        speak(ud.getName()+"님의 "+tree.getTree_name()+"입니다");
+                        return;
+                    }
+                    Log.e("QR", answer+"/"+treeId+"/"+treeId.equals(answer));
+                }
+            }
+
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
     @Override
     public void onBackPressed() { //뒤로가기 했을 때
         if (drawerLayout.isDrawerOpen(GravityCompat.END)) { // drawer가 열려 있을 때
@@ -136,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
         TextView tv_name = header.findViewById(R.id.tv_name);
         TextView tv_info = header.findViewById(R.id.tv_info);
 
-        UserInfo ud = HomeViewModel.getUserInfo().getValue();
+        ud = HomeViewModel.getUserInfo().getValue();
         Log.e("MainActivity", ud.toString());
 
         // 나무가 여러 그루일 수 있으므로 나무종류는 안쓰는 게 좋겠다?!
@@ -152,6 +204,24 @@ public class MainActivity extends AppCompatActivity {
     public void replaceFragment(Fragment fragment){
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.mfragment_main, fragment).commit();
+    }
+
+    private void speak(String text) {
+        tts = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if (status != ERROR){
+                    int result = tts.setLanguage(Locale.KOREA); // 언어 선택
+                    if(result == TextToSpeech.LANG_NOT_SUPPORTED || result == TextToSpeech.LANG_MISSING_DATA){
+                        Log.e("TTS", "This Language is not supported");
+                    }else{
+                        tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, null);
+                    }
+                }else{
+                    Log.e("TTS", "Initialization Failed!");
+                }
+            }
+        });
     }
 
 }

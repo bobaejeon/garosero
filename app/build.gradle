@@ -54,4 +54,7 @@ dependencies {
 
     // permission
     implementation 'gun0912.ted:tedpermission:2.2.1'
+
+    // read qrcode
+    implementation 'com.journeyapps:zxing-android-embedded:3.4.0'
 }
