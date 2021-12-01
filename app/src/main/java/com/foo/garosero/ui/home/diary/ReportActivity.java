@@ -7,6 +7,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -19,8 +20,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.foo.garosero.R;
 import com.foo.garosero.data.DiaryData;
+import com.foo.garosero.data.TreeInfo;
 import com.foo.garosero.mviewmodel.DiaryViewModel;
+import com.foo.garosero.mviewmodel.HomeViewModel;
 import com.foo.garosero.myUtil.DiaryHelper;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 public class ReportActivity extends AppCompatActivity implements View.OnClickListener {
     EditText et_schedule, et_memo, et_persons;
@@ -31,6 +40,8 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
 
     DiaryData data;
     String imageUri;
+
+    Map<CheckBox, TreeInfo> checkTreeMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +78,9 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
             }
         });
 
+        // show Tree
+        showTree();
+
         // show data
         String report_mode = "create";
         try{
@@ -80,18 +94,33 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
             et_memo.setText(data.getMemo());
             et_schedule.setText(data.getSchedule());
             et_persons.setText(String.valueOf(data.getPersons()));
-            if (data.getPicture().equals("")!=true)
-                Glide.with(getApplicationContext()).load(data.getPicture()).into(iv_picture);
+            if (data.getPicture().equals("")!=true){
+                File file = new File(data.getPicture());
+                if (file.exists()){
+                    Glide.with(getApplicationContext()).load(data.getPicture()).into(iv_picture);
+                }
+                Log.w("ReportActivity", "해당 경로에 파일이 존재하지 않습니다.");
+            }
+
+            // set tree check box
+            Set<String> chosenTrees = data.getTrees().keySet();
+            for (CheckBox checkBox : checkTreeMap.keySet()){
+                TreeInfo tree = checkTreeMap.get(checkBox);
+                if (chosenTrees.contains(tree.getTree_id())){
+                    checkBox.setChecked(true); // 체크박스에 표시하기
+                }
+            }
 
             // setVisibility
-            bt_insert.setVisibility(View.GONE);
-            bt_cancel.setVisibility(View.GONE);
+            bt_update.setVisibility(View.VISIBLE);
+            bt_delete.setVisibility(View.VISIBLE);
+
         } else {
-            // setVisibility
             // report_mode == create ? set new data
             data = new DiaryData();
-            bt_update.setVisibility(View.GONE);
-            bt_delete.setVisibility(View.GONE);
+            // setVisibility
+            bt_insert.setVisibility(View.VISIBLE);
+            bt_cancel.setVisibility(View.VISIBLE);
         }
     }
 
@@ -115,6 +144,8 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
 
         switch (v.getId()){
             case R.id.report_Button_insert: // insert data
+                getChosenTree();
+                //diaryHelper.insertDiaryToServer(data);
                 diaryHelper.insertDiaryToServer(data);
                 break;
 
@@ -143,6 +174,48 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
         } catch (Exception e){
             data.setPersons(0);
         }
+
+        // 나무 등록 : 나무 아이디 값만 저장
+        ArrayList<TreeInfo> chosenTree = getChosenTree();
+        Map<String, Object> treeMap = new HashMap<String, Object>();
+        for (TreeInfo tree : chosenTree) {
+            treeMap.put(tree.tree_id, tree.tree_id);
+        }
+        data.setTrees(treeMap);
+
         return data;
+    }
+
+    // 소유하고 있는 나무 표시하기
+    private void showTree(){
+        CheckBox[] cbList = {
+                findViewById(R.id.report_CheckBox_tree1),
+                findViewById(R.id.report_CheckBox_tree2),
+                findViewById(R.id.report_CheckBox_tree3),
+                findViewById(R.id.report_CheckBox_tree4),
+                findViewById(R.id.report_CheckBox_tree5)};
+
+        checkTreeMap  = new HashMap<>();
+        ArrayList<TreeInfo> treeList = HomeViewModel.getUserInfo().getValue().getTreeList();
+        for (int i = 0;i<treeList.size();i++){
+            TreeInfo tree = treeList.get(i);
+            CheckBox cb = cbList[i];
+            checkTreeMap.put(cb, tree);
+
+            String message = tree.getRoad()+"에 있는 "+tree.getTree_name()+"("+tree.getTree_id()+")";
+            cb.setVisibility(View.VISIBLE); // 화면에 표시하기
+            cb.setText(message);
+        }
+    }
+
+    // 체크된 나무 가져오기
+    private ArrayList<TreeInfo> getChosenTree(){
+        ArrayList<TreeInfo> chosenTreeList = new ArrayList<TreeInfo>();
+        for (CheckBox cb : checkTreeMap.keySet()){
+            if (cb.isChecked() == true) {
+                chosenTreeList.add(checkTreeMap.get(cb));
+            }
+        }
+        return  chosenTreeList;
     }
 }

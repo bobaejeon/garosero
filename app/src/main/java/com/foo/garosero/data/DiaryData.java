@@ -10,6 +10,7 @@ public class DiaryData {
     private String content = "";
     private String memo = "";
     private String picture = "";
+    private Map<String, Object> trees = new HashMap<String, Object>();
 
     public DiaryData() {
 
@@ -63,6 +64,14 @@ public class DiaryData {
         this.picture = picture;
     }
 
+    public Map<String, Object> getTrees() {
+        return trees;
+    }
+
+    public void setTrees(Map<String, Object> trees) {
+        this.trees = trees;
+    }
+
     @Override
     public String toString() {
         return "DiaryData{" +
@@ -72,6 +81,7 @@ public class DiaryData {
                 ", content='" + content + '\'' +
                 ", memo='" + memo + '\'' +
                 ", picture='" + picture + '\'' +
+                ", trees=" + trees +
                 '}';
     }
 
@@ -83,6 +93,7 @@ public class DiaryData {
         hash.put("content", this.content);
         hash.put("memo", this.memo);
         hash.put("picture", this.picture);
+        hash.put("trees", this.trees);
         return hash;
     }
 }

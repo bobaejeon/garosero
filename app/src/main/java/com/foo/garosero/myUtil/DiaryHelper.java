@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
 import com.foo.garosero.data.DiaryData;
+import com.foo.garosero.data.TreeInfo;
 import com.foo.garosero.mviewmodel.DiaryViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -18,6 +19,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DiaryHelper {
     public void readDiaryFromFireBase(){
@@ -56,7 +59,9 @@ public class DiaryHelper {
         // diaryData에도 ID 업데이트(BB)
         diaryData.setDiaryID(now);
 
-        ref.child("Users").child(uid).child("diaries").child(now).setValue(diaryData.getHash());
+        // diaryData를 Users>UID>diaries>now 에 업데이트
+        ref = ref.child("Users").child(uid).child("diaries").child(now);
+        ref.setValue(diaryData.getHash());
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -66,7 +71,8 @@ public class DiaryHelper {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         String uid = FirebaseAuth.getInstance().getUid();
 
-        ref.child("Users").child(uid).child("diaries").child(diaryData.getDiaryID()).updateChildren(diaryData.getHash());
+        ref = ref.child("Users").child(uid).child("diaries").child(diaryData.getDiaryID());
+        ref.updateChildren(diaryData.getHash());
     }
 
     public void deleteDiaryFromServer(DiaryData diaryData){
