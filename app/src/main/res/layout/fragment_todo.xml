@@ -13,7 +13,7 @@
 
         <!-- 할일 리스트1 -->
         <androidx.cardview.widget.CardView
-            android:id="@+id/treeManagement_CardView_todo1"
+            android:id="@+id/todo_CardView_1"
             android:backgroundTint="@color/gray_default"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -28,6 +28,7 @@
                 android:padding="@dimen/activity_padding_default">
 
                 <TextView
+                    android:id="@+id/todo_tv_1"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="나무 물주기"
@@ -38,7 +39,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <CheckBox
-                    android:id="@+id/treeManagement_cb_todo1"
+                    android:id="@+id/todo_cb_1"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:clickable="true"
@@ -63,7 +64,7 @@
 
         <!-- 할일 리스트2 -->
         <androidx.cardview.widget.CardView
-            android:id="@+id/treeManagement_CardView_todo2"
+            android:id="@+id/todo_CardView_2"
             android:backgroundTint="@color/gray_default"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -78,6 +79,7 @@
                 android:padding="@dimen/activity_padding_default">
 
                 <TextView
+                    android:id="@+id/todo_tv_2"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="낙엽 치우기"
@@ -88,7 +90,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <CheckBox
-                    android:id="@+id/treeManagement_cb_todo2"
+                    android:id="@+id/todo_cb_2"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:clickable="true"
@@ -113,7 +115,7 @@
 
         <!-- 할일 리스트3 -->
         <androidx.cardview.widget.CardView
-            android:id="@+id/treeManagement_CardView_todo3"
+            android:id="@+id/todo_CardView_3"
             android:backgroundTint="@color/gray_default"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -128,6 +130,7 @@
                 android:padding="@dimen/activity_padding_default">
 
                 <TextView
+                    android:id="@+id/todo_tv_3"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="훼손된 시설물 확인하기"
@@ -138,7 +141,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <CheckBox
-                    android:id="@+id/treeManagement_cb_todo3"
+                    android:id="@+id/todo_cb_3"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:clickable="true"

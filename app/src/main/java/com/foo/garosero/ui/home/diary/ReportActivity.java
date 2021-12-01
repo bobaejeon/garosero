@@ -81,6 +81,13 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
         // show Tree
         showTree();
 
+        // set content (to-do)
+        try {
+            String content = getIntent().getStringExtra("content");
+            tv_content.setText(content);
+        }catch (Exception e){
+        }
+
         // show data
         String report_mode = "create";
         try{
