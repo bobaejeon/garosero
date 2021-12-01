@@ -88,18 +88,18 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
         }catch (Exception e){
         }
         if (report_mode.equals("update")){
-            // set Data
+            // set Data on form
             data = DiaryViewModel.getDiaryData();
             tv_content.setText(data.getContent());
             et_memo.setText(data.getMemo());
             et_schedule.setText(data.getSchedule());
             et_persons.setText(String.valueOf(data.getPersons()));
             if (data.getPicture().equals("")!=true){
-                File file = new File(data.getPicture());
-                if (file.exists()){
+                try{
                     Glide.with(getApplicationContext()).load(data.getPicture()).into(iv_picture);
+                }catch (Exception e){
+                    Log.w("ReportActivity", "해당 경로에 파일이 존재하지 않습니다.");
                 }
-                Log.w("ReportActivity", "해당 경로에 파일이 존재하지 않습니다.");
             }
 
             // set tree check box
@@ -131,7 +131,11 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
         super.onActivityResult(requestCode, resultCode, mdata);
         if (requestCode == 0 && resultCode == RESULT_OK){
             imageUri = mdata.getData().toString();
-            Glide.with(getApplicationContext()).load(mdata.getData()).into(iv_picture);
+            try{
+                Glide.with(getApplicationContext()).load(mdata.getData()).into(iv_picture);
+            }catch (Exception e){
+                Log.w("ReportActivity", "해당 경로에 파일이 존재하지 않습니다.");
+            }
         }
     }
 

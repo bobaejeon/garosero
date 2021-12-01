@@ -18,7 +18,6 @@ import com.foo.garosero.R;
 import com.foo.garosero.data.DiaryData;
 import com.foo.garosero.mviewmodel.DiaryViewModel;
 
-import java.io.File;
 import java.util.ArrayList;
 
 public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.ViewHolder>{
@@ -77,11 +76,11 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.ViewHolder>{
 
         // 이미지 띄우기
         if (data.getPicture().equals("")!=true){
-            File file = new File(data.getPicture());
-            if (file.exists()){
+            try{
                 Glide.with(holder.iv_picture.getContext()).load(data.getPicture()).into(holder.iv_picture);
+            }catch (Exception e){
+                Log.w("DiaryAdapter", "해당 경로에 파일이 존재하지 않습니다.");
             }
-            Log.w("DiaryAdater", "해당 경로에 파일이 존재하지 않습니다.");
         }
     }
 
