@@ -58,22 +58,29 @@ public class MainActivity extends AppCompatActivity {
         bt_menu = findViewById(R.id.memu);
         bt_qrcode = findViewById(R.id.main_ImageButton_qrcode);
 
-        // 서버에서 정보 받아오기
-        ServerHelper.initServer();
+        // 서버에서 정보 받아오기 -> initial activity에서 받음
+//        ServerHelper.initServer();
 
         // live data
         final Observer<UserInfo> userDataObserver = new Observer<UserInfo>() {
             @Override
             public void onChanged(UserInfo userData) {
-                if (!userData.getName().equals(""))
-                // 로그인 중이면 뷰 로딩
+                // 유저 정보 가져오기
+                ud = HomeViewModel.getUserInfo().getValue();
+                // 뷰 로딩
                 initView();
             }
         };
         HomeViewModel.getUserInfo().observe(MainActivity.this, userDataObserver);
 
         // 프래그먼트 초기설정
-        replaceFragment(new HomeFragment());
+        /* initial activity에서 선택한 나무 인덱스를 홈 프래그먼트 전달 */
+        HomeFragment homeFrag = new HomeFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("index",getIntent().getIntExtra("index", 0));
+        homeFrag.setArguments(bundle);
+
+        replaceFragment(homeFrag);
 
         // QR code Icon click 시
         bt_qrcode.setOnClickListener(new View.OnClickListener() {
@@ -103,8 +110,8 @@ public class MainActivity extends AppCompatActivity {
                         replaceFragment(applicationFrag);
                         break;
                     case R.id.item_home:
-                        HomeFragment homeFrag = new HomeFragment();
-                        replaceFragment(homeFrag);
+                        HomeFragment homeFragment = new HomeFragment();
+                        replaceFragment(homeFragment);
                         break;
                     case R.id.item_information:
                         InformationFragment informationFrag = new InformationFragment();

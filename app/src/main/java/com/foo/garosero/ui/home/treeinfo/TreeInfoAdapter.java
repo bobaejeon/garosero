@@ -1,14 +1,14 @@
 package com.foo.garosero.ui.home.treeinfo;
 
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -17,7 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.foo.garosero.R;
 import com.foo.garosero.data.TreeInfo;
 import com.foo.garosero.data.UserInfo;
-import com.google.firebase.auth.FirebaseAuth;
+import com.foo.garosero.myUtil.ServerHelper;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,7 +31,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Map;
 
 public class TreeInfoAdapter extends RecyclerView.Adapter<TreeInfoAdapter.ViewHolder> {
     UserInfo ud;
@@ -57,7 +57,43 @@ public class TreeInfoAdapter extends RecyclerView.Adapter<TreeInfoAdapter.ViewHo
         holder.tv_desc_content.setText(getDescContents(treeInfo.getKind()));
         setBackgroundImageview(holder.treeCharacter, treeInfo.getKind(), treeInfo.getLevel());
 
-        //todo tree_name을 변경하는 경우 firebase update
+        // 나무이름 수정 버튼
+        holder.btn_submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // 1. 현재 객체와 treeid가 같은 db 항목의 ref를 얻는다
+                // 2. 나무 이름 업데이트 3. 업데이트 성공시 토스트 띄우고 데이터 다시 불러오기
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Trees_taken");
+
+                Query query = ref.orderByChild("tree_id").equalTo(treeInfo.getTree_id());
+                query.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.exists()){
+                            for(DataSnapshot snap:snapshot.getChildren()){
+                                HashMap<String, Object> map = new HashMap<>();
+                                map.put("tree_name", holder.tv_tree_name.getText().toString());
+                                snap.getRef().updateChildren(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        ServerHelper.initServer();
+                                        Toast.makeText(view.getContext(), "완료되었습니다.", Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                            }
+                        }else {
+                            Log.e("TreeInfoAdapter", "no data");
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        // Getting Post failed, log a message
+                        Log.w("TreeInfoAdapter", "onCancelled", error.toException());
+                    }
+                });
+            }
+        });
     }
 
     @Override
@@ -73,6 +109,7 @@ public class TreeInfoAdapter extends RecyclerView.Adapter<TreeInfoAdapter.ViewHo
         TextView tv_tree_name, tv_tree_day, tv_level, tv_desc_title, tv_desc_content;
         ImageView treeCharacter;
         ProgressBar progressBar;
+        Button btn_submit;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -84,6 +121,7 @@ public class TreeInfoAdapter extends RecyclerView.Adapter<TreeInfoAdapter.ViewHo
             progressBar = itemView.findViewById(R.id.treeManagement_ProgressBar);
             tv_desc_title = itemView.findViewById(R.id.treeManagement_TextView_treeTitle);
             tv_desc_content = itemView.findViewById(R.id.treeManagement_TextView_treeDesc);
+            btn_submit = itemView.findViewById(R.id.bt_submit);
         }
     }
 

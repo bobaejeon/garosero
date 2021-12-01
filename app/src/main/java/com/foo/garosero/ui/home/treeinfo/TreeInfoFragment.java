@@ -1,6 +1,7 @@
 package com.foo.garosero.ui.home.treeinfo;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,6 +56,10 @@ public class TreeInfoFragment extends Fragment {
             // 2. 나무 정보 있을 때
             pagerAdapter = new TreeInfoAdapter(ud);
             viewPager.setAdapter(pagerAdapter);
+            Bundle bundle = getArguments();
+
+            if(bundle!=null) viewPager.setCurrentItem(bundle.getInt("index"));
+            else viewPager.setCurrentItem(0);
         }
     }
 
