@@ -41,8 +41,6 @@ public class InitialActivity extends AppCompatActivity implements View.OnClickLi
         final Observer<UserInfo> userDataObserver = new Observer<UserInfo>() {
             @Override
             public void onChanged(UserInfo userData) {
-                // 유저 정보 가져오기
-                ud = HomeViewModel.getUserInfo().getValue();
                 // 뷰 로딩
                 initView();
             }
@@ -51,24 +49,26 @@ public class InitialActivity extends AppCompatActivity implements View.OnClickLi
 
     }
     public void initView(){
+        ud = HomeViewModel.getUserInfo().getValue();
+        btn_start = findViewById(R.id.btn_start);
+        ll_info = findViewById(R.id.linearLayout_info);
+        btn_care = findViewById(R.id.btn_care);
+        tv_tree_name = findViewById(R.id.textView_tree_name);
+        tv_tree_level = findViewById(R.id.textView_tree_level);
+
+        iv_background = findViewById(R.id.imageView);
+        iv_tree1 = findViewById(R.id.imageView_tree1);
+        iv_tree2 = findViewById(R.id.imageView_tree2);
+        iv_tree3 = findViewById(R.id.imageView_tree3);
+        iv_tree4 = findViewById(R.id.imageView_tree4);
+        iv_tree5 = findViewById(R.id.imageView_tree5);
+
         if(ud.isEmpty()){
-            btn_start = findViewById(R.id.btn_start);
             btn_start.setVisibility(View.VISIBLE);
             btn_start.setOnClickListener(this);
         }
         else{
-            ll_info = findViewById(R.id.linearLayout_info);
-            btn_care = findViewById(R.id.btn_care);
-            tv_tree_name = findViewById(R.id.textView_tree_name);
-            tv_tree_level = findViewById(R.id.textView_tree_level);
-
-            iv_background = findViewById(R.id.imageView);
-            iv_tree1 = findViewById(R.id.imageView_tree1);
-            iv_tree2 = findViewById(R.id.imageView_tree2);
-            iv_tree3 = findViewById(R.id.imageView_tree3);
-            iv_tree4 = findViewById(R.id.imageView_tree4);
-            iv_tree5 = findViewById(R.id.imageView_tree5);
-
+            btn_start.setVisibility(View.GONE);
             iv_list = new ImageView[]{iv_tree1,iv_tree2,iv_tree3,iv_tree4,iv_tree5};
 
             // 나무의 갯수만큼만 표시

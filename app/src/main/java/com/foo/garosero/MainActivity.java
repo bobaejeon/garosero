@@ -197,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
         TextView tv_info = header.findViewById(R.id.tv_info);
 
         ud = HomeViewModel.getUserInfo().getValue();
-        Log.e("MainActivity", ud.toString());
+        Log.d("MainActivity", ud.toString());
 
         // 나무가 여러 그루일 수 있으므로 나무종류는 안쓰는 게 좋겠다?!
 //        if (ud.isEmpty()) {
