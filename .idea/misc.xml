@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidStudioProjects/garosero/app/src/main/res/layout/activity_main.xml" value="0.15081521739130435" />
+        <entry key="..\:/AndroidStudioProjects/garosero/app/src/main/res/layout/fragment_tree_info.xml" value="0.15081521739130435" />
+        <entry key="..\:/AndroidStudioProjects/garosero/app/src/main/res/layout/fragment_visualization.xml" value="0.15081521739130435" />
+        <entry key="..\:/AndroidStudioProjects/garosero/app/src/main/res/layout/navi_header.xml" value="0.15081521739130435" />
+        <entry key="..\:/AndroidStudioProjects/garosero/app/src/main/res/menu/navi_menu.xml" value="0.24895833333333334" />
         <entry key="..\:/Users/bbj56/AndroidStudioProjects/garosero/app/src/main/res/drawable/border.xml" value="0.1" />
         <entry key="..\:/Users/bbj56/AndroidStudioProjects/garosero/app/src/main/res/drawable/border_bottom.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/bbj56/AndroidStudioProjects/garosero/app/src/main/res/drawable/button_background.xml" value="0.19583333333333333" />
@@ -25,7 +30,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

@@ -9,6 +9,7 @@ import android.widget.ProgressBar;
 
 public class WebviewHelper {
     // url 모음
+    public static String URL_form="https://garosero.netlify.app/googlemap";
     public static String URL_visualization = "https://618e46a416eac000078e9aa8--garosero.netlify.app/datavisualization";    // 가로수 정보 시각화
     public static String URL_information = "https://618cdf09145ae20008f961dc--garosero.netlify.app/caretreeintroduce";      // 나무돌보미란?
     public static String URL_TreeTip_ginkgo = "https://618e46a416eac000078e9aa8--garosero.netlify.app/ginkgo";   // 은행나무
@@ -17,6 +18,9 @@ public class WebviewHelper {
     public static String URL_TreeTip_cherry = "https://618e46a416eac000078e9aa8--garosero.netlify.app/kingcherry";   // 벚나무
     public static String URL_TreeTip_poplar = "https://618e46a416eac000078e9aa8--garosero.netlify.app/poplartree";   // 이팝나무
     public static String URL_TreeTip_apricot = "https://618e46a416eac000078e9aa8--garosero.netlify.app/apricottree";  // 살구나무
+
+
+    
 
     // 웹뷰 초기화 함수
     public void initWebView(WebView wView, ProgressBar pBar, String mURL){
@@ -38,9 +42,7 @@ public class WebviewHelper {
                 return true;
             }
         });
-        // 2. WebSettings: 웹뷰의 각종 설정을 정할 수 있다.
-        WebSettings ws = wView.getSettings();
-        ws.setJavaScriptEnabled(true); // 자바스크립트 사용 허가
+
         // 3. 웹페이지 호출
         wView.loadUrl(mURL);
     }

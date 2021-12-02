@@ -20,6 +20,7 @@ import androidx.lifecycle.Observer;
 import com.foo.garosero.myUtil.ServerHelper;
 import com.foo.garosero.data.UserData;
 import com.foo.garosero.ui.application.ApplicationFragment;
+import com.foo.garosero.ui.applytree.ApplyTreeFragment;
 import com.foo.garosero.ui.home.HomeFragment;
 import com.foo.garosero.mviewmodel.HomeViewModel;
 import com.foo.garosero.ui.treetip.TreeTipFragment;
@@ -76,8 +77,11 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.item_application:
-                        ApplicationFragment applicationFrag = new ApplicationFragment();
-                        replaceFragment(applicationFrag);
+//                        ApplicationFragment applicationFrag = new ApplicationFragment();
+//                        replaceFragment(applicationFrag);
+                        ApplyTreeFragment applyTreeFragment=new ApplyTreeFragment();
+                        replaceFragment(applyTreeFragment);
+
                         break;
                     case R.id.item_home:
                         HomeFragment homeFrag = new HomeFragment();
