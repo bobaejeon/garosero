@@ -46,10 +46,6 @@ public class ApplicationFragment extends Fragment implements View.OnClickListene
             /*Log.d("Appfrag", "OpeningDialog");
             AppDialogFragment dialog = new AppDialogFragment();
             dialog.show(getChildFragmentManager(), "AppDialogFragment");*/
-
-            // go to Application map Activity
-            Intent intent = new Intent(getActivity(), ApplicationMapActivity.class);
-            startActivity(intent);
         }
     }
 
