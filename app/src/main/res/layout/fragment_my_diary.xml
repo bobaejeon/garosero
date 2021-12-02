@@ -6,6 +6,7 @@
     tools:context=".ui.home.diary.MyDiaryFragment">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="@dimen/activity_margin_small"
         android:id="@+id/diary_RecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

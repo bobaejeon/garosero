@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,20 +15,15 @@ import androidx.fragment.app.Fragment;
 import com.foo.garosero.R;
 import com.foo.garosero.ui.home.diary.ReportActivity;
 
+import java.util.HashMap;
+
 public class TodoFragment extends Fragment{
     View root;
 
     TextView ans1, ans2, ans3;
     ImageView icon1, icon2, icon3;
     Button bt_submit;
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-
-        }
-    }
+    HashMap<CheckBox, TextView> checkBoxTextViewHashMap;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -35,16 +31,6 @@ public class TodoFragment extends Fragment{
         // Inflate the layout for this fragment
         root =inflater.inflate(R.layout.fragment_todo, container, false);
 
-        /* todo 결과 보고버튼 클릭시 isChecked에 따라 다른 내용을 활동 결과 폼으로 보내기 & 카드뷰를 눌러도 체크, uncheck되도록? */
-        bt_submit = root.findViewById(R.id.bt_submit);
-        bt_submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ReportActivity.class);
-                intent.putExtra("report_mode","create");
-                startActivity(intent);
-            }
-        });
         // init view
 //        ans1 = root.findViewById(R.id.treeManagement_TextView_ans1);
 //        ans2 = root.findViewById(R.id.treeManagement_TextView_ans2);
@@ -55,6 +41,34 @@ public class TodoFragment extends Fragment{
 //        root.findViewById(R.id.treeManagement_CardView_todo1).setOnClickListener(this);
 //        root.findViewById(R.id.treeManagement_CardView_todo2).setOnClickListener(this);
 //        root.findViewById(R.id.treeManagement_CardView_todo3).setOnClickListener(this);
+        bt_submit = root.findViewById(R.id.bt_submit);
+
+        // 체크박스-텍스트뷰 묶음
+        checkBoxTextViewHashMap = new HashMap<>();
+        checkBoxTextViewHashMap.put(root.findViewById(R.id.todo_cb_1), root.findViewById(R.id.todo_tv_1));
+        checkBoxTextViewHashMap.put(root.findViewById(R.id.todo_cb_2), root.findViewById(R.id.todo_tv_2));
+        checkBoxTextViewHashMap.put(root.findViewById(R.id.todo_cb_3), root.findViewById(R.id.todo_tv_3));
+
+        /* todo 카드뷰를 눌러도 체크, uncheck되도록? */
+
+        bt_submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // get check box checked > set diary
+                String content = "";
+                for (CheckBox checkBox : checkBoxTextViewHashMap.keySet()){
+                   if (checkBox.isChecked()==true){
+                       content += checkBoxTextViewHashMap.get(checkBox).getText().toString()+"\n";
+                   }
+                }
+
+                // goto report Activity
+                Intent intent = new Intent(getActivity(), ReportActivity.class);
+                intent.putExtra("report_mode","create");
+                intent.putExtra("content",content);
+                startActivity(intent);
+            }
+        });
 
         return root;
     }
