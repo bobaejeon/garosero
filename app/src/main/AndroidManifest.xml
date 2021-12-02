@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.foo.garosero">
+    package="com.foo.garosero" >
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -9,25 +9,27 @@
 
     <queries>
         <intent>
-            <action android:name="android.intent.action.TTS_SERVICE"/>
+            <action android:name="android.intent.action.TTS_SERVICE" />
         </intent>
     </queries>
 
     <application
-        android:hardwareAccelerated="true"
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/garosu_logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/garosu_logo_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoActionBar">
+        android:theme="@style/AppTheme.NoActionBar" >
+        <activity
+            android:name=".ui.application.ApplicationMapActivity"
+            android:exported="false" />
         <activity
             android:name=".InitialActivity"
             android:exported="false" />
         <activity
             android:name=".ui.home.diary.ReportActivity"
             android:exported="false" />
-
         <activity
             android:name=".ui.treetip.TreeExplainActivity"
             android:exported="false" />
@@ -36,7 +38,7 @@
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -46,9 +48,10 @@
         <activity
             android:name=".MainActivity"
             android:exported="false" />
-        <activity android:name="com.journeyapps.barcodescanner.CaptureActivity"
+        <activity
+            android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="fullSensor"
-            tools:replace="screenOrientation"/>
+            tools:replace="screenOrientation" />
     </application>
 
 </manifest>
