@@ -116,7 +116,7 @@
             <TextView
                 android:id="@+id/treeManagement_TextView_treeTitle"
                 android:textStyle="bold"
-                android:textSize="15sp"
+                android:textSize="18sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
@@ -125,11 +125,13 @@
 
             <TextView
                 android:id="@+id/treeManagement_TextView_treeDesc"
-                android:textSize="15sp"
+                android:textSize="17sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
-                android:text="가을이 되면 낙엽이 지기 전에 잎사귀가 샛노랗게 물들어 아름답고 다른 여러 장점이 있어 가로수로 많이 심는다. 은행나무에서 은행은 그 열매가 '은빛이 나는 살구'라는 뜻에서 은행나무라고 불리게 되었다고 합니다."/>
+                android:lineSpacingExtra="8sp"
+                android:text="가을이 되면 낙엽이 지기 전에 잎사귀가 샛노랗게 물들어 아름답고, 다른 여러 장점이 있어 가로수로 많이 심어요.\n\n
+은행나무에서 은행은 그 열매가 '은빛이 나는 살구'라는 뜻에서 은행나무라고 불리게 되었다고 합니다."/>
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
