@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.foo.garosero.data.AsteriskPasswordTransformationMethod;
+import com.foo.garosero.myUtil.ServerHelper;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -80,6 +81,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                                         if(snapshot.exists()){
                                             Log.e("LoginActivity","data exist");
+
+                                            // 서버에서 정보 받아오기
+                                            ServerHelper.initServer();
+
                                             startActivity(intent);
                                             finish();
 

@@ -35,7 +35,7 @@ public class InitialActivity extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.activity_initial);
 
         // 서버에서 정보 받아오기
-        ServerHelper.initServer();
+//        ServerHelper.initServer();
 
         // live data
         final Observer<UserInfo> userDataObserver = new Observer<UserInfo>() {
@@ -113,7 +113,7 @@ public class InitialActivity extends AppCompatActivity implements View.OnClickLi
         idx = i;
         ll_info.setVisibility(View.VISIBLE);
         tv_tree_name.setText(ud.getTreeList().get(idx).getTree_name());
-        String lev = "Level. "+ud.getTreeList().get(idx).getLevel();
+        String lev = "Level. "+(ud.getTreeList().get(idx).getXp()/10+1);
         tv_tree_level.setText(lev);
     }
 }
