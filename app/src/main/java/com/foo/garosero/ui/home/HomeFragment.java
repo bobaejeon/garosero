@@ -1,6 +1,7 @@
 package com.foo.garosero.ui.home;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import com.foo.garosero.mviewmodel.HomeViewModel;
 import com.foo.garosero.ui.home.diary.MyDiaryFragment;
 import com.foo.garosero.ui.home.treeinfo.TreeInfoFragment;
 import com.foo.garosero.ui.home.treemanagement.TreeManagementFragment;
+import com.google.firebase.database.core.utilities.Tree;
 
 public class HomeFragment extends Fragment {
 
@@ -40,7 +42,12 @@ public class HomeFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        replaceFragment(new TreeInfoFragment());
+        /* 내 나무 정보 -> main activity에서 받은 argment를 tree info에 전달
+           initial activity(나무 일러스트 페이지)에서 선택한 나무 정보를 보여주기 위함 */
+        TreeInfoFragment treeInfoFragment = new TreeInfoFragment();
+        treeInfoFragment.setArguments(getArguments());
+        replaceFragment(treeInfoFragment);
+
         // init view
         home_TextView_pageTitle = root.findViewById(R.id.home_TextView_pageTitle);
         home_TextView_explain = root.findViewById(R.id.home_TextView_explain);
@@ -66,7 +73,7 @@ public class HomeFragment extends Fragment {
                         home_Button_treeManagement.setBackground(ContextCompat.getDrawable(root.getContext(), R.drawable.button_focus));
                         break;
                     case "내 기록" :
-                        home_TextView_explain.setText("");
+                        home_TextView_explain.setText("나무와 어떤 추억을 쌓았을까요?");
                         home_Button_diary.setBackground(ContextCompat.getDrawable(root.getContext(), R.drawable.button_focus));
                         break;
                     case "내 나무 정보":
@@ -82,7 +89,6 @@ public class HomeFragment extends Fragment {
         home_Button_treeInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 내 나무 정보
                 replaceFragment(new TreeInfoFragment());
                 model.getPageTitle().setValue(home_Button_treeInfo.getText().toString());
             }
@@ -114,4 +120,5 @@ public class HomeFragment extends Fragment {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.mfragment_home, fragment).commit();
     }
+
 }

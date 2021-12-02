@@ -1,36 +1,1 @@
-package com.foo.garosero.ui.visualization;
-
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import androidx.fragment.app.Fragment;
-
-import com.foo.garosero.R;
-import com.foo.garosero.myUtil.WebviewHelper;
-
-public class VisualizationFragment extends Fragment {
-    View root;
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        root = inflater.inflate(R.layout.fragment_visualization, container, false);
-
-        //웹 뷰 띄우기
-        new WebviewHelper().initWebView(
-                root.findViewById(R.id.visualization_WebView),
-                root.findViewById(R.id.visualization_ProgressBar),
-                WebviewHelper.URL_visualization);
-        return root;
-    }
-}
+package com.foo.garosero.ui.visualization;import android.os.Bundle;import android.view.LayoutInflater;import android.view.View;import android.view.ViewGroup;import androidx.fragment.app.Fragment;import com.foo.garosero.R;import com.foo.garosero.myUtil.WebviewHelper;public class VisualizationFragment extends Fragment {    View root;    @Override    public void onCreate(Bundle savedInstanceState) {        super.onCreate(savedInstanceState);        if (getArguments() != null) {        }    }    @Override    public View onCreateView(LayoutInflater inflater, ViewGroup container,                             Bundle savedInstanceState) {        // Inflate the layout for this fragment        root = inflater.inflate(R.layout.fragment_visualization, container, false);        //웹 뷰 띄우기        new WebviewHelper().initWebView(                root.findViewById(R.id.visualization_WebView),                root.findViewById(R.id.visualization_ProgressBar),                WebviewHelper.URL_visualization);        return root;    }}

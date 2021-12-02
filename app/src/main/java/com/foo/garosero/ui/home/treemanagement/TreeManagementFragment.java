@@ -18,6 +18,7 @@ import com.foo.garosero.R;
 import com.foo.garosero.data.UserInfo;
 import com.foo.garosero.mviewmodel.HomeViewModel;
 import com.foo.garosero.ui.home.empty.EmptyFragment;
+import com.foo.garosero.ui.home.treemanagement.TodoFragment;
 
 
 public class TreeManagementFragment extends Fragment {
@@ -58,29 +59,6 @@ public class TreeManagementFragment extends Fragment {
             replaceFragment(todoFragment);
         }
     }
-
-//    private String getTreeDay(){
-//        Calendar calendar = Calendar.getInstance();
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//        long calDateDays = 0;
-//        String tree_day = "";
-//
-//        if (ud.getStart_date().equals("")){
-//            return "";
-//        }
-//
-//        try {
-//            Date currDate = calendar.getTime();
-//            Date lastDate = sdf.parse(ud.getStart_date());
-//            long calDate = currDate.getTime() - lastDate.getTime();
-//            calDateDays = calDate / ( 24*60*60*1000);
-//            tree_day = ud.getName()+"님과 함께한지 "+Math.abs(calDateDays)+"일째";
-//
-//        } catch (ParseException e) {
-//            Log.e("TreeManagementFrag",e.toString());
-//        }
-//        return tree_day;
-//    }
 
     // 프래그먼트 바꾸기
     public void replaceFragment(Fragment fragment) {

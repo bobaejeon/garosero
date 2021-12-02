@@ -17,6 +17,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.foo.garosero.data.TreeInfo;
 import com.foo.garosero.data.UserInfo;
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     ImageButton bt_menu, bt_qrcode;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     private long lastTimeBackPressed; //뒤로가기 버튼이 클릭된 시간
 
@@ -58,22 +60,29 @@ public class MainActivity extends AppCompatActivity {
         bt_menu = findViewById(R.id.memu);
         bt_qrcode = findViewById(R.id.main_ImageButton_qrcode);
 
-        // 서버에서 정보 받아오기
-        ServerHelper.initServer();
+        // 서버에서 정보 받아오기 -> initial activity에서 받음
+//        ServerHelper.initServer();
 
         // live data
         final Observer<UserInfo> userDataObserver = new Observer<UserInfo>() {
             @Override
             public void onChanged(UserInfo userData) {
-                if (!userData.getName().equals(""))
-                // 로그인 중이면 뷰 로딩
+                // 유저 정보 가져오기
+                ud = HomeViewModel.getUserInfo().getValue();
+                // 뷰 로딩
                 initView();
             }
         };
         HomeViewModel.getUserInfo().observe(MainActivity.this, userDataObserver);
 
         // 프래그먼트 초기설정
-        replaceFragment(new HomeFragment());
+        /* initial activity에서 선택한 나무 인덱스를 홈 프래그먼트 전달 */
+        HomeFragment homeFrag = new HomeFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("index",getIntent().getIntExtra("index", 0));
+        homeFrag.setArguments(bundle);
+
+        replaceFragment(homeFrag);
 
         // QR code Icon click 시
         bt_qrcode.setOnClickListener(new View.OnClickListener() {
@@ -103,8 +112,8 @@ public class MainActivity extends AppCompatActivity {
                         replaceFragment(applicationFrag);
                         break;
                     case R.id.item_home:
-                        HomeFragment homeFrag = new HomeFragment();
-                        replaceFragment(homeFrag);
+                        HomeFragment homeFragment = new HomeFragment();
+                        replaceFragment(homeFragment);
                         break;
                     case R.id.item_information:
                         InformationFragment informationFrag = new InformationFragment();
@@ -136,6 +145,16 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        // SwipeRefreshLayout
+        swipeRefreshLayout = findViewById(R.id.main_SwipeRefreshLayout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                ServerHelper.initServer();
+                swipeRefreshLayout.setRefreshing(false); // 새로고침 완료
+            }
+        });
     }
 
     // QR code Reader
@@ -157,7 +176,8 @@ public class MainActivity extends AppCompatActivity {
                         speak(ud.getName()+"님의 "+tree.getTree_name()+"입니다");
                         return;
                     }
-                    Log.e("QR", answer+"/"+treeId+"/"+treeId.equals(answer));
+                    Toast.makeText(MainActivity.this, ud.getName()+"님의 나무가 아닙니다", Toast.LENGTH_SHORT).show();
+                    //Log.e("MainActivity-QR", answer+"/"+treeId);
                 }
             }
 
@@ -189,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
         TextView tv_info = header.findViewById(R.id.tv_info);
 
         ud = HomeViewModel.getUserInfo().getValue();
-        Log.e("MainActivity", ud.toString());
+        Log.d("MainActivity", ud.toString());
 
         // 나무가 여러 그루일 수 있으므로 나무종류는 안쓰는 게 좋겠다?!
 //        if (ud.isEmpty()) {
