@@ -1,5 +1,6 @@
 package com.foo.garosero.ui.application;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -42,10 +43,13 @@ public class ApplicationFragment extends Fragment implements View.OnClickListene
     public void onClick(View view) {
         if(view == bt_search){
             // 검색버튼 누르면 dialog 나와서 나무를 선택할 수 있음 -> 선택하면 바로 신청됨
-            Log.d("Appfrag", "OpeningDialog");
+            /*Log.d("Appfrag", "OpeningDialog");
             AppDialogFragment dialog = new AppDialogFragment();
-            dialog.show(getChildFragmentManager(), "AppDialogFragment");
+            dialog.show(getChildFragmentManager(), "AppDialogFragment");*/
 
+            // go to Application map Activity
+            Intent intent = new Intent(getActivity(), ApplicationMapActivity.class);
+            startActivity(intent);
         }
     }
 
