@@ -51,11 +51,11 @@ public class TreeInfoAdapter extends RecyclerView.Adapter<TreeInfoAdapter.ViewHo
         TreeInfo treeInfo = ud.getTreeList().get(position);
         holder.tv_tree_name.setText(treeInfo.getTree_name());
         holder.tv_tree_day.setText(getTreeDay(treeInfo.getStart_date()));
-        holder.tv_level.setText(String.valueOf(treeInfo.getXp()/10));
+        holder.tv_level.setText(String.valueOf(treeInfo.getXp()/10+1));
         holder.progressBar.setProgress(treeInfo.getXp()%10);
         holder.tv_desc_title.setText(getDescTitle(treeInfo.getRoad(),treeInfo.getKind()));
         holder.tv_desc_content.setText(getDescContents(treeInfo.getKind()));
-        setBackgroundImageview(holder.treeCharacter, treeInfo.getKind(), treeInfo.getXp()/10);
+        setBackgroundImageview(holder.treeCharacter, treeInfo.getKind(), treeInfo.getXp()/10+1);
 
         // 나무이름 수정 버튼
         holder.btn_submit.setOnClickListener(new View.OnClickListener() {
@@ -78,7 +78,7 @@ public class TreeInfoAdapter extends RecyclerView.Adapter<TreeInfoAdapter.ViewHo
                                     @Override
                                     public void onSuccess(Void unused) {
                                         treeInfo.setTree_name(newName);
-                                        Toast.makeText(view.getContext(), "완료되었습니다.", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(view.getContext(), "완료되었습니다.", Toast.LENGTH_SHORT).show();
                                     }
                                 });
                             }

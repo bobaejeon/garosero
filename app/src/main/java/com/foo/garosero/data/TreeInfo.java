@@ -41,7 +41,6 @@ public class TreeInfo {
         this.lng = lng;
     }
 
-    public int level;
     public int xp;
     public double lat;
     public double lng;
@@ -110,14 +109,6 @@ public class TreeInfo {
         this.tree_name = tree_name;
     }
 
-    public int getLevel() {
-        return level;
-    }
-
-    public void setLevel(int level) {
-        this.level = level;
-    }
-
     public int getXp() {
         return xp;
     }
@@ -137,7 +128,6 @@ public class TreeInfo {
                 ", end_date='" + end_date + '\'' +
                 ", tree_id='" + tree_id + '\'' +
                 ", tree_name='" + tree_name + '\'' +
-                ", level=" + level +
                 ", xp=" + xp +
                 '}';
     }
