@@ -35,8 +35,12 @@ public class ServerHelper {
                     String name = dataSnapshot.child("Users/"+uid).child("name").getValue().toString();
                     for(DataSnapshot snap : dataSnapshot.child("Trees_taken").getChildren()){
                         TreeInfo ti = snap.getValue(TreeInfo.class);
-                        if(ti.getUid().equals(uid)){
-                            list.add(ti);
+                        try {
+                            if(ti.getUid().equals(uid)){
+                                list.add(ti);
+                            }
+                        }catch (Exception e){
+
                         }
                     }
                     UserInfo ud = new UserInfo(name,list);

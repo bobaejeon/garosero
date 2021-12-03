@@ -13,37 +13,59 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/activity_margin_default">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="@dimen/activity_padding_default"
             android:orientation="vertical">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/viewPager_lottie"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/treeManagement_ImageView_treeCharacter"
+                app:layout_constraintStart_toEndOf="@+id/treeManagement_ImageView_treeCharacter"
+                app:layout_constraintTop_toTopOf="parent"
+                app:lottie_autoPlay="true"
+                android:visibility="gone"
+                app:lottie_rawRes="@raw/blinkchat" />
 
             <ImageView
                 android:id="@+id/treeManagement_ImageView_treeCharacter"
                 android:layout_width="119dp"
                 android:layout_height="153dp"
                 android:layout_gravity="center"
-                android:layout_margin="@dimen/activity_margin_small"/>
+                android:layout_margin="@dimen/activity_margin_small"
+                android:layout_marginTop="48dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
                 android:id="@+id/treeManagement_TextView_treeName"
-                android:paddingBottom="@dimen/activity_padding_default"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
+                android:gravity="center"
                 android:hint="나무이름을 지어주세요!"
-                android:gravity="center"/>
+                android:paddingBottom="@dimen/activity_padding_default"
+                app:layout_constraintTop_toBottomOf="@+id/treeManagement_TextView_treeDay"
+                tools:layout_editor_absoluteX="20dp" />
 
             <TextView
                 android:id="@+id/treeManagement_TextView_treeDay"
-                android:textStyle="bold"
-                android:textSize="20sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"/>
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/treeManagement_ImageView_treeCharacter"
+                tools:layout_editor_absoluteX="20dp" />
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
     <!-- ProgressBar -->

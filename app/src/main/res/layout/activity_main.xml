@@ -19,6 +19,7 @@
                 android:layout_height="match_parent">
                 <!-- tool bar -->
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/main_ConstraintLayout_toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="50dp">
 
@@ -63,6 +64,16 @@
                     android:layout_marginTop="50dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
+
+                <com.airbnb.lottie.LottieAnimationView
+                    app:lottie_rawRes="@raw/speak"
+                    android:layout_below="@id/main_ConstraintLayout_toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:id="@+id/main_lottie"
+                    android:visibility="gone"
+                    app:lottie_loop="true"
+                    app:lottie_autoPlay="true"/>
 
             </RelativeLayout>
         </ScrollView>

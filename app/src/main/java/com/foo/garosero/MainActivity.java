@@ -19,11 +19,12 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.foo.garosero.data.TreeInfo;
 import com.foo.garosero.data.UserInfo;
 import com.foo.garosero.mviewmodel.HomeViewModel;
 import com.foo.garosero.myUtil.ServerHelper;
-import com.foo.garosero.ui.application.ApplicationFragment;
+import com.foo.garosero.myUtil.SpeechHelper;
 import com.foo.garosero.ui.application.ApplicationMapActivity;
 import com.foo.garosero.ui.home.HomeFragment;
 import com.foo.garosero.ui.information.InformationFragment;
@@ -34,10 +35,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-import static android.speech.tts.TextToSpeech.ERROR;
-
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -45,11 +43,11 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
     ImageButton bt_menu, bt_qrcode;
     SwipeRefreshLayout swipeRefreshLayout;
+    LottieAnimationView lottieAnimationView;
 
     private long lastTimeBackPressed; //뒤로가기 버튼이 클릭된 시간
-
-    private TextToSpeech tts;
     public UserInfo ud;
+    private TextToSpeech tts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         navigationView = (NavigationView)findViewById(R.id.navigation_view);
         bt_menu = findViewById(R.id.memu);
         bt_qrcode = findViewById(R.id.main_ImageButton_qrcode);
+        lottieAnimationView = findViewById(R.id.main_lottie);
 
         // 서버에서 정보 받아오기 -> initial activity에서 받음
 //        ServerHelper.initServer();
@@ -114,20 +113,16 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);
                         break;
                     case R.id.item_home:
-                        HomeFragment homeFragment = new HomeFragment();
-                        replaceFragment(homeFragment);
+                        replaceFragment(new HomeFragment());
                         break;
                     case R.id.item_information:
-                        InformationFragment informationFrag = new InformationFragment();
-                        replaceFragment(informationFrag);
+                        replaceFragment(new InformationFragment());
                         break;
                     case R.id.item_visualization:
-                        VisualizationFragment visualizationFrag = new VisualizationFragment();
-                        replaceFragment(visualizationFrag);
+                        replaceFragment(new VisualizationFragment());
                         break;
                     case R.id.item_treeTip:
-                        TreeTipFragment treeTipFragment = new TreeTipFragment();
-                        replaceFragment(treeTipFragment);
+                        replaceFragment(new TreeTipFragment());
                         break;
                     case R.id.item_logout:
                         //logout 후 login activity로 redirect
@@ -162,11 +157,14 @@ public class MainActivity extends AppCompatActivity {
     // QR code Reader
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        String message = "";
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+
         if (result != null) {
             //qrcode 가 없으면
             if (result.getContents() == null) {
                 Toast.makeText(MainActivity.this, "취소", Toast.LENGTH_SHORT).show();
+
             } else {
                 //qrcode 결과가 있으면
                 String answer = result.getContents().trim();
@@ -175,14 +173,16 @@ public class MainActivity extends AppCompatActivity {
                 for (TreeInfo tree : treeList){
                     String treeId = tree.getTree_id().trim();
                     if (treeId.equals(answer)){
-                        speak(ud.getName()+"님의 "+tree.getTree_name()+"입니다");
+                        message = ud.getName()+"님의 "+tree.getTree_name()+"입니다";
+                        SpeechHelper speechHelper = new SpeechHelper(getApplicationContext(), lottieAnimationView, tts);
+                        speechHelper.speak(message);
+                        Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    Toast.makeText(MainActivity.this, ud.getName()+"님의 나무가 아닙니다", Toast.LENGTH_SHORT).show();
-                    //Log.e("MainActivity-QR", answer+"/"+treeId);
                 }
+                message = ud.getName()+"님의 나무가 아닙니다";
+                Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
             }
-
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
@@ -212,13 +212,6 @@ public class MainActivity extends AppCompatActivity {
 
         ud = HomeViewModel.getUserInfo().getValue();
         Log.d("MainActivity", ud.toString());
-
-        // 나무가 여러 그루일 수 있으므로 나무종류는 안쓰는 게 좋겠다?!
-//        if (ud.isEmpty()) {
-//            tv_name.setText("");
-//        } else {
-//            tv_name.setText(ud.getKind());
-//        }
         tv_name.setText(ud.getName());
         tv_info.setText("");
     }
@@ -228,22 +221,13 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.mfragment_main, fragment).commit();
     }
 
-    private void speak(String text) {
-        tts = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int status) {
-                if (status != ERROR){
-                    int result = tts.setLanguage(Locale.KOREA); // 언어 선택
-                    if(result == TextToSpeech.LANG_NOT_SUPPORTED || result == TextToSpeech.LANG_MISSING_DATA){
-                        Log.e("TTS", "This Language is not supported");
-                    }else{
-                        tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, null);
-                    }
-                }else{
-                    Log.e("TTS", "Initialization Failed!");
-                }
-            }
-        });
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (tts != null){
+            tts.stop();
+            tts.shutdown();
+            tts = null;
+        }
     }
-
 }
