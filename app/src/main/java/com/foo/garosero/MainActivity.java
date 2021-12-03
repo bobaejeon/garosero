@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.item_application:
                         // go to Application map Activity -> 5그루가 있으면 더 이상 신청 안되도록
                         if(ud.getTreeList().size() == 5){
-                            Toast.makeText(MainActivity.this,"다섯 그루까지만 신청 가능합니다.",Toast.LENGTH_LONG);
+                            Toast.makeText(MainActivity.this,"다섯 그루까지만 신청 가능합니다.",Toast.LENGTH_SHORT).show();
                             return false;
                         }
                         Intent intent = new Intent(MainActivity.this, ApplicationMapActivity.class);
@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
                         HomeViewModel.setUserInfo(empty_ud);
 
                         // intent
-                        Toast.makeText(MainActivity.this, "로그아웃되었습니다.", Toast.LENGTH_LONG);
+                        Toast.makeText(MainActivity.this, "로그아웃되었습니다.", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(MainActivity.this, LoginActivity.class));
                         finish();
                         break;
