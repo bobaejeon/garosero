@@ -2,6 +2,7 @@ package com.foo.garosero;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.view.GravityCompat;
 import androidx.lifecycle.Observer;
 
 import android.content.Intent;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.foo.garosero.data.TreeInfo;
 import com.foo.garosero.data.UserInfo;
@@ -19,6 +21,8 @@ import com.foo.garosero.mviewmodel.HomeViewModel;
 import com.foo.garosero.myUtil.ServerHelper;
 
 public class InitialActivity extends AppCompatActivity implements View.OnClickListener {
+    private long lastTimeBackPressed; //뒤로가기 버튼이 클릭된 시간
+
     UserInfo ud;
     Button btn_care, btn_start;
     TextView tv_tree_name, tv_tree_level;
@@ -115,5 +119,18 @@ public class InitialActivity extends AppCompatActivity implements View.OnClickLi
         tv_tree_name.setText(ud.getTreeList().get(idx).getTree_name());
         String lev = "Level. "+(ud.getTreeList().get(idx).getXp()/10+1);
         tv_tree_level.setText(lev);
+    }
+
+    @Override
+    public void onBackPressed() { //뒤로가기 했을 때
+        // 두번 클릭시 종료
+        if (System.currentTimeMillis() - lastTimeBackPressed < 2000) {
+            finishAffinity();           // 해당 어플리케이션의 루트 액티비티를 종료
+            System.runFinalization();   // 쓰레드 종료
+            System.exit(0);       // 현재의 액티비티를 종료
+            return;
+        }
+        Toast.makeText(this, "'뒤로' 버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT).show();
+        lastTimeBackPressed = System.currentTimeMillis();
     }
 }

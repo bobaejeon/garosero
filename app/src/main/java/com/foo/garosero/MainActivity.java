@@ -109,7 +109,11 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.item_application:
-                        // go to Application map Activity
+                        // go to Application map Activity -> 5그루가 있으면 더 이상 신청 안되도록
+                        if(ud.getTreeList().size() == 5){
+                            Toast.makeText(MainActivity.this,"다섯 그루까지만 신청 가능합니다.",Toast.LENGTH_LONG);
+                            return false;
+                        }
                         Intent intent = new Intent(MainActivity.this, ApplicationMapActivity.class);
                         startActivity(intent);
                         break;
@@ -192,16 +196,10 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() { //뒤로가기 했을 때
         if (drawerLayout.isDrawerOpen(GravityCompat.END)) { // drawer가 열려 있을 때
             drawerLayout.closeDrawer(GravityCompat.END);
-        } else {
-            // 두번 클릭시 종료
-            if (System.currentTimeMillis() - lastTimeBackPressed < 2000) {
-                finishAffinity();           // 해당 어플리케이션의 루트 액티비티를 종료
-                System.runFinalization();   // 쓰레드 종료
-                System.exit(0);       // 현재의 액티비티를 종료
-                return;
-            }
-            Toast.makeText(this, "'뒤로' 버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT).show();
-            lastTimeBackPressed = System.currentTimeMillis();
+        } else { // drawer가 닫혀있다면 메인페이지(일러스트)로 이동
+            Intent intent = new Intent(MainActivity.this, InitialActivity.class);
+            startActivity(intent);
+            finish();
         }
     }
 
