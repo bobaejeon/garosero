@@ -40,7 +40,7 @@ public class ServerHelper {
                                 list.add(ti);
                             }
                         }catch (Exception e){
-
+                            
                         }
                     }
                     UserInfo ud = new UserInfo(name,list);
