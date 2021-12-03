@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.foo.garosero.R;
 import com.foo.garosero.data.TreeInfo;
 import com.foo.garosero.data.UserInfo;
@@ -31,6 +32,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Random;
 
 public class TreeInfoAdapter extends RecyclerView.Adapter<TreeInfoAdapter.ViewHolder> {
     UserInfo ud;
@@ -56,6 +58,20 @@ public class TreeInfoAdapter extends RecyclerView.Adapter<TreeInfoAdapter.ViewHo
         holder.tv_desc_title.setText(getDescTitle(treeInfo.getRoad(),treeInfo.getKind()));
         holder.tv_desc_content.setText(getDescContents(treeInfo.getKind()));
         setBackgroundImageview(holder.treeCharacter, treeInfo.getKind(), treeInfo.getXp()/10+1);
+
+        // 캐릭터 클릭시
+        holder.treeCharacter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (holder.lottie.getVisibility() == View.GONE){
+                    holder.lottie.setVisibility(View.VISIBLE);
+                    holder.lottie.playAnimation();
+
+                } else {
+                    holder.lottie.setVisibility(View.GONE);
+                }
+            }
+        });
 
         // 나무이름 수정 버튼
         holder.btn_submit.setOnClickListener(new View.OnClickListener() {
@@ -111,6 +127,7 @@ public class TreeInfoAdapter extends RecyclerView.Adapter<TreeInfoAdapter.ViewHo
         ImageView treeCharacter;
         ProgressBar progressBar;
         Button btn_submit;
+        LottieAnimationView lottie;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -123,6 +140,7 @@ public class TreeInfoAdapter extends RecyclerView.Adapter<TreeInfoAdapter.ViewHo
             tv_desc_title = itemView.findViewById(R.id.treeManagement_TextView_treeTitle);
             tv_desc_content = itemView.findViewById(R.id.treeManagement_TextView_treeDesc);
             btn_submit = itemView.findViewById(R.id.bt_submit);
+            lottie = itemView.findViewById(R.id.viewPager_lottie);
         }
     }
 
