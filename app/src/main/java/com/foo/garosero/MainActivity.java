@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
     SwipeRefreshLayout swipeRefreshLayout;
     LottieAnimationView lottieAnimationView;
 
-    private long lastTimeBackPressed; //뒤로가기 버튼이 클릭된 시간
     public UserInfo ud;
     private TextToSpeech tts;
 
@@ -59,9 +58,6 @@ public class MainActivity extends AppCompatActivity {
         bt_menu = findViewById(R.id.memu);
         bt_qrcode = findViewById(R.id.main_ImageButton_qrcode);
         lottieAnimationView = findViewById(R.id.main_lottie);
-
-        // 서버에서 정보 받아오기 -> initial activity에서 받음
-//        ServerHelper.initServer();
 
         // live data
         final Observer<UserInfo> userDataObserver = new Observer<UserInfo>() {
