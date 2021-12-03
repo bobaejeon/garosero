@@ -18,7 +18,7 @@ public class WebviewHelper {
     public static String URL_TreeTip_cherry = "https://618e46a416eac000078e9aa8--garosero.netlify.app/kingcherry";   // 벚나무
     public static String URL_TreeTip_poplar = "https://618e46a416eac000078e9aa8--garosero.netlify.app/poplartree";   // 이팝나무
     public static String URL_TreeTip_apricot = "https://618e46a416eac000078e9aa8--garosero.netlify.app/apricottree";  // 살구나무
-    public static String URL_form = "https://garosero.netlify.app/googlemap";
+    public static String URL_form = "https://garosero.netlify.app/form";
 
     // 웹뷰 초기화 함수
     public void initWebView(WebView wView, ProgressBar pBar, String mURL){
