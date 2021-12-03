@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -23,12 +24,14 @@ public class TreeInfoFragment extends Fragment {
     TreeInfoAdapter pagerAdapter;
 
     UserInfo ud;
+    FrameLayout frameLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_tree_info, container, false);
         viewPager = root.findViewById(R.id.viewPager);
+        frameLayout = root.findViewById(R.id.treeInfo_FrameLayout);
 
         // live data
         final Observer<UserInfo> userDataObserver = new Observer<UserInfo>() {
@@ -49,11 +52,17 @@ public class TreeInfoFragment extends Fragment {
 
         if (ud.isEmpty()){
             // 1. 나무 정보 없을때
+            frameLayout.setVisibility(View.VISIBLE);
+            viewPager.setVisibility(View.GONE);
+
             EmptyFragment emptyFragment = new EmptyFragment();
             replaceFragment(emptyFragment);
         }
         else {
             // 2. 나무 정보 있을 때
+            frameLayout.setVisibility(View.GONE);
+            viewPager.setVisibility(View.VISIBLE);
+
             pagerAdapter = new TreeInfoAdapter(ud);
             viewPager.setAdapter(pagerAdapter);
             Bundle bundle = getArguments();

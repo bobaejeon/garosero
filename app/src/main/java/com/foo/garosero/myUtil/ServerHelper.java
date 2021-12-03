@@ -34,13 +34,13 @@ public class ServerHelper {
                 if(dataSnapshot.exists()){
                     String name = dataSnapshot.child("Users/"+uid).child("name").getValue().toString();
                     for(DataSnapshot snap : dataSnapshot.child("Trees_taken").getChildren()){
-                        TreeInfo ti = snap.getValue(TreeInfo.class);
-                        try {
+                        try{
+                            TreeInfo ti = snap.getValue(TreeInfo.class);
                             if(ti.getUid().equals(uid)){
                                 list.add(ti);
                             }
-                        }catch (Exception e){
-                            
+                        }catch(Exception e){
+                            e.printStackTrace();
                         }
                     }
                     UserInfo ud = new UserInfo(name,list);
