@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.foo.garosero.R;
 import com.foo.garosero.mviewmodel.HomeViewModel;
 import com.foo.garosero.ui.home.diary.MyDiaryFragment;
+import com.foo.garosero.ui.home.empty.EmptyFragment;
 import com.foo.garosero.ui.home.treeinfo.TreeInfoFragment;
 import com.foo.garosero.ui.home.treemanagement.TreeManagementFragment;
 import com.google.firebase.database.core.utilities.Tree;
@@ -104,8 +105,12 @@ public class HomeFragment extends Fragment {
         home_Button_diary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 내 기록
-                replaceFragment(new MyDiaryFragment());
+                if (HomeViewModel.getUserInfo().getValue().isEmpty()){
+                    replaceFragment(new EmptyFragment());
+                } else{
+                    // 내 기록
+                    replaceFragment(new MyDiaryFragment());
+                }
                 model.getPageTitle().setValue(home_Button_diary.getText().toString());
             }
         });
