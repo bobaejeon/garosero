@@ -1,5 +1,6 @@
 package com.foo.garosero;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
@@ -34,8 +35,11 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+import com.gun0912.tedpermission.PermissionListener;
+import com.gun0912.tedpermission.TedPermission;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -62,6 +66,25 @@ public class MainActivity extends AppCompatActivity {
         lottieAnimationView = findViewById(R.id.main_lottie);
 
         bt_all = findViewById(R.id.main_ImageButton_all); // 모아보기
+
+        // 권한 설정
+        PermissionListener permissionListener = new PermissionListener() {
+            @Override
+            public void onPermissionGranted() {
+                Toast.makeText(MainActivity.this, "권한 허가", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onPermissionDenied(List<String> deniedPermissions) {
+                Toast.makeText(MainActivity.this, "권한 거부", Toast.LENGTH_SHORT).show();
+            }
+        };
+        TedPermission.with(this)
+                .setPermissionListener(permissionListener)
+                .setRationaleMessage("이미지를 등록하기 위해서는 접근 권한이 필요해요")
+                .setDeniedMessage("[설정] > [권한] 에서 권한을 허용할 수 있어요.")
+                .setPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.INTERNET})
+                .check();
 
         // live data
         final Observer<UserInfo> userDataObserver = new Observer<UserInfo>() {
