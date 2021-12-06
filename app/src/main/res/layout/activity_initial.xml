@@ -9,6 +9,16 @@
     android:background="@drawable/empty_background"
     tools:context=".InitialActivity">
 
+    <!-- 뒤로가기 버튼 -->
+    <ImageButton
+        android:id="@+id/map_ImageButton_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_baseline_keyboard_backspace_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="@dimen/activity_margin_small"/>
+
     <ImageView
         android:id="@+id/imageView_tree1"
         android:layout_width="183dp"
