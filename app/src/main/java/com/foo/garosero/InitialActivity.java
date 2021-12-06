@@ -123,14 +123,8 @@ public class InitialActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onBackPressed() { //뒤로가기 했을 때
-        // 두번 클릭시 종료
-        if (System.currentTimeMillis() - lastTimeBackPressed < 2000) {
-            finishAffinity();           // 해당 어플리케이션의 루트 액티비티를 종료
-            System.runFinalization();   // 쓰레드 종료
-            System.exit(0);       // 현재의 액티비티를 종료
-            return;
-        }
-        Toast.makeText(this, "'뒤로' 버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT).show();
-        lastTimeBackPressed = System.currentTimeMillis();
+        Intent intent = new Intent(InitialActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
