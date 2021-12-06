@@ -78,7 +78,7 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.ViewHolder>{
         holder.tv_schedule.setText(data.getSchedule());
 
         // 이미지 띄우기
-        showImage(holder.iv_picture.getContext(), data.getPicture(), holder.iv_picture);
+        showImage(holder.itemView.getContext(), data.getPicture(), holder.iv_picture);
     }
 
     @Override
