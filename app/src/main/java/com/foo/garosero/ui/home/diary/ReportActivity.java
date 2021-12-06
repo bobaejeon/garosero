@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -153,15 +154,18 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.report_Button_insert: // insert data
                 newDiary = setDiaryData();
                 diaryHelper.insertDiaryToServer(newDiary);
+                Toast.makeText(getApplicationContext(), "저장되었습니다.", Toast.LENGTH_LONG).show();
                 break;
 
             case R.id.report_Button_delete: // delete data
                 diaryHelper.deleteDiaryFromServer(oldDiary);
+                Toast.makeText(getApplicationContext(), "삭제되었습니다.", Toast.LENGTH_LONG).show();
                 break;
 
             case R.id.report_Button_update: // update data
                 newDiary = setDiaryData();
                 diaryHelper.updateDiaryToServer(oldDiary, newDiary);
+                Toast.makeText(getApplicationContext(), "수정되었습니다.", Toast.LENGTH_LONG).show();
                 break;
         }
 
