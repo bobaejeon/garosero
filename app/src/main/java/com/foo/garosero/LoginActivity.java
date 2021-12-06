@@ -74,7 +74,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             if (task.isSuccessful()) {
                                 uid = Objects.requireNonNull(firebaseAuth.getCurrentUser()).getUid();
                                 Log.e("LoginActivity",uid);
-                                Intent intent = new Intent(LoginActivity.this, InitialActivity.class);
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
 
                                 ValueEventListener eventListener = new ValueEventListener() {
                                     @Override

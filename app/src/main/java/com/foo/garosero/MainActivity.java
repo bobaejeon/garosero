@@ -41,12 +41,14 @@ public class MainActivity extends AppCompatActivity {
 
     DrawerLayout drawerLayout;
     NavigationView navigationView;
-    ImageButton bt_menu, bt_qrcode;
+    ImageButton bt_menu, bt_qrcode, bt_all;
     SwipeRefreshLayout swipeRefreshLayout;
     LottieAnimationView lottieAnimationView;
 
     public UserInfo ud;
     private TextToSpeech tts;
+
+    private long lastTimeBackPressed; //뒤로가기 버튼이 클릭된 시간
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
         bt_menu = findViewById(R.id.memu);
         bt_qrcode = findViewById(R.id.main_ImageButton_qrcode);
         lottieAnimationView = findViewById(R.id.main_lottie);
+
+        bt_all = findViewById(R.id.main_ImageButton_all); // 모아보기
 
         // live data
         final Observer<UserInfo> userDataObserver = new Observer<UserInfo>() {
@@ -79,6 +83,14 @@ public class MainActivity extends AppCompatActivity {
         homeFrag.setArguments(bundle);
 
         replaceFragment(homeFrag);
+
+        // 모아보기 click
+        bt_all.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, InitialActivity.class));
+            }
+        });
 
         // QR code Icon click 시
         bt_qrcode.setOnClickListener(new View.OnClickListener() {
@@ -192,10 +204,16 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() { //뒤로가기 했을 때
         if (drawerLayout.isDrawerOpen(GravityCompat.END)) { // drawer가 열려 있을 때
             drawerLayout.closeDrawer(GravityCompat.END);
-        } else { // drawer가 닫혀있다면 메인페이지(일러스트)로 이동
-            Intent intent = new Intent(MainActivity.this, InitialActivity.class);
-            startActivity(intent);
-            finish();
+        } else {
+            // 두번 클릭시 종료
+            if (System.currentTimeMillis() - lastTimeBackPressed < 2000) {
+                finishAffinity();           // 해당 어플리케이션의 루트 액티비티를 종료
+                System.runFinalization();   // 쓰레드 종료
+                System.exit(0);       // 현재의 액티비티를 종료
+                return;
+            }
+            Toast.makeText(this, "'뒤로' 버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT).show();
+            lastTimeBackPressed = System.currentTimeMillis();
         }
     }
 

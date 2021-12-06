@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -25,6 +26,7 @@ public class InitialActivity extends AppCompatActivity implements View.OnClickLi
 
     UserInfo ud;
     Button btn_care, btn_start;
+    ImageButton btn_back;
     TextView tv_tree_name, tv_tree_level;
     ImageView iv_tree1, iv_tree2, iv_tree3, iv_tree4, iv_tree5;
     ConstraintLayout iv_background;
@@ -67,6 +69,8 @@ public class InitialActivity extends AppCompatActivity implements View.OnClickLi
         iv_tree4 = findViewById(R.id.imageView_tree4);
         iv_tree5 = findViewById(R.id.imageView_tree5);
 
+        btn_back = findViewById(R.id.map_ImageButton_back);
+
         if(ud.isEmpty()){
             btn_start.setVisibility(View.VISIBLE);
             btn_start.setOnClickListener(this);
@@ -81,6 +85,7 @@ public class InitialActivity extends AppCompatActivity implements View.OnClickLi
                 iv_list[i].setOnClickListener(this);
             }
 
+            btn_back.setOnClickListener(this);
             btn_care.setOnClickListener(this);
             iv_background.setOnClickListener(this);
         }
@@ -110,6 +115,8 @@ public class InitialActivity extends AppCompatActivity implements View.OnClickLi
             setTreeText(4);
         }else if(v == iv_background){
             ll_info.setVisibility(View.GONE);
+        }else if(v == btn_back){
+            onBackPressed();
         }
     }
 
@@ -123,14 +130,8 @@ public class InitialActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onBackPressed() { //뒤로가기 했을 때
-        // 두번 클릭시 종료
-        if (System.currentTimeMillis() - lastTimeBackPressed < 2000) {
-            finishAffinity();           // 해당 어플리케이션의 루트 액티비티를 종료
-            System.runFinalization();   // 쓰레드 종료
-            System.exit(0);       // 현재의 액티비티를 종료
-            return;
-        }
-        Toast.makeText(this, "'뒤로' 버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT).show();
-        lastTimeBackPressed = System.currentTimeMillis();
+        Intent intent = new Intent(InitialActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
