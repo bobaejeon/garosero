@@ -6,8 +6,8 @@ An Android native application for a volunteer program, taking care of some stree
 - Have fun finding new tree icons as the level increases
 - Submit reports of your volunteer work (and check those afterwards)
 - Learn useful information and fun facts about public trees
-<br>
-#### Technology involved
+
+### Technology involved
 - Android Studio (JAVA)
 - ReactJS
 - Firebase (Authentication, Functions, Realtime Database)
