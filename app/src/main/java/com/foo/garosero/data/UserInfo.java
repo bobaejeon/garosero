@@ -14,7 +14,7 @@ public class UserInfo {
 		return "UserInfo{" +
 				"name='" + name + '\'' +
 				", treeList=" + treeList +
-				'}';
+				"}, token=" +token;
 	}
 
 	public boolean isEmpty() {
@@ -43,4 +43,14 @@ public class UserInfo {
 	}
 
 	ArrayList<TreeInfo> treeList;
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+
+	String token;
 }
