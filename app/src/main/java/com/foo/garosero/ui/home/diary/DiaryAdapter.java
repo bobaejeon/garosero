@@ -4,7 +4,6 @@ import static com.foo.garosero.myUtil.ImageHelper.showImage;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,11 +14,9 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.foo.garosero.R;
 import com.foo.garosero.data.DiaryData;
 import com.foo.garosero.mviewmodel.DiaryViewModel;
-import com.foo.garosero.myUtil.WebviewHelper;
 
 import java.util.ArrayList;
 

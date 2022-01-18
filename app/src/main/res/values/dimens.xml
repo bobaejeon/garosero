@@ -10,4 +10,6 @@
 
     <dimen name="banner_title_textsize">20sp</dimen>
     <dimen name="default_linespacing">5sp</dimen>
+
+    <dimen name="banner_character_imagesize">70dp</dimen>
 </resources>

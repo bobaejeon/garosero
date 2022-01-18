@@ -6,33 +6,79 @@
     android:layout_height="match_parent"
     tools:context=".ui.treetip.TreeExplainActivity">
 
-    <!-- 웹뷰 및 로딩바 -->
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <WebView
-            android:id="@+id/explain_WebView"
+        android:layout_height="match_parent">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <!-- banner -->
+            <LinearLayout
+                android:id="@+id/explain_LinearLayout_banner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/banner_background"
+                android:padding="@dimen/activity_margin_default">
+                <!-- 뒤로가기 버튼 -->
+                <ImageButton
+                    android:id="@+id/explain_ImageButton_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_baseline_keyboard_backspace_24"
+                    android:layout_marginBottom="@dimen/activity_margin_small"/>
 
-        <ProgressBar
-            android:id="@+id/explain_ProgressBar"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|bottom" />
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/explain_TextView_banner_title"
+                    android:textColor="@color/black"
+                    style="@style/TextViewStyle.Banner.Title1"/>
 
-    <!-- 뒤로가기 버튼 -->
-    <ImageButton
-        android:id="@+id/explain_ImageButton_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/ic_baseline_keyboard_backspace_24"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="@dimen/activity_margin_small"/>
+                <ImageView
+                    android:id="@+id/explain_ImageView_character"
+                    android:layout_width="@dimen/banner_character_imagesize"
+                    android:layout_height="@dimen/banner_character_imagesize"
+                    android:layout_gravity="right"/>
+            </LinearLayout>
+
+            <!-- content -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="@dimen/activity_margin_default">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/activity_margin_default"/>
+
+                <!-- group1 -->
+                <TextView
+                    android:id="@+id/explain_TextView_group1_title1"
+                    style="@style/TextViewStyle.Title1"/>
+                <TextView
+                    android:id="@+id/explain_TextView_group1_title2"
+                    style="@style/TextViewStyle.Title2"/>
+                <TextView
+                    android:id="@+id/explain_TextView_group1_content"
+                    style="@style/TextViewStyle.default"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/activity_margin_default"/>
+
+                <!-- group2 -->
+                <TextView
+                    android:id="@+id/explain_TextView_group2_title1"
+                    style="@style/TextViewStyle.Title1"/>
+                <TextView
+                    android:id="@+id/explain_TextView_group2_title2"
+                    style="@style/TextViewStyle.Title2"/>
+                <TextView
+                    android:id="@+id/explain_TextView_group2_content"
+                    style="@style/TextViewStyle.default"/>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

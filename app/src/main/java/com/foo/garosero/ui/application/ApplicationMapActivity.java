@@ -6,7 +6,7 @@ import android.view.View;
 import android.webkit.CookieManager;
 
 import com.foo.garosero.R;
-import com.foo.garosero.myUtil.WebviewHelper;
+import com.foo.garosero.myUtil.TreeTipHelper;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class ApplicationMapActivity extends AppCompatActivity {
@@ -22,11 +22,11 @@ public class ApplicationMapActivity extends AppCompatActivity {
         cookieManager.setCookie("https://garosero.netlify.app/form",cookieValue);
 
         // WebView 초기화
-        WebviewHelper webviewHelper = new WebviewHelper();
-        webviewHelper.initWebView(
+        TreeTipHelper treeTipHelper = new TreeTipHelper();
+        treeTipHelper.initWebView(
                 findViewById(R.id.map_WebView),
                 findViewById(R.id.map_ProgressBar),
-                WebviewHelper.URL_form);
+                TreeTipHelper.URL_form);
 
         // 뒤로가기 버튼
         findViewById(R.id.map_ImageButton_back).setOnClickListener(new View.OnClickListener() {

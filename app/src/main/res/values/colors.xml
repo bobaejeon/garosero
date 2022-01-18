@@ -12,4 +12,11 @@
     <color name="gray_default">#F0F2F5</color>
     <color name="green_textColor">#55C595</color>
     <color name="gray_dark">#818181</color>
+
+    <color name="banner_color_mint">#BDF1C9</color>
+    <color name="banner_color_green">#A0DFC1</color>
+    <color name="banner_color_pink">#EEC9C9</color>
+    <color name="banner_color_blue">#AED8D8</color>
+    <color name="banner_color_whitepink">#F4E9EA</color>
+    <color name="banner_color_bluegreen">#8CCDC2</color>
 </resources>
