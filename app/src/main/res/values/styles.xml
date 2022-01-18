@@ -17,4 +17,37 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <!-- custom textview -->
+    <style name="TextViewStyle.Title1" parent="@android:style/Widget.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginBottom">@dimen/activity_margin_small</item>
+    </style>
+
+    <style name="TextViewStyle.Title2" parent="@android:style/Widget.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/gray_dark</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginBottom">@dimen/activity_margin_small</item>
+    </style>
+
+    <style name="TextViewStyle.Banner.Title1" parent="@android:style/Widget.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/banner_title_textsize</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginBottom">@dimen/activity_margin_default</item>
+    </style>
+
+    <style name="TextViewStyle.default" parent="@android:style/Widget.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">@dimen/activity_margin_small</item>
+        <item name="android:lineSpacingExtra">@dimen/default_linespacing</item>
+    </style>
+
 </resources>
