@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 public class DiaryHelper {
@@ -63,8 +64,12 @@ public class DiaryHelper {
         diaryData.setDiaryID(now);
 
         // diaryData를 Users>UID>diaries>now 에 업데이트
-        ref = ref.child("Users").child(uid).child("diaries").child(now);
-        ref.setValue(diaryData.getHash());
+        // 마지막 활동날짜 저장
+        ref = ref.child("Users").child(uid);
+        Map<String, Object> childUpdate = new HashMap<String, Object>();
+        childUpdate.put("/diaries/"+now, diaryData.getHash());
+        childUpdate.put("/last_activity/",now);
+        ref.updateChildren(childUpdate);
 
         // tree xp update
         updateTreeXp(diaryData.getTrees().keySet(), 5);
@@ -96,7 +101,6 @@ public class DiaryHelper {
         String uid = FirebaseAuth.getInstance().getUid();
 
         ref.child("Users").child(uid).child("diaries").child(diaryData.getDiaryID()).removeValue();
-
         // tree xp update
         updateTreeXp(diaryData.getTrees().keySet(), -5);
     }
