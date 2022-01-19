@@ -26,7 +26,6 @@ import com.foo.garosero.data.UserInfo;
 import com.foo.garosero.mviewmodel.HomeViewModel;
 import com.foo.garosero.myUtil.ServerHelper;
 import com.foo.garosero.myUtil.SpeechHelper;
-import com.foo.garosero.ui.application.ApplicationMapActivity;
 import com.foo.garosero.ui.home.HomeFragment;
 import com.foo.garosero.ui.information.InformationFragment;
 import com.foo.garosero.ui.treetip.TreeTipFragment;
@@ -143,9 +142,8 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(MainActivity.this,"다섯 그루까지만 신청 가능합니다.",Toast.LENGTH_SHORT).show();
                             return false;
                         }
-                        Intent intent = new Intent(MainActivity.this, ApplicationMapActivity.class);
-                        startActivity(intent);
-                        break;
+                        
+
                     case R.id.item_home:
                         replaceFragment(new HomeFragment());
                         break;

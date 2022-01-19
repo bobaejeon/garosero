@@ -13,12 +13,7 @@
 
         <!-- Page Title -->
         <TextView
-            android:textStyle="bold"
-            android:textSize="30sp"
-            android:paddingStart="@dimen/activity_padding_default"
-            android:id="@+id/home_TextView_pageTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/TextViewStyle.pageTitle"
             android:text="나무 관리 TIP"/>
 
         <!-- Image View : Explain page -->
