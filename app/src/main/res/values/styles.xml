@@ -60,6 +60,13 @@
     </style>
 
     <!-- custom imageview -->
+    <style name="customImageView"></style>
+    <style name="customImageView.character">
+        <item name="android:layout_width">@dimen/banner_character_imagesize</item>
+        <item name="android:layout_height">@dimen/banner_character_imagesize</item>
+        <item name ="android:layout_marginLeft">@dimen/activity_margin_small</item>
+    </style>
+
     <!-- custom cardView -->
     <style name="customCardViewStyle"></style>
     <style name="customCardViewStyle.banner" parent="customCardViewStyle">

@@ -36,8 +36,7 @@
 
                 <ImageView
                     android:id="@+id/explain_ImageView_character"
-                    android:layout_width="@dimen/banner_character_imagesize"
-                    android:layout_height="@dimen/banner_character_imagesize"
+                    style="@style/customImageView.character"
                     android:layout_gravity="right"/>
             </LinearLayout>
 

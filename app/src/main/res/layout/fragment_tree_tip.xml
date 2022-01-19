@@ -36,8 +36,7 @@
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="70dp"
+                    style="@style/customImageView.character"
                     android:layout_gravity="center"
                     android:layout_marginEnd="32dp"
                     android:background="@drawable/mid_tree"
@@ -75,9 +74,7 @@
                             android:textSize="15sp"
                             android:textStyle="bold"/>
                         <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="60dp"
-                            android:layout_margin="@dimen/activity_padding_default"
+                            style="@style/customImageView.character"
                             android:background="@drawable/yellow_tree"/>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -101,9 +98,7 @@
                             android:textSize="15sp"
                             android:textStyle="bold"/>
                         <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="60dp"
-                            android:layout_margin="@dimen/activity_padding_default"
+                            style="@style/customImageView.character"
                             android:background="@drawable/pine_tree"/>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -131,9 +126,7 @@
                             android:textSize="15sp"
                             android:textStyle="bold"/>
                         <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="60dp"
-                            android:layout_margin="@dimen/activity_padding_default"
+                            style="@style/customImageView.character"
                             android:background="@drawable/zelkova_tree"/>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -156,9 +149,7 @@
                             android:textSize="15sp"
                             android:textStyle="bold"/>
                         <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="60dp"
-                            android:layout_margin="@dimen/activity_padding_default"
+                            style="@style/customImageView.character"
                             android:background="@drawable/cherry_tree"/>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -184,9 +175,7 @@
                             android:textSize="15sp"
                             android:textStyle="bold"/>
                         <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="60dp"
-                            android:layout_margin="@dimen/activity_padding_default"
+                            style="@style/customImageView.character"
                             android:background="@drawable/poplar_tree"/>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -210,14 +199,11 @@
                             android:textSize="15sp"
                             android:textStyle="bold"/>
                         <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="60dp"
-                            android:layout_margin="@dimen/activity_padding_default"
+                            style="@style/customImageView.character"
                             android:background="@drawable/apricot_tree"/>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
             </TableRow>
         </TableLayout>
-
     </LinearLayout>
 </FrameLayout>

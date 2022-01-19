@@ -36,12 +36,10 @@
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <ImageView
-                    android:layout_width="@dimen/banner_character_imagesize"
-                    android:layout_height="@dimen/banner_character_imagesize"
+                    style="@style/customImageView.character"
                     android:layout_gravity="center"
                     android:layout_marginEnd="32dp"
                     android:background="@drawable/mid_tree"
-                    android:padding="@dimen/activity_margin_small"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
