@@ -30,7 +30,6 @@ import com.foo.garosero.ui.application.ApplicationMapActivity;
 import com.foo.garosero.ui.home.HomeFragment;
 import com.foo.garosero.ui.information.InformationFragment;
 import com.foo.garosero.ui.treetip.TreeTipFragment;
-import com.foo.garosero.ui.visualization.VisualizationFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -152,9 +151,6 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.item_information:
                         replaceFragment(new InformationFragment());
-                        break;
-                    case R.id.item_visualization:
-                        replaceFragment(new VisualizationFragment());
                         break;
                     case R.id.item_treeTip:
                         replaceFragment(new TreeTipFragment());

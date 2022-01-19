@@ -11,9 +11,6 @@
         android:id="@+id/item_application"
         android:title="나무 돌보미 신청"/>
     <item
-        android:id="@+id/item_visualization"
-        android:title="가로수 정보 시각화"/>
-    <item
         android:id="@+id/item_treeTip"
         android:title="나무 관리 TIP"/>
     <item
