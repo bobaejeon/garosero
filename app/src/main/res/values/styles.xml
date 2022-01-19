@@ -77,4 +77,13 @@
         <item name="cardBackgroundColor">@color/gray_default</item>
     </style>
 
+    <!-- custom editText-->
+    <style name="customEditTextStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name ="android:layout_margin">7dp</item>
+        <item name ="android:padding">10dp</item>
+        <item name="background">@drawable/border_bottom</item>
+    </style>
+
 </resources>

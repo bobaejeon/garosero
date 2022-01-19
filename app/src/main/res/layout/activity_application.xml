@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.application.ApplicationActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/activity_margin_default">
+
+        <!-- 뒤로가기 버튼 -->
+        <ImageButton
+            android:id="@+id/application_ImageButton_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_baseline_keyboard_backspace_24"
+            android:layout_marginBottom="@dimen/activity_margin_small"/>
+
+        <!-- title -->
+        <TextView
+            style="@style/TextViewStyle.pageTitle"
+            android:text="나무 돌보미 신청"
+            android:layout_marginBottom="@dimen/activity_margin_default"/>
+
+        <!-- 소속 -->
+        <TextView
+            style="@style/TextViewStyle.Title1"
+            android:text="소속"/>
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="20dp">
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/application_cb_indi"
+                android:text="개인" />
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/application_cb_team"
+                android:text="단체"/>
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/application_cb_school"
+                android:text="학교"/>
+        </RadioGroup>
+
+        <!-- 인적사항 -->
+        <TextView
+            style="@style/TextViewStyle.Title1"
+            android:text="인적사항"/>
+
+        <EditText
+            style="@style/customEditTextStyle"
+            android:inputType="text"
+            android:id="@+id/application_et_name"
+            android:hint="이름"/>
+
+        <EditText
+            style="@style/customEditTextStyle"
+            android:id="@+id/application_et_phone"
+            android:inputType="phone"
+            android:hint="연락처"/>
+
+        <EditText
+            style="@style/customEditTextStyle"
+            android:id="@+id/application_et_loc"
+            android:inputType="text"
+            android:hint="지역"/>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/activity_margin_default"/>
+
+        <!-- 지원동기 -->
+        <TextView
+            style="@style/TextViewStyle.Title1"
+            android:text="지원동기"/>
+
+        <EditText
+            style="@style/customEditTextStyle"
+            android:id="@+id/application_et_motive"
+            android:inputType="textMultiLine"
+            android:hint="지원동기"/>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/activity_margin_default"/>
+
+        <!-- 나무 -->
+        <TextView
+            style="@style/TextViewStyle.Title1"
+            android:text="나무 신청하기"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                style="@style/customEditTextStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:layout_margin="7dp"
+                android:padding="10dp"
+                android:background="@drawable/border_bottom"
+                android:id="@+id/application_et_road"
+                android:inputType="text"
+                android:hint="가로수가 위치한 길 검색하기"/>
+
+            <Button
+                android:id="@+id/application_btn_search"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="7dp"
+                android:padding="10dp"
+                android:text="검색" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/activity_margin_default"/>
+
+        <!-- 지원하기 -->
+        <Button
+            android:id="@+id/application_btn_application"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_background"
+            android:layout_gravity="center"
+            android:text="신청하기"/>
+
+    </LinearLayout>
+</ScrollView>
