@@ -23,11 +23,7 @@
 
         <!-- Image View : Explain page -->
         <androidx.cardview.widget.CardView
-            android:layout_margin="@dimen/activity_margin_small"
-            app:cardCornerRadius="12dp"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:backgroundTint="@color/gray_default">
+            style="@style/customCardViewStyle.banner">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

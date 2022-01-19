@@ -51,4 +51,15 @@
         <item name="android:lineSpacingExtra">@dimen/default_linespacing</item>
     </style>
 
+    <!-- custom imageview -->
+    <!-- custom cardView -->
+    <style name="customCardViewStyle"></style>
+    <style name="customCardViewStyle.banner" parent="customCardViewStyle">
+        <item name = "android:layout_margin">@dimen/activity_margin_small</item>
+        <item name="cornerRadius">12dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">100dp</item>
+        <item name="cardBackgroundColor">@color/gray_default</item>
+    </style>
+
 </resources>
