@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.foo.garosero.R;
-import com.foo.garosero.myUtil.WebviewHelper;
+import com.foo.garosero.myUtil.TreeTipHelper;
 
 public class TreeTipFragment extends Fragment implements View.OnClickListener {
     View root;
@@ -41,29 +41,29 @@ public class TreeTipFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.TreeTip_CardView_1:
-                startWebView(WebviewHelper.URL_TreeTip_ginkgo);
+                startTipActivity(TreeTipHelper.STRING_ginkgo);
                 break;
             case R.id.TreeTip_CardView_2:
-                startWebView(WebviewHelper.URL_TreeTip_pine);
+                startTipActivity(TreeTipHelper.STRING_pine);
                 break;
             case R.id.TreeTip_CardView_3:
-                startWebView(WebviewHelper.URL_TreeTip_zelkova);
+                startTipActivity(TreeTipHelper.STRING_zelkova);
                 break;
             case R.id.TreeTip_CardView_4:
-                startWebView(WebviewHelper.URL_TreeTip_cherry);
+                startTipActivity(TreeTipHelper.STRING_cherry);
                 break;
             case R.id.TreeTip_CardView_5:
-                startWebView(WebviewHelper.URL_TreeTip_poplar);
+                startTipActivity(TreeTipHelper.STRING_poplar);
                 break;
             case R.id.TreeTip_CardView_6:
-                startWebView(WebviewHelper.URL_TreeTip_apricot);
+                startTipActivity(TreeTipHelper.STRING_apricot);
                 break;
         }
     }
 
-    private void startWebView(String mURL){
+    private void startTipActivity(String mKey){
         Intent intent = new Intent(getActivity(), TreeExplainActivity.class);
-        intent.putExtra("mURL", mURL);
+        intent.putExtra("mKey", mKey);
         startActivity(intent);
     }
 

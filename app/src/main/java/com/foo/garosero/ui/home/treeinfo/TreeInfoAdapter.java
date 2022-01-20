@@ -18,7 +18,6 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.foo.garosero.R;
 import com.foo.garosero.data.TreeInfo;
 import com.foo.garosero.data.UserInfo;
-import com.foo.garosero.myUtil.ServerHelper;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,7 +31,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Random;
 
 public class TreeInfoAdapter extends RecyclerView.Adapter<TreeInfoAdapter.ViewHolder> {
     UserInfo ud;
@@ -44,7 +42,7 @@ public class TreeInfoAdapter extends RecyclerView.Adapter<TreeInfoAdapter.ViewHo
     @NonNull
     @Override
     public TreeInfoAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.tree_info_view_pager, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewpager_treeinfo, parent, false);
         return new ViewHolder(view);
     }
 
