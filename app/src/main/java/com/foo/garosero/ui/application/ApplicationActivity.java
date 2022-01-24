@@ -31,7 +31,7 @@ public class ApplicationActivity extends AppCompatActivity {
         bt_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ApplicationActivity.this, GarosuMapActivity.class);
+                Intent intent = new Intent(ApplicationActivity.this, MapActivity.class);
                 startActivity(intent);
             }
         });
