@@ -1,5 +1,6 @@
 package com.foo.garosero.ui.application;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +25,7 @@ import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.NaverMapSdk;
 import com.naver.maps.map.OnMapReadyCallback;
 import com.naver.maps.map.overlay.Marker;
+import com.naver.maps.map.overlay.Overlay;
 
 import java.util.ArrayList;
 
@@ -64,9 +67,11 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Message message = Message.obtain();
-                message.what = position;
-                thread.handler.sendMessage(message); // 메세지 전송
+                if (naverMap!=null) {
+                    Message message = Message.obtain();
+                    message.what = position;
+                    thread.handler.sendMessage(message); // 메세지 전송
+                }
             }
 
             @Override
@@ -81,6 +86,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(@NonNull NaverMap naverMap) {
         this.naverMap = naverMap;
+
+        if (naverMap!=null) {
+            Message message = Message.obtain();
+            message.what = 0;
+            thread.handler.sendMessage(message); // 메세지 전송
+        }
     }
 
     // thread
@@ -108,7 +119,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 public void run() {
                     String key = getString(R.string.SEOUL_GAROSU_API_KEY);
                     // 100개만 표시
-                    ApiHelper.getApiData(key, 0, 100, gu);
+                    ApiHelper.getApiData(key, 0, 50, gu);
                 }
             };
 
@@ -135,6 +146,16 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     Marker marker = new Marker();
                     marker.setPosition(new LatLng(apiData.getLAT(), apiData.getLNG()));
                     marker.setMap(naverMap);
+                    marker.setTag(apiData);
+                    marker.setOnClickListener(new Overlay.OnClickListener() {
+                        @Override
+                        public boolean onClick(@NonNull Overlay overlay) {
+                            Log.e("", marker.getTag().toString());
+                            ApplicationActivity.apiData = (TreeApiData) marker.getTag();
+                            finish();
+                            return true;
+                        }
+                    });
 
                     MapViewModel.markerList.add(marker);
                 }
