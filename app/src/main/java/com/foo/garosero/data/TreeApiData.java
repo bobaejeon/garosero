@@ -9,7 +9,7 @@ public class TreeApiData {
 
     String GU_NM; // 구명
     String TRE_IDN; // 수목고유번호
-    String WDPT_NM; // 가로명
+    String WDPT_NM; // 가로명 (나무종류)
     Double LNG; // 경도
     Double LAT; // 위도
 
