@@ -10,9 +10,12 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class ApiHelper {
-    public static void getApiData(String SEOUL_GAROSU_API_KEY, Integer start_row, Integer end_row, String GU_NM) {
+    public static ArrayList<TreeApiData> getApiData(String SEOUL_GAROSU_API_KEY, Integer start_row, Integer end_row, String GU_NM) {
+        ArrayList<TreeApiData> treeApiDataList = new ArrayList<TreeApiData>();
+
         // 쿼리 작성하기
         String dataType = "json";
         String queryUrl = "http://openAPI.seoul.go.kr:8088/"+SEOUL_GAROSU_API_KEY+
@@ -40,10 +43,9 @@ public class ApiHelper {
             JSONArray row = GeoInfoRoadsideTree.getJSONArray("row");
 
             // 데이터 담기
-            MapViewModel.treeApiDataList.clear(); // 초기화
             for (int i=0; i<row.length();i++){
                 JSONObject item = row.getJSONObject(i);
-                MapViewModel.treeApiDataList.add(new TreeApiData(
+                treeApiDataList.add(new TreeApiData(
                         item.getString(TreeApiData.STRING_GU_NM),
                         item.getString(TreeApiData.STRING_TRE_IDN),
                         item.getString(TreeApiData.STRING_WDPT_NM),
@@ -55,5 +57,7 @@ public class ApiHelper {
         } catch (Exception e){
             e.printStackTrace();
         }
+
+        return treeApiDataList;
     }
 }

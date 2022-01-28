@@ -1,6 +1,5 @@
 package com.foo.garosero.ui.application;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -9,7 +8,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,15 +32,18 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     static public NaverMap naverMap;
     static public Spinner spinner;
+    public static ArrayList<Marker> markerList = new ArrayList<Marker>();
+    public static ArrayList<TreeApiData> treeApiDataList = new ArrayList<TreeApiData>();
 
     MyThread thread = new MyThread();
-
     ArrayAdapter<CharSequence> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+
+        // todo : get taken tree
 
         // naver map
         String naver_client_id = getString(R.string.NAVER_CLIENT_ID); // id 가져오기
@@ -120,7 +121,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 public void run() {
                     String key = getString(R.string.SEOUL_GAROSU_API_KEY);
                     // 100개만 표시
-                    ApiHelper.getApiData(key, 0, 50, gu);
+                    treeApiDataList = ApiHelper.getApiData(key, 0, 50, gu);
                 }
             };
 
@@ -130,19 +131,19 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 getDataThread.join();
 
                 // 카메라 초기 위치 설정
-                ArrayList<TreeApiData> apiDataList = MapViewModel.treeApiDataList;
+                ArrayList<TreeApiData> apiDataList = treeApiDataList;
                 LatLng initialPosition = new LatLng(
                         apiDataList.get(0).getLAT(), apiDataList.get(0).getLNG());
                 CameraUpdate cameraUpdate = CameraUpdate.scrollTo(initialPosition);
                 naverMap.moveCamera(cameraUpdate);
 
                 // 지금 활성화 된 마커 지우기
-                for (Marker marker : MapViewModel.markerList) {
+                for (Marker marker : markerList) {
                     marker.setMap(null);
                 }
 
                 // 마커 표시하기
-                MapViewModel.markerList.clear();
+                markerList.clear();
                 for (TreeApiData apiData : apiDataList) {
                     Marker marker = new Marker();
                     marker.setPosition(new LatLng(apiData.getLAT(), apiData.getLNG()));
@@ -151,14 +152,14 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     marker.setOnClickListener(new Overlay.OnClickListener() {
                         @Override
                         public boolean onClick(@NonNull Overlay overlay) {
-                            Log.e("", marker.getTag().toString());
+                            //Log.e("", marker.getTag().toString());
                             ApplicationActivity.apiData = (TreeApiData) marker.getTag();
                             finish();
                             return true;
                         }
                     });
 
-                    MapViewModel.markerList.add(marker);
+                    markerList.add(marker);
                 }
 
             } catch (InterruptedException e) {
