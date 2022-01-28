@@ -15,5 +15,15 @@
         <item>동작구</item>
         <item>마포구</item>
         <item>서대문구</item>
+        <item>서초구</item>
+        <item>성동구</item>
+        <item>성북구</item>
+        <item>송파구</item>
+        <item>양천구</item>
+        <item>영등포구</item>
+        <item>용산구</item>
+        <item>은평구</item>
+        <item>중구</item>
+        <item>중랑구</item>
     </string-array>
 </resources>

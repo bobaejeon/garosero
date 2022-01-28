@@ -1,12 +1,23 @@
 package com.foo.garosero.mviewmodel;
 
-import androidx.lifecycle.MutableLiveData;
-
-import com.foo.garosero.data.TreeApiData;
 import com.foo.garosero.data.TreeData;
-import com.naver.maps.map.overlay.Marker;
+import com.foo.garosero.myUtil.ServerHelper;
 
 import java.util.ArrayList;
 
 public class MapViewModel {
+    public static ArrayList<TreeData> treeDataArrayList;
+
+    public static ArrayList<TreeData> getTreeDataArrayList() {
+        if (treeDataArrayList==null){
+            ServerHelper.readTreeTakenFromFireBase();
+            treeDataArrayList = new ArrayList<TreeData>();
+        }
+        return treeDataArrayList;
+    }
+
+    public static void setTreeDataArrayList(ArrayList<TreeData> treeDataArrayList) {
+        getTreeDataArrayList();
+        MapViewModel.treeDataArrayList = treeDataArrayList;
+    }
 }

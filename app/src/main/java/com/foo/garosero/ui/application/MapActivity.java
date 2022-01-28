@@ -1,9 +1,9 @@
 package com.foo.garosero.ui.application;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.foo.garosero.R;
 import com.foo.garosero.data.TreeApiData;
+import com.foo.garosero.data.TreeData;
 import com.foo.garosero.mviewmodel.MapViewModel;
 import com.foo.garosero.myUtil.ApiHelper;
 import com.naver.maps.geometry.LatLng;
@@ -32,6 +33,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     static public NaverMap naverMap;
     static public Spinner spinner;
+
     public static ArrayList<Marker> markerList = new ArrayList<Marker>();
     public static ArrayList<TreeApiData> treeApiDataList = new ArrayList<TreeApiData>();
 
@@ -42,8 +44,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
-
-        // todo : get taken tree
 
         // naver map
         String naver_client_id = getString(R.string.NAVER_CLIENT_ID); // id 가져오기
@@ -69,11 +69,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (naverMap!=null) {
-                    Message message = Message.obtain();
-                    message.what = position;
-                    thread.handler.sendMessage(message); // 메세지 전송
-                }
+                Message message = Message.obtain();
+                message.what = position;
+                thread.handler.sendMessage(message); // 메세지 전송
             }
 
             @Override
@@ -83,17 +81,17 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         // thread
         thread = new MyThread();
+
+        // get tree-taken
+        MapViewModel.getTreeDataArrayList();
     }
 
     @Override
     public void onMapReady(@NonNull NaverMap naverMap) {
         this.naverMap = naverMap;
-
-        if (naverMap!=null) {
-            Message message = Message.obtain();
-            message.what = 0;
-            thread.handler.sendMessage(message); // 메세지 전송
-        }
+        Message message = Message.obtain();
+        message.what = 0;
+        thread.handler.sendMessage(message); // 메세지 전송
     }
 
     // thread
@@ -112,16 +110,20 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
 
-            Integer index = msg.what;
-            String gu = (String) adapter.getItem(index);
+            // todo : check MapViewModel.getTreeDataArrayList(), naverMap, treeApiDataList
+            if (naverMap == null) return;
+            /*if (MapViewModel.getTreeDataArrayList().isEmpty() == true) return;
+            if (treeApiDataList.isEmpty() == true) return;*/
 
             // 공공 데이터 가져오기
+            Integer index = msg.what;
+            String GU_NM = (String) adapter.getItem(index);
             Thread getDataThread = new Thread() {
                 @Override
                 public void run() {
                     String key = getString(R.string.SEOUL_GAROSU_API_KEY);
-                    // 100개만 표시
-                    treeApiDataList = ApiHelper.getApiData(key, 0, 50, gu);
+                    ApiHelper apiHelper = new ApiHelper();
+                    treeApiDataList = apiHelper.getApiData(key, GU_NM);
                 }
             };
 
@@ -130,41 +132,78 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 getDataThread.start();
                 getDataThread.join();
 
-                // 카메라 초기 위치 설정
-                ArrayList<TreeApiData> apiDataList = treeApiDataList;
-                LatLng initialPosition = new LatLng(
-                        apiDataList.get(0).getLAT(), apiDataList.get(0).getLNG());
-                CameraUpdate cameraUpdate = CameraUpdate.scrollTo(initialPosition);
-                naverMap.moveCamera(cameraUpdate);
-
-                // 지금 활성화 된 마커 지우기
-                for (Marker marker : markerList) {
-                    marker.setMap(null);
-                }
-
-                // 마커 표시하기
-                markerList.clear();
-                for (TreeApiData apiData : apiDataList) {
-                    Marker marker = new Marker();
-                    marker.setPosition(new LatLng(apiData.getLAT(), apiData.getLNG()));
-                    marker.setMap(naverMap);
-                    marker.setTag(apiData);
-                    marker.setOnClickListener(new Overlay.OnClickListener() {
-                        @Override
-                        public boolean onClick(@NonNull Overlay overlay) {
-                            //Log.e("", marker.getTag().toString());
-                            ApplicationActivity.apiData = (TreeApiData) marker.getTag();
-                            finish();
-                            return true;
-                        }
-                    });
-
-                    markerList.add(marker);
-                }
+                showMarker();
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    private void showMarker(){
+        // 카메라 초기 위치 설정
+        ArrayList<TreeApiData> apiDataList = treeApiDataList;
+        LatLng initialPosition = new LatLng(
+                apiDataList.get(0).getLAT(), apiDataList.get(0).getLNG());
+        CameraUpdate cameraUpdate = CameraUpdate.scrollTo(initialPosition);
+        naverMap.moveCamera(cameraUpdate);
+
+        // 지금 활성화 된 마커 지우기
+        for (Marker marker : markerList) {
+            marker.setMap(null);
+        }
+
+        // 마커 표시하기
+        markerList.clear();
+        for (TreeApiData apiData : apiDataList) {
+            Marker marker = new Marker();
+            marker.setPosition(new LatLng(apiData.getLAT(), apiData.getLNG()));
+            marker.setMap(naverMap);
+            marker.setTag(apiData);
+
+            marker.setCaptionText(apiData.getTRE_IDN());
+
+            // check available for maker color
+            Boolean available = true;
+            ArrayList<TreeData> treeTakenArrayList = MapViewModel.getTreeDataArrayList();
+            for (TreeData treeData : treeTakenArrayList) {
+                if (treeData.getTree_id().equals(apiData.getTRE_IDN())) {
+                    available = false;
+                    break;
+                }
+            }
+
+            if (available==false){
+                marker.setIconTintColor(Color.BLUE);
+            } else {
+                marker.setIconTintColor(Color.RED);
+            }
+
+            marker.setOnClickListener(new Overlay.OnClickListener() {
+                @Override
+                public boolean onClick(@NonNull Overlay overlay) {
+                    // check available
+                    // todo : change
+                    Boolean available = true;
+                    ArrayList<TreeData> treeTakenArrayList = MapViewModel.getTreeDataArrayList();
+                    for (TreeData treeData : treeTakenArrayList) {
+                        if (treeData.getTree_id().equals(apiData.getTRE_IDN())) {
+                            available = false;
+                            break;
+                        }
+                    }
+
+                    // finish activity
+                    if (available == true){
+                        ApplicationActivity.apiData = (TreeApiData) marker.getTag();
+                        finish();
+                    }
+
+                    return true;
+                }
+            });
+
+            markerList.add(marker);
         }
     }
 }

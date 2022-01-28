@@ -6,6 +6,7 @@ import com.foo.garosero.data.TreeData;
 import com.foo.garosero.data.TreeInfo;
 import com.foo.garosero.data.UserInfo;
 import com.foo.garosero.mviewmodel.HomeViewModel;
+import com.foo.garosero.mviewmodel.MapViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -63,7 +64,7 @@ public class ServerHelper {
     }
 
     // get taken tree
-    private ArrayList<TreeData> readTreeTakenFromFireBase(){
+    static public ArrayList<TreeData> readTreeTakenFromFireBase(){
         String uid = FirebaseAuth.getInstance().getUid();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         ArrayList<TreeData> arr_tree = new ArrayList<TreeData>();
@@ -80,7 +81,8 @@ public class ServerHelper {
                         e.printStackTrace();
                     }
                 }
-                Log.e("MAP", arr_tree.toString());
+
+                MapViewModel.setTreeDataArrayList(arr_tree);
             }
 
             @Override

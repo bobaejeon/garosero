@@ -1,7 +1,6 @@
 package com.foo.garosero.myUtil;
 
 import com.foo.garosero.data.TreeApiData;
-import com.foo.garosero.mviewmodel.MapViewModel;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -13,7 +12,16 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class ApiHelper {
-    public static ArrayList<TreeApiData> getApiData(String SEOUL_GAROSU_API_KEY, Integer start_row, Integer end_row, String GU_NM) {
+    private String SEOUL_GAROSU_API_KEY;
+    private String GU_NM;
+
+    public ArrayList<TreeApiData> getApiData(String SEOUL_GAROSU_API_KEY, String GU_NM) {
+        this.SEOUL_GAROSU_API_KEY = SEOUL_GAROSU_API_KEY;
+        this.GU_NM = GU_NM;
+        return connect(0, 50); // todo : 데이터 양 조절
+    }
+
+    private ArrayList<TreeApiData> connect(Integer start_row, Integer end_row) {
         ArrayList<TreeApiData> treeApiDataList = new ArrayList<TreeApiData>();
 
         // 쿼리 작성하기
