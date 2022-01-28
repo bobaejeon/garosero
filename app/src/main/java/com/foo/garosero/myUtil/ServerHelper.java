@@ -2,6 +2,7 @@ package com.foo.garosero.myUtil;
 
 import android.util.Log;
 
+import com.foo.garosero.data.TreeData;
 import com.foo.garosero.data.TreeInfo;
 import com.foo.garosero.data.UserInfo;
 import com.foo.garosero.mviewmodel.HomeViewModel;
@@ -59,5 +60,35 @@ public class ServerHelper {
             }
         };
         database.addListenerForSingleValueEvent(postListener);
+    }
+
+    // get taken tree
+    private ArrayList<TreeData> readTreeTakenFromFireBase(){
+        String uid = FirebaseAuth.getInstance().getUid();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+        ArrayList<TreeData> arr_tree = new ArrayList<TreeData>();
+
+        ValueEventListener postListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                for(DataSnapshot snap : snapshot.child("Trees_taken").getChildren()){
+                    try{
+                        TreeData treeData = snap.getValue(TreeData.class);
+                        arr_tree.add(treeData);
+
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
+                }
+                Log.e("MAP", arr_tree.toString());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w("MAP ACTIVITY", "loadPost:onCancelled", databaseError.toException());
+            }
+        };
+        ref.addValueEventListener(postListener);
+        return arr_tree;
     }
 }
