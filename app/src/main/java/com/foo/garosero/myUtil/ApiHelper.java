@@ -55,7 +55,7 @@ public class ApiHelper {
                 JSONObject item = row.getJSONObject(i);
                 treeApiDataList.add(new TreeApiData(
                         item.getString(TreeApiData.STRING_GU_NM),
-                        item.getString(TreeApiData.STRING_TRE_IDN),
+                        item.getString(TreeApiData.STRING_OBJECTID),
                         item.getString(TreeApiData.STRING_WDPT_NM),
                         item.getDouble(TreeApiData.STRING_LNG),
                         item.getDouble(TreeApiData.STRING_LAT)

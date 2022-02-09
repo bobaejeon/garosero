@@ -15,7 +15,6 @@ import androidx.fragment.app.FragmentManager;
 
 import com.foo.garosero.R;
 import com.foo.garosero.data.TreeApiData;
-import com.foo.garosero.data.TreeData;
 import com.foo.garosero.mviewmodel.MapViewModel;
 import com.foo.garosero.myUtil.ApiHelper;
 import com.naver.maps.geometry.LatLng;
@@ -161,13 +160,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             marker.setMap(naverMap);
             marker.setTag(apiData);
 
-            marker.setCaptionText(apiData.getTRE_IDN());
+            marker.setCaptionText(apiData.getOBJECTID());
 
             // check available for maker color
             Boolean available = true;
-            ArrayList<TreeData> treeTakenArrayList = MapViewModel.getTreeDataArrayList();
-            for (TreeData treeData : treeTakenArrayList) {
-                if (treeData.getTree_id().equals(apiData.getTRE_IDN())) {
+            ArrayList<String> treeTakenArrayList = MapViewModel.getTreeDataArrayList();
+            for (String tree_id : treeTakenArrayList) {
+                if (tree_id.equals(apiData.getOBJECTID())) {
                     available = false;
                     break;
                 }
@@ -185,9 +184,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     // check available
                     // todo : change
                     Boolean available = true;
-                    ArrayList<TreeData> treeTakenArrayList = MapViewModel.getTreeDataArrayList();
-                    for (TreeData treeData : treeTakenArrayList) {
-                        if (treeData.getTree_id().equals(apiData.getTRE_IDN())) {
+                    ArrayList<String> treeTakenArrayList = MapViewModel.getTreeDataArrayList();
+                    for (String tree_id : treeTakenArrayList) {
+                        if (tree_id.equals(apiData.getOBJECTID())) {
                             available = false;
                             break;
                         }

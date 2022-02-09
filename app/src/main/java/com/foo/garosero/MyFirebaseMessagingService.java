@@ -58,6 +58,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         String title = remoteMessage.getData().get("title");
         String message = remoteMessage.getData().get("message");
 
+        Log.d("MSG", title+", "+message);
+
         final String CHANNEL_ID = "ChannerID";
         NotificationManager mManager = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {

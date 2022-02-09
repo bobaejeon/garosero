@@ -13,10 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.foo.garosero.R;
-import com.foo.garosero.RegisterActivity;
 import com.foo.garosero.data.TreeApiData;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -130,7 +128,7 @@ public class ApplicationActivity extends AppCompatActivity {
         super.onResume();
         try{
             if (apiData!=null){
-                et_tree.setText(apiData.getTRE_IDN());
+                et_tree.setText(apiData.getOBJECTID());
                 et_loc.setText(apiData.getGU_NM());
             }
         } catch (Exception e){
