@@ -1,6 +1,5 @@
 package com.foo.garosero.mviewmodel;
 
-import com.foo.garosero.data.TreeData;
 import com.foo.garosero.data.TreeInfo;
 import com.foo.garosero.myUtil.ServerHelper;
 
@@ -11,7 +10,6 @@ public class MapViewModel {
 
     public static ArrayList<String> getTreeDataArrayList() {
         if (treeDataArrayList==null){
-//            ServerHelper.readTreeTakenFromFireBase();
             treeDataArrayList = new ArrayList<>();
         }
         return treeDataArrayList;
