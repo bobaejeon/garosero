@@ -77,34 +77,14 @@ public class TreeInfoAdapter extends RecyclerView.Adapter<TreeInfoAdapter.ViewHo
             public void onClick(View view) {
                 // 1. 현재 객체와 treeid가 같은 db 항목의 ref를 얻는다
                 // 2. 나무 이름 업데이트 3. 업데이트 성공시 토스트 띄우고 데이터 다시 불러오기
-                DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Trees_taken");
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+                String newName = holder.tv_tree_name.getText().toString();
 
-                Query query = ref.orderByChild("tree_id").equalTo(treeInfo.getTree_id());
-                query.addListenerForSingleValueEvent(new ValueEventListener() {
+                ref.child("Trees_taken/"+treeInfo.getTree_id()).child("tree_name").setValue(newName).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if(snapshot.exists()){
-                            for(DataSnapshot snap:snapshot.getChildren()){
-                                HashMap<String, Object> map = new HashMap<>();
-                                String newName = holder.tv_tree_name.getText().toString();
-                                map.put("tree_name", newName);
-                                snap.getRef().updateChildren(map).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void unused) {
-                                        treeInfo.setTree_name(newName);
-                                        Toast.makeText(view.getContext(), "완료되었습니다.", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                            }
-                        }else {
-                            Log.e("TreeInfoAdapter", "no data");
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        // Getting Post failed, log a message
-                        Log.w("TreeInfoAdapter", "onCancelled", error.toException());
+                    public void onSuccess(Void unused) {
+                        treeInfo.setTree_name(newName);
+                        Toast.makeText(view.getContext(), "완료되었습니다.", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
