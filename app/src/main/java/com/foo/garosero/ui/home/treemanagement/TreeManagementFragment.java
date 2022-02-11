@@ -5,20 +5,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
-import androidx.viewpager2.widget.ViewPager2;
 
 import com.foo.garosero.R;
 import com.foo.garosero.data.UserInfo;
 import com.foo.garosero.mviewmodel.HomeViewModel;
 import com.foo.garosero.ui.home.empty.EmptyFragment;
-import com.foo.garosero.ui.home.treemanagement.TodoFragment;
 
 
 public class TreeManagementFragment extends Fragment {

@@ -144,7 +144,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="15dp"
-                android:text="덕수궁길에 있는 은행나무"/>
+                android:text="송파구에 있는 은행나무"/>
 
             <TextView
                 android:id="@+id/treeManagement_TextView_treeDesc"

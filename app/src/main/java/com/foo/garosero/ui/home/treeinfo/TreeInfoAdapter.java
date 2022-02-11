@@ -18,7 +18,6 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.foo.garosero.R;
 import com.foo.garosero.data.TreeInfo;
 import com.foo.garosero.data.UserInfo;
-import com.foo.garosero.myUtil.ServerHelper;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,7 +31,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Random;
 
 public class TreeInfoAdapter extends RecyclerView.Adapter<TreeInfoAdapter.ViewHolder> {
     UserInfo ud;
@@ -44,7 +42,7 @@ public class TreeInfoAdapter extends RecyclerView.Adapter<TreeInfoAdapter.ViewHo
     @NonNull
     @Override
     public TreeInfoAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.tree_info_view_pager, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewpager_treeinfo, parent, false);
         return new ViewHolder(view);
     }
 
@@ -55,9 +53,9 @@ public class TreeInfoAdapter extends RecyclerView.Adapter<TreeInfoAdapter.ViewHo
         holder.tv_tree_day.setText(getTreeDay(treeInfo.getStart_date()));
         holder.tv_level.setText(String.valueOf(treeInfo.getXp()/10+1));
         holder.progressBar.setProgress(treeInfo.getXp()%10);
-        holder.tv_desc_title.setText(getDescTitle(treeInfo.getRoad(),treeInfo.getKind()));
-        holder.tv_desc_content.setText(getDescContents(treeInfo.getKind()));
-        setBackgroundImageview(holder.treeCharacter, treeInfo.getKind(), treeInfo.getXp()/10+1);
+        holder.tv_desc_title.setText(getDescTitle(treeInfo.getLocation(),treeInfo.getTree_type()));
+        holder.tv_desc_content.setText(getDescContents(treeInfo.getTree_type()));
+        setBackgroundImageview(holder.treeCharacter, treeInfo.getTree_type(), treeInfo.getXp()/10+1);
 
         // 캐릭터 클릭시
         holder.treeCharacter.setOnClickListener(new View.OnClickListener() {
@@ -79,34 +77,14 @@ public class TreeInfoAdapter extends RecyclerView.Adapter<TreeInfoAdapter.ViewHo
             public void onClick(View view) {
                 // 1. 현재 객체와 treeid가 같은 db 항목의 ref를 얻는다
                 // 2. 나무 이름 업데이트 3. 업데이트 성공시 토스트 띄우고 데이터 다시 불러오기
-                DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Trees_taken");
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+                String newName = holder.tv_tree_name.getText().toString();
 
-                Query query = ref.orderByChild("tree_id").equalTo(treeInfo.getTree_id());
-                query.addListenerForSingleValueEvent(new ValueEventListener() {
+                ref.child("Trees_taken/"+treeInfo.getTree_id()).child("tree_name").setValue(newName).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if(snapshot.exists()){
-                            for(DataSnapshot snap:snapshot.getChildren()){
-                                HashMap<String, Object> map = new HashMap<>();
-                                String newName = holder.tv_tree_name.getText().toString();
-                                map.put("tree_name", newName);
-                                snap.getRef().updateChildren(map).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void unused) {
-                                        treeInfo.setTree_name(newName);
-                                        Toast.makeText(view.getContext(), "완료되었습니다.", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                            }
-                        }else {
-                            Log.e("TreeInfoAdapter", "no data");
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        // Getting Post failed, log a message
-                        Log.w("TreeInfoAdapter", "onCancelled", error.toException());
+                    public void onSuccess(Void unused) {
+                        treeInfo.setTree_name(newName);
+                        Toast.makeText(view.getContext(), "완료되었습니다.", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -183,7 +161,7 @@ public class TreeInfoAdapter extends RecyclerView.Adapter<TreeInfoAdapter.ViewHo
     private String getTreeDay(String start_date){
         if (start_date==null) return "";
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
         long calDateDays = 0;
         String tree_day = "";
 

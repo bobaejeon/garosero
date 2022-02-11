@@ -14,12 +14,15 @@ import android.widget.Toast;
 
 import com.foo.garosero.data.AsteriskPasswordTransformationMethod;
 import com.foo.garosero.myUtil.ServerHelper;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.Objects;
 
@@ -80,10 +83,29 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                                         if(snapshot.exists()){
-                                            Log.e("LoginActivity","data exist");
+                                            Log.d("LoginActivity","data exist");
 
                                             // 서버에서 정보 받아오기
                                             ServerHelper.initServer();
+
+                                            // token 저장: 같은 기기에서 다른 아이디를 사용할 때가 있으므로 로그인할 때마다 토큰 업데이트
+                                            FirebaseMessaging.getInstance().getToken()
+                                                    .addOnCompleteListener(new OnCompleteListener<String>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<String> task) {
+                                                            if (!task.isSuccessful()) {
+                                                                Log.w("LoginActivity", "Fetching FCM registration token failed", task.getException());
+                                                                return;
+                                                            }
+
+                                                            // Get new FCM registration token
+                                                            String token = task.getResult();
+
+                                                            // Log and toast
+                                                            Log.d("LoginActivity", token);
+                                                            ref.child("Users").child(uid).child("token").setValue(token);
+                                                        }
+                                                    });
 
                                             startActivity(intent);
                                             finish();

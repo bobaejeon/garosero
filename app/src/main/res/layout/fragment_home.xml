@@ -13,21 +13,12 @@
 
         <!-- Page Title -->
         <TextView
-            android:textStyle="bold"
-            android:textSize="30sp"
-            android:paddingStart="@dimen/activity_padding_default"
             android:id="@+id/home_TextView_pageTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="PAGE TITLE"/>
+            style="@style/TextViewStyle.pageTitle"/>
 
         <!-- Image View : Explain page -->
         <androidx.cardview.widget.CardView
-            android:layout_margin="@dimen/activity_margin_small"
-            app:cardCornerRadius="12dp"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:backgroundTint="@color/gray_default">
+            style="@style/customCardViewStyle.banner">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -45,12 +36,10 @@
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="70dp"
+                    style="@style/customImageView.character"
                     android:layout_gravity="center"
                     android:layout_marginEnd="32dp"
                     android:background="@drawable/mid_tree"
-                    android:padding="@dimen/activity_margin_small"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

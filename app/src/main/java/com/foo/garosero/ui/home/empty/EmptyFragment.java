@@ -2,17 +2,14 @@ package com.foo.garosero.ui.home.empty;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.foo.garosero.MainActivity;
+import androidx.fragment.app.Fragment;
+
 import com.foo.garosero.R;
-import com.foo.garosero.ui.application.ApplicationFragment;
-import com.foo.garosero.ui.application.ApplicationMapActivity;
+import com.foo.garosero.ui.application.ApplicationActivity;
 
 public class EmptyFragment extends Fragment {
     View root;
@@ -26,8 +23,7 @@ public class EmptyFragment extends Fragment {
         root.findViewById(R.id.empty_Button_application).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // go to Application map Activity
-                Intent intent = new Intent(getActivity(), ApplicationMapActivity.class);
+                Intent intent = new Intent(getActivity(), ApplicationActivity.class);
                 startActivity(intent);
             }
         });

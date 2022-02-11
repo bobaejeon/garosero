@@ -18,10 +18,12 @@
         <entry key="..\:/Users/bbj56/AndroidStudioProjects/garosero/app/src/main/res/drawable/img_circle.xml" value="0.1" />
         <entry key="..\:/Users/bbj56/AndroidStudioProjects/garosero/app/src/main/res/drawable/white_round_background.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/bbj56/AndroidStudioProjects/garosero/app/src/main/res/font/font.xml" value="0.10677083333333333" />
+        <entry key="..\:/Users/bbj56/AndroidStudioProjects/garosero/app/src/main/res/layout/activity_application.xml" value="0.1513157894736842" />
         <entry key="..\:/Users/bbj56/AndroidStudioProjects/garosero/app/src/main/res/layout/activity_application_map.xml" value="0.1" />
         <entry key="..\:/Users/bbj56/AndroidStudioProjects/garosero/app/src/main/res/layout/activity_initial.xml" value="0.1" />
         <entry key="..\:/Users/bbj56/AndroidStudioProjects/garosero/app/src/main/res/layout/activity_login.xml" value="0.14666666666666667" />
         <entry key="..\:/Users/bbj56/AndroidStudioProjects/garosero/app/src/main/res/layout/activity_main.xml" value="0.20147874306839186" />
+        <entry key="..\:/Users/bbj56/AndroidStudioProjects/garosero/app/src/main/res/layout/activity_map.xml" value="0.1513157894736842" />
         <entry key="..\:/Users/bbj56/AndroidStudioProjects/garosero/app/src/main/res/layout/activity_register.xml" value="0.22" />
         <entry key="..\:/Users/bbj56/AndroidStudioProjects/garosero/app/src/main/res/layout/activity_report.xml" value="0.1796875" />
         <entry key="..\:/Users/bbj56/AndroidStudioProjects/garosero/app/src/main/res/layout/activity_tree_explain.xml" value="0.1796875" />
@@ -40,6 +42,7 @@
         <entry key="..\:/Users/bbj56/AndroidStudioProjects/garosero/app/src/main/res/layout/navi_header.xml" value="0.1796875" />
         <entry key="..\:/Users/bbj56/AndroidStudioProjects/garosero/app/src/main/res/layout/tree_info_view_pager.xml" value="0.22" />
         <entry key="..\:/Users/bbj56/AndroidStudioProjects/garosero/app/src/main/res/layout/tree_management_view_pager.xml" value="0.1" />
+        <entry key="..\:/Users/bbj56/AndroidStudioProjects/garosero/app/src/main/res/layout/viewpager_treeinfo.xml" value="0.1" />
         <entry key="..\:/Users/bbj56/AndroidStudioProjects/garosero/app/src/main/res/menu/navi_menu.xml" value="0.1796875" />
       </map>
     </option>

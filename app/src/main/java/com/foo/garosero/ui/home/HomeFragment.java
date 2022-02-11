@@ -1,7 +1,6 @@
 package com.foo.garosero.ui.home;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +21,6 @@ import com.foo.garosero.ui.home.diary.MyDiaryFragment;
 import com.foo.garosero.ui.home.empty.EmptyFragment;
 import com.foo.garosero.ui.home.treeinfo.TreeInfoFragment;
 import com.foo.garosero.ui.home.treemanagement.TreeManagementFragment;
-import com.google.firebase.database.core.utilities.Tree;
 
 public class HomeFragment extends Fragment {
 

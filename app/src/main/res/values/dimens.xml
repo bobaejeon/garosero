@@ -7,4 +7,10 @@
     <dimen name="treewindow_height_default">100dp</dimen>
     <dimen name="activity_padding_default">12dp</dimen>
     <dimen name="activity_margin_small">12dp</dimen>
+
+    <dimen name="banner_title_textsize">20sp</dimen>
+    <dimen name="default_linespacing">5sp</dimen>
+
+    <dimen name="banner_character_imagesize">70dp</dimen>
+    <dimen name="activity_margin_big">32dp</dimen>
 </resources>

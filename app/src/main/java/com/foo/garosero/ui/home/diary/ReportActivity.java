@@ -180,7 +180,6 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
         newDiary.setMemo(et_memo.getText().toString());
         newDiary.setSchedule(et_schedule.getText().toString());
         newDiary.setContent(tv_content.getText().toString());
-        newDiary.getPicture();
         if (imageUrl!=null) newDiary.setPicture(imageUrl);
 
         try {
@@ -193,7 +192,7 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
         ArrayList<TreeInfo> chosenTree = getChosenTree();
         Map<String, Object> treeMap = new HashMap<String, Object>();
         for (TreeInfo tree : chosenTree) {
-            treeMap.put(tree.tree_id, tree.tree_id);
+            treeMap.put(tree.getTree_id(), tree.getTree_id());
         }
         newDiary.setTrees(treeMap);
 
@@ -216,7 +215,7 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
             CheckBox cb = cbList[i];
             checkTreeMap.put(cb, tree);
 
-            String message = tree.getRoad()+"에 있는 "+tree.getTree_name()+"("+tree.getTree_id()+")";
+            String message = tree.getLocation()+"에 있는 "+tree.getTree_name()+"("+tree.getTree_id()+")";
             cb.setVisibility(View.VISIBLE); // 화면에 표시하기
             cb.setText(message);
         }
