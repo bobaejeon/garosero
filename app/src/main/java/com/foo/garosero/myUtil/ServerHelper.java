@@ -2,11 +2,9 @@ package com.foo.garosero.myUtil;
 
 import android.util.Log;
 
-import com.foo.garosero.data.TreeData;
 import com.foo.garosero.data.TreeInfo;
 import com.foo.garosero.data.UserInfo;
 import com.foo.garosero.mviewmodel.HomeViewModel;
-import com.foo.garosero.mviewmodel.MapViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -62,36 +60,5 @@ public class ServerHelper {
             }
         };
         database.addListenerForSingleValueEvent(postListener);
-    }
-
-    // get taken tree
-    static public ArrayList<TreeData> readTreeTakenFromFireBase(){
-        String uid = FirebaseAuth.getInstance().getUid();
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-        ArrayList<TreeData> arr_tree = new ArrayList<TreeData>();
-
-        ValueEventListener postListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                for(DataSnapshot snap : snapshot.child("Trees_taken").getChildren()){
-                    try{
-                        TreeData treeData = snap.getValue(TreeData.class);
-                        arr_tree.add(treeData);
-
-                    }catch(Exception e){
-                        e.printStackTrace();
-                    }
-                }
-
-                MapViewModel.setTreeDataArrayList(arr_tree);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.w("MAP ACTIVITY", "loadPost:onCancelled", databaseError.toException());
-            }
-        };
-        ref.addValueEventListener(postListener);
-        return arr_tree;
     }
 }

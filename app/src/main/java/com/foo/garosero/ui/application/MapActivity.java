@@ -15,8 +15,6 @@ import androidx.fragment.app.FragmentManager;
 
 import com.foo.garosero.R;
 import com.foo.garosero.data.TreeApiData;
-import com.foo.garosero.data.TreeData;
-import com.foo.garosero.mviewmodel.MapViewModel;
 import com.foo.garosero.myUtil.ApiHelper;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.CameraUpdate;
@@ -82,8 +80,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         // thread
         thread = new MyThread();
 
-        // get tree-taken
-        MapViewModel.getTreeDataArrayList();
+        // todo : get tree-taken
     }
 
     @Override
@@ -132,7 +129,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 getDataThread.start();
                 getDataThread.join();
 
-                showMarker();
+                //showMarker();
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -165,13 +162,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
             // check available for maker color
             Boolean available = true;
-            ArrayList<TreeData> treeTakenArrayList = MapViewModel.getTreeDataArrayList();
+            /*ArrayList<TreeData> treeTakenArrayList = MapViewModel.getTreeDataArrayList();
             for (TreeData treeData : treeTakenArrayList) {
                 if (treeData.getTree_id().equals(apiData.getTRE_IDN())) {
                     available = false;
                     break;
                 }
-            }
+            }*/
 
             if (available==false){
                 marker.setIconTintColor(Color.BLUE);
@@ -185,13 +182,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     // check available
                     // todo : change
                     Boolean available = true;
-                    ArrayList<TreeData> treeTakenArrayList = MapViewModel.getTreeDataArrayList();
+                    /*ArrayList<TreeData> treeTakenArrayList = MapViewModel.getTreeDataArrayList();
                     for (TreeData treeData : treeTakenArrayList) {
                         if (treeData.getTree_id().equals(apiData.getTRE_IDN())) {
                             available = false;
                             break;
                         }
-                    }
+                    }*/
 
                     // finish activity
                     if (available == true){
