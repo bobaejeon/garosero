@@ -4,17 +4,25 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Observer;
 
+import com.foo.garosero.MainActivity;
 import com.foo.garosero.R;
 import com.foo.garosero.data.TreeApiData;
+import com.foo.garosero.data.TreeInfo;
+import com.foo.garosero.data.UserInfo;
+import com.foo.garosero.mviewmodel.HomeViewModel;
 import com.foo.garosero.myUtil.ApiHelper;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.CameraUpdate;
@@ -31,9 +39,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     static public NaverMap naverMap;
     static public Spinner spinner;
+    public TextView tv_message;
 
-    public static ArrayList<Marker> markerList = new ArrayList<Marker>();
-    public static ArrayList<TreeApiData> treeApiDataList = new ArrayList<TreeApiData>();
+    public ArrayList<Marker> markerList = new ArrayList<Marker>();
+    public ArrayList<TreeApiData> treeApiDataList; // api data
+    static ArrayList<TreeInfo> approveData; // approve data
+    static ArrayList<TreeInfo> candidateData; // candidate data
 
     MyThread thread = new MyThread();
     ArrayAdapter<CharSequence> adapter;
@@ -42,6 +53,28 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+
+        // 초기값
+        treeApiDataList = new ArrayList<>();
+        approveData = HomeViewModel.getApproveInfo().getValue();
+        candidateData = HomeViewModel.getCandidateInfo().getValue();
+
+        // live data
+        final Observer<ArrayList<TreeInfo>> approveDataObserver = new Observer<ArrayList<TreeInfo>>() {
+            @Override
+            public void onChanged(ArrayList<TreeInfo> treeData) {
+                approveData = treeData;
+            }
+        };
+        HomeViewModel.getApproveInfo().observe(MapActivity.this, approveDataObserver);
+
+        final Observer<ArrayList<TreeInfo>> candidateDataObserver = new Observer<ArrayList<TreeInfo>>() {
+            @Override
+            public void onChanged(ArrayList<TreeInfo> treeData) {
+                candidateData = treeData;
+            }
+        };
+        HomeViewModel.getCandidateInfo().observe(MapActivity.this, candidateDataObserver);
 
         // naver map
         String naver_client_id = getString(R.string.NAVER_CLIENT_ID); // id 가져오기
@@ -79,8 +112,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         // thread
         thread = new MyThread();
-
-        // todo : get tree-taken
     }
 
     @Override
@@ -107,11 +138,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
 
-            // todo : check MapViewModel.getTreeDataArrayList(), naverMap, treeApiDataList
-            if (naverMap == null) return;
-            /*if (MapViewModel.getTreeDataArrayList().isEmpty() == true) return;
-            if (treeApiDataList.isEmpty() == true) return;*/
-
             // 공공 데이터 가져오기
             Integer index = msg.what;
             String GU_NM = (String) adapter.getItem(index);
@@ -129,7 +155,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 getDataThread.start();
                 getDataThread.join();
 
-                //showMarker();
+                showMarker();
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -158,49 +184,85 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             marker.setMap(naverMap);
             marker.setTag(apiData);
 
-            marker.setCaptionText(apiData.getTRE_IDN());
+            marker.setCaptionText(apiData.getTRE_IDN()); // todo : 확인용
+            marker.setIconTintColor(Color.YELLOW);
 
             // check available for maker color
-            Boolean available = true;
-            /*ArrayList<TreeData> treeTakenArrayList = MapViewModel.getTreeDataArrayList();
-            for (TreeData treeData : treeTakenArrayList) {
-                if (treeData.getTree_id().equals(apiData.getTRE_IDN())) {
-                    available = false;
-                    break;
-                }
-            }*/
+            // 승인된 마커 표시하기
+            if (canNotApply(apiData, approveData)){
+                Toast.makeText(getApplicationContext(), "다른 나무를 선택하세요",Toast.LENGTH_SHORT).show();
+                marker.setIconTintColor(Color.GRAY);
+            }
 
-            if (available==false){
-                marker.setIconTintColor(Color.BLUE);
-            } else {
-                marker.setIconTintColor(Color.RED);
+            // 대기중인 마커 표시하기
+            else if (canNotApply(apiData, candidateData)){
+                Toast.makeText(getApplicationContext(), "다른 나무를 선택하세요",Toast.LENGTH_SHORT).show();
+                marker.setIconTintColor(Color.GREEN);
             }
 
             marker.setOnClickListener(new Overlay.OnClickListener() {
                 @Override
                 public boolean onClick(@NonNull Overlay overlay) {
-                    // check available
-                    // todo : change
-                    Boolean available = true;
-                    /*ArrayList<TreeData> treeTakenArrayList = MapViewModel.getTreeDataArrayList();
-                    for (TreeData treeData : treeTakenArrayList) {
-                        if (treeData.getTree_id().equals(apiData.getTRE_IDN())) {
-                            available = false;
-                            break;
-                        }
-                    }*/
-
-                    // finish activity
-                    if (available == true){
-                        ApplicationActivity.apiData = (TreeApiData) marker.getTag();
-                        finish();
+                    // 대기중인 나무를 클릭
+                    if (canNotApply(apiData, candidateData)){
+                        setMessage("심사 중인 나무입니다. 다른 나무를 선택하세요");
+                        return false;
                     }
 
+                    // 승인된 나무를 클릭(주인이 있는)
+                    if (canNotApply(apiData, approveData)){
+                        setMessage("주인이 있는 나무입니다. 다른 나무를 선택하세요");
+                        return false;
+                    }
+
+                    // 선택 가능한 나무
+                    setMessage("");
+                    ApplicationActivity.apiData = (TreeApiData) marker.getTag();
+                    finish();
                     return true;
                 }
             });
 
             markerList.add(marker);
+        }
+    }
+
+    private Boolean canNotApply(TreeApiData apiData, ArrayList<TreeInfo> treeInfoArrayList){
+        Double id = -1.0;
+        try{
+            id = Double.valueOf(apiData.getTRE_IDN());
+        } catch (Exception e){
+            e.printStackTrace();
+            Log.d("MAP", apiData.getTRE_IDN());
+        }
+
+        for (TreeInfo treeData : treeInfoArrayList) {
+            try{
+                Integer data_id = Integer.parseInt(treeData.getTree_id());
+                if (Math.abs(data_id-id)<1) {
+                    return true;
+                }
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+
+    private void setMessage(String message){
+        tv_message = findViewById(R.id.map_tv_message);
+        tv_message.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tv_message.setVisibility(View.GONE);
+            }
+        });
+
+        if (message == ""){
+            tv_message.setVisibility(View.GONE);
+        } else {
+            tv_message.setText(message);
+            tv_message.setVisibility(View.VISIBLE);
         }
     }
 }

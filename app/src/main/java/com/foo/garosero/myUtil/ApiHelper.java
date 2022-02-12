@@ -18,7 +18,7 @@ public class ApiHelper {
     public ArrayList<TreeApiData> getApiData(String SEOUL_GAROSU_API_KEY, String GU_NM) {
         this.SEOUL_GAROSU_API_KEY = SEOUL_GAROSU_API_KEY;
         this.GU_NM = GU_NM;
-        return connect(0, 50); // todo : 데이터 양 조절
+        return connect(0, 100); // todo : 데이터 양 조절
     }
 
     private ArrayList<TreeApiData> connect(Integer start_row, Integer end_row) {
@@ -55,7 +55,7 @@ public class ApiHelper {
                 JSONObject item = row.getJSONObject(i);
                 treeApiDataList.add(new TreeApiData(
                         item.getString(TreeApiData.STRING_GU_NM),
-                        item.getString(TreeApiData.STRING_TRE_IDN),
+                        item.getString(TreeApiData.STRING_TRE_IDN), // object id
                         item.getString(TreeApiData.STRING_WDPT_NM),
                         item.getDouble(TreeApiData.STRING_LNG),
                         item.getDouble(TreeApiData.STRING_LAT)

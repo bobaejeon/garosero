@@ -21,4 +21,17 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="32dp" />
 
+    <TextView
+        android:id="@+id/map_tv_message"
+        android:visibility="gone"
+        style="@style/TextViewStyle.default"
+        android:layout_width="0dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:background="@color/white"
+        android:padding="@dimen/activity_padding_default"
+        app:layout_constraintEnd_toEndOf="@+id/map_spinner_loc"
+        app:layout_constraintStart_toStartOf="@+id/map_spinner_loc"
+        app:layout_constraintTop_toBottomOf="@+id/map_spinner_loc" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
