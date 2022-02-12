@@ -18,7 +18,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.foo.garosero.data.TreeInfo;
@@ -48,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     ImageButton bt_menu, bt_qrcode, bt_all;
-    SwipeRefreshLayout swipeRefreshLayout;
     LottieAnimationView lottieAnimationView;
 
     DatabaseReference ref;

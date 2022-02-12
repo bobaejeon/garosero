@@ -100,9 +100,11 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Message message = Message.obtain();
-                message.what = position;
-                thread.handler.sendMessage(message); // 메세지 전송
+                if (naverMap != null) {
+                    Message message = Message.obtain();
+                    message.what = position;
+                    thread.handler.sendMessage(message); // 메세지 전송
+                }
             }
 
             @Override

@@ -15,7 +15,9 @@ public class TreeApiData {
 
     public TreeApiData(String GU_NM, String TRE_IDN, String WDPT_NM, Double LNG, Double LAT) {
         this.GU_NM = GU_NM;
-        this.TRE_IDN = TRE_IDN;
+
+        Double object_id = Double.valueOf(TRE_IDN);
+        this.TRE_IDN = ((int) Math.round(object_id)) + "";
         this.WDPT_NM = WDPT_NM;
         this.LNG = LNG;
         this.LAT = LAT;
