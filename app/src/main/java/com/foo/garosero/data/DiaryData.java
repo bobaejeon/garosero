@@ -4,6 +4,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DiaryData {
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    private String uid = "";
     private String diaryID = "";
     private String schedule = "";
     private int persons = 0;
@@ -75,7 +84,8 @@ public class DiaryData {
     @Override
     public String toString() {
         return "DiaryData{" +
-                "diaryID='" + diaryID + '\'' +
+                "uid='" + uid + '\'' +
+                ", diaryID='" + diaryID + '\'' +
                 ", schedule='" + schedule + '\'' +
                 ", persons=" + persons +
                 ", content='" + content + '\'' +
@@ -94,6 +104,7 @@ public class DiaryData {
         hash.put("memo", this.memo);
         hash.put("picture", this.picture);
         hash.put("trees", this.trees);
+        hash.put("uid", this.uid);
         return hash;
     }
 }

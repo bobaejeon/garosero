@@ -180,7 +180,6 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
         newDiary.setMemo(et_memo.getText().toString());
         newDiary.setSchedule(et_schedule.getText().toString());
         newDiary.setContent(tv_content.getText().toString());
-        newDiary.getPicture();
         if (imageUrl!=null) newDiary.setPicture(imageUrl);
 
         try {

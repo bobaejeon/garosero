@@ -16,6 +16,15 @@ public class TreeInfo {
     public String tree_id;
     public String tree_name;
     public String kind;
+    public String unit;
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
 
     public String getKind() {
         return kind;
@@ -128,7 +137,11 @@ public class TreeInfo {
                 ", end_date='" + end_date + '\'' +
                 ", tree_id='" + tree_id + '\'' +
                 ", tree_name='" + tree_name + '\'' +
+                ", kind='" + kind + '\'' +
+                ", unit='" + unit + '\'' +
                 ", xp=" + xp +
+                ", lat=" + lat +
+                ", lng=" + lng +
                 '}';
     }
 }

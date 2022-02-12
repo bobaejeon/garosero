@@ -35,6 +35,7 @@ public class ServerHelper {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
                     String name = dataSnapshot.child("Users/"+uid).child("name").getValue().toString();
+
                     for(DataSnapshot snap : dataSnapshot.child("Trees_taken").getChildren()){
                         try{
                             TreeInfo ti = snap.getValue(TreeInfo.class);

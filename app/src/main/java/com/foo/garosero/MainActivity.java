@@ -32,12 +32,15 @@ import com.foo.garosero.ui.information.InformationFragment;
 import com.foo.garosero.ui.treetip.TreeTipFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -48,6 +51,10 @@ public class MainActivity extends AppCompatActivity {
     SwipeRefreshLayout swipeRefreshLayout;
     LottieAnimationView lottieAnimationView;
 
+    DatabaseReference ref;
+    FirebaseAuth firebaseAuth;
+    String uid;
+
     public UserInfo ud;
     private TextToSpeech tts;
 
@@ -57,6 +64,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ref = FirebaseDatabase.getInstance().getReference();
+        firebaseAuth = FirebaseAuth.getInstance();
+        uid = Objects.requireNonNull(firebaseAuth.getCurrentUser()).getUid();
 
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         navigationView = (NavigationView)findViewById(R.id.navigation_view);
@@ -163,6 +174,9 @@ public class MainActivity extends AppCompatActivity {
                         // 싱글턴 객체 초기화
                         UserInfo empty_ud = new UserInfo();
                         HomeViewModel.setUserInfo(empty_ud);
+
+                        // token 초기화
+                        ref.child("Users").child(uid).child("token").setValue("");
 
                         // intent
                         Toast.makeText(MainActivity.this, "로그아웃되었습니다.", Toast.LENGTH_SHORT).show();

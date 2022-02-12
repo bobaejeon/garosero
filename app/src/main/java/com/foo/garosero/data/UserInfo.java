@@ -14,7 +14,7 @@ public class UserInfo {
 		return "UserInfo{" +
 				"name='" + name + '\'' +
 				", treeList=" + treeList +
-				'}';
+				"}";
 	}
 
 	public boolean isEmpty() {
