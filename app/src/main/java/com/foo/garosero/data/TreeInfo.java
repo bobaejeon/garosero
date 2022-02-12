@@ -1,8 +1,5 @@
 package com.foo.garosero.data;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class TreeInfo {
     public TreeInfo() {
     }
@@ -17,6 +14,15 @@ public class TreeInfo {
     public String tree_name;
     public String kind;
     public String unit;
+    public String tree_type;
+
+    public String getTree_type() {
+        return tree_type;
+    }
+
+    public void setTree_type(String tree_type) {
+        this.tree_type = tree_type;
+    }
 
     public String getUnit() {
         return unit;

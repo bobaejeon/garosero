@@ -67,7 +67,12 @@ public class MainActivity extends AppCompatActivity {
 
         ref = FirebaseDatabase.getInstance().getReference();
         firebaseAuth = FirebaseAuth.getInstance();
-        uid = Objects.requireNonNull(firebaseAuth.getCurrentUser()).getUid();
+
+        try{
+            uid = Objects.requireNonNull(firebaseAuth.getCurrentUser()).getUid();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
 
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         navigationView = (NavigationView)findViewById(R.id.navigation_view);
@@ -76,6 +81,9 @@ public class MainActivity extends AppCompatActivity {
         lottieAnimationView = findViewById(R.id.main_lottie);
 
         bt_all = findViewById(R.id.main_ImageButton_all); // 모아보기
+
+        // 서버 설정
+        ServerHelper.initServer();
 
         // 권한 설정
         PermissionListener permissionListener = new PermissionListener() {
@@ -176,7 +184,8 @@ public class MainActivity extends AppCompatActivity {
                         HomeViewModel.setUserInfo(empty_ud);
 
                         // token 초기화
-                        ref.child("Users").child(uid).child("token").setValue("");
+                        if (uid!=null)
+                            ref.child("Users").child(uid).child("token").setValue("");
 
                         // intent
                         Toast.makeText(MainActivity.this, "로그아웃되었습니다.", Toast.LENGTH_SHORT).show();
@@ -189,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // SwipeRefreshLayout
+        /*// SwipeRefreshLayout
         swipeRefreshLayout = findViewById(R.id.main_SwipeRefreshLayout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -197,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
                 ServerHelper.initServer();
                 swipeRefreshLayout.setRefreshing(false); // 새로고침 완료
             }
-        });
+        });*/
     }
 
     // QR code Reader

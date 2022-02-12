@@ -53,9 +53,9 @@ public class TreeInfoAdapter extends RecyclerView.Adapter<TreeInfoAdapter.ViewHo
         holder.tv_tree_day.setText(getTreeDay(treeInfo.getStart_date()));
         holder.tv_level.setText(String.valueOf(treeInfo.getXp()/10+1));
         holder.progressBar.setProgress(treeInfo.getXp()%10);
-        holder.tv_desc_title.setText(getDescTitle(treeInfo.getRoad(),treeInfo.getKind()));
-        holder.tv_desc_content.setText(getDescContents(treeInfo.getKind()));
-        setBackgroundImageview(holder.treeCharacter, treeInfo.getKind(), treeInfo.getXp()/10+1);
+        holder.tv_desc_title.setText(getDescTitle(treeInfo.getLocation(),treeInfo.getTree_type()));
+        holder.tv_desc_content.setText(getDescContents(treeInfo.getTree_type()));
+        setBackgroundImageview(holder.treeCharacter, treeInfo.getTree_type(), treeInfo.getXp()/10+1);
 
         // 캐릭터 클릭시
         holder.treeCharacter.setOnClickListener(new View.OnClickListener() {
