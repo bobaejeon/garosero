@@ -3,6 +3,7 @@ package com.foo.garosero.ui.application;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -132,7 +133,12 @@ public class ApplicationActivity extends AppCompatActivity {
                 et_loc.setText(apiData.getGU_NM());
             }
         } catch (Exception e){
-
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        apiData = null;
     }
 }
