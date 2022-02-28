@@ -18,14 +18,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.airbnb.lottie.LottieAnimationView;
-import com.foo.garosero.data.TreeInfo;
 import com.foo.garosero.data.UserInfo;
 import com.foo.garosero.mviewmodel.HomeViewModel;
-import com.foo.garosero.myUtil.ServerHelper;
-import com.foo.garosero.myUtil.SpeechHelper;
 import com.foo.garosero.ui.application.ApplicationActivity;
 import com.foo.garosero.ui.home.HomeFragment;
 import com.foo.garosero.ui.information.InformationFragment;
@@ -34,22 +29,17 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 
-import java.util.ArrayList;
-import java.util.Objects;
 import java.util.List;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
     DrawerLayout drawerLayout;
     NavigationView navigationView;
-    ImageButton bt_menu, bt_qrcode, bt_all;
-    SwipeRefreshLayout swipeRefreshLayout;
-    LottieAnimationView lottieAnimationView;
+    ImageButton imb_menu;
 
     DatabaseReference ref;
     FirebaseAuth firebaseAuth;
@@ -71,11 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         navigationView = (NavigationView)findViewById(R.id.navigation_view);
-        bt_menu = findViewById(R.id.memu);
-        bt_qrcode = findViewById(R.id.main_ImageButton_qrcode);
-        lottieAnimationView = findViewById(R.id.main_lottie);
-
-        bt_all = findViewById(R.id.main_ImageButton_all); // 모아보기
+        imb_menu = findViewById(R.id.toolbar_imb_memu);
 
         // 권한 설정
         PermissionListener permissionListener = new PermissionListener() {
@@ -117,26 +103,8 @@ public class MainActivity extends AppCompatActivity {
 
         replaceFragment(homeFrag);
 
-        // 모아보기 click
-        bt_all.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, InitialActivity.class));
-            }
-        });
-
-        // QR code Icon click 시
-        bt_qrcode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                IntentIntegrator qrScan = new IntentIntegrator(MainActivity.this);
-                qrScan.setOrientationLocked(false); // 가로 /세로 변경 가능
-                qrScan.initiateScan();
-            }
-        });
-
         // 메뉴 아이콘 클릭 시
-        bt_menu.setOnClickListener(new View.OnClickListener() {
+        imb_menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 drawerLayout.openDrawer(GravityCompat.END);
@@ -188,50 +156,6 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-
-        // SwipeRefreshLayout
-        swipeRefreshLayout = findViewById(R.id.main_SwipeRefreshLayout);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                ServerHelper.initServer();
-                swipeRefreshLayout.setRefreshing(false); // 새로고침 완료
-            }
-        });
-    }
-
-    // QR code Reader
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        String message = "";
-        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-
-        if (result != null) {
-            //qrcode 가 없으면
-            if (result.getContents() == null) {
-                Toast.makeText(MainActivity.this, "취소", Toast.LENGTH_SHORT).show();
-
-            } else {
-                //qrcode 결과가 있으면
-                String answer = result.getContents().trim();
-                ArrayList<TreeInfo> treeList = ud.getTreeList();
-
-                for (TreeInfo tree : treeList){
-                    String treeId = tree.getTree_id().trim();
-                    if (treeId.equals(answer)){
-                        message = ud.getName()+"님의 "+tree.getTree_name()+"입니다";
-                        SpeechHelper speechHelper = new SpeechHelper(getApplicationContext(), lottieAnimationView, tts);
-                        speechHelper.speak(message);
-                        Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                }
-                message = ud.getName()+"님의 나무가 아닙니다";
-                Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
-            }
-        } else {
-            super.onActivityResult(requestCode, resultCode, data);
-        }
     }
 
     @Override
