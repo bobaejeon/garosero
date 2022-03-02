@@ -59,8 +59,8 @@ public class MainActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         uid = Objects.requireNonNull(firebaseAuth.getCurrentUser()).getUid();
 
-        drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
-        navigationView = (NavigationView)findViewById(R.id.navigation_view);
+        drawerLayout = (DrawerLayout)findViewById(R.id.main_layout_drawer);
+        navigationView = (NavigationView)findViewById(R.id.main_navi_drawer);
         imb_menu = findViewById(R.id.toolbar_imb_memu);
 
         // 권한 설정
@@ -188,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void replaceFragment(Fragment fragment){
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.mfragment_main, fragment).commit();
+        fragmentTransaction.replace(R.id.main_frag, fragment).commit();
     }
 
     @Override
