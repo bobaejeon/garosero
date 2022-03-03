@@ -3,7 +3,6 @@ package com.foo.garosero;
 import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
-import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,6 +24,8 @@ import com.foo.garosero.ui.application.ApplicationActivity;
 import com.foo.garosero.ui.home.HomeFragment;
 import com.foo.garosero.ui.information.InformationFragment;
 import com.foo.garosero.ui.treetip.TreeTipFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
     DrawerLayout drawerLayout;
     NavigationView navigationView;
+    BottomNavigationView bottomNavigationView;
     ImageButton imb_menu;
 
     DatabaseReference ref;
@@ -46,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
     String uid;
 
     public UserInfo ud;
-    private TextToSpeech tts;
 
     private long lastTimeBackPressed; //뒤로가기 버튼이 클릭된 시간
 
@@ -61,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
         drawerLayout = (DrawerLayout)findViewById(R.id.main_layout_drawer);
         navigationView = (NavigationView)findViewById(R.id.main_navi_drawer);
+        bottomNavigationView = findViewById(R.id.main_navi_bottom);
         imb_menu = findViewById(R.id.toolbar_imb_memu);
 
         // 권한 설정
@@ -116,24 +118,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
-                    case R.id.item_application:
-                        // go to Application map Activity -> 5그루가 있으면 더 이상 신청 안되도록
-                        if(ud.getTreeList().size() == 5){
-                            Toast.makeText(MainActivity.this,"다섯 그루까지만 신청 가능합니다.",Toast.LENGTH_SHORT).show();
-                            return false;
-                        }
-                        Intent intent = new Intent(MainActivity.this, ApplicationActivity.class);
-                        startActivity(intent);
-                        break;
-
-                    case R.id.item_home:
-                        replaceFragment(new HomeFragment());
-                        break;
                     case R.id.item_information:
                         replaceFragment(new InformationFragment());
-                        break;
-                    case R.id.item_treeTip:
-                        replaceFragment(new TreeTipFragment());
                         break;
                     case R.id.item_logout:
                         //logout 후 login activity로 redirect
@@ -153,6 +139,35 @@ public class MainActivity extends AppCompatActivity {
                         break;
                 }
                 drawerLayout.closeDrawer(GravityCompat.END);
+                return false;
+            }
+        });
+
+        // bottom navigation
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()) {
+                    case R.id.bottom_item_home:
+                        replaceFragment(new HomeFragment());
+                        break;
+                    case R.id.bottom_item_course:
+                        replaceFragment(new TreeTipFragment());
+                        break;
+                    case R.id.bottom_item_application:
+                        // go to Application map Activity -> 5그루가 있으면 더 이상 신청 안되도록
+                        if(ud.getTreeList().size() == 5){
+                            Toast.makeText(MainActivity.this,"다섯 그루까지만 신청 가능합니다.",Toast.LENGTH_SHORT).show();
+                        } else {
+                            Intent intent = new Intent(MainActivity.this, ApplicationActivity.class);
+                            startActivity(intent);
+                        }
+                        break;
+                    case R.id.bottom_item_forest:
+                        startActivity(new Intent(MainActivity.this, InitialActivity.class));
+                        break;
+                }
                 return false;
             }
         });
@@ -189,15 +204,5 @@ public class MainActivity extends AppCompatActivity {
     public void replaceFragment(Fragment fragment){
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_frag, fragment).commit();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (tts != null){
-            tts.stop();
-            tts.shutdown();
-            tts = null;
-        }
     }
 }

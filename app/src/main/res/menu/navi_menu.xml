@@ -1,18 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item
-        android:id="@+id/item_home"
-        android:title="홈"/>
     <item
         android:id="@+id/item_information"
         android:title="나무 돌보미란?"/>
-    <item
-        android:id="@+id/item_application"
-        android:title="나무 돌보미 신청"/>
-    <item
-        android:id="@+id/item_treeTip"
-        android:title="나무 관리 TIP"/>
     <item
         android:id="@+id/item_logout"
         android:title="로그아웃"/>
