@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../Library/Android/sdk/platforms/android-31/data/res/layout/simple_spinner_item.xml" value="0.1" />
         <entry key="..\:/Users/bbj56/AndroidStudioProjects/garosero/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.14351851851851852" />
         <entry key="..\:/Users/bbj56/AndroidStudioProjects/garosero/app/src/main/res/drawable/border.xml" value="0.1" />
         <entry key="..\:/Users/bbj56/AndroidStudioProjects/garosero/app/src/main/res/drawable/border_bottom.xml" value="0.19583333333333333" />
@@ -44,10 +45,11 @@
         <entry key="..\:/Users/bbj56/AndroidStudioProjects/garosero/app/src/main/res/layout/tree_management_view_pager.xml" value="0.1" />
         <entry key="..\:/Users/bbj56/AndroidStudioProjects/garosero/app/src/main/res/layout/viewpager_treeinfo.xml" value="0.1" />
         <entry key="..\:/Users/bbj56/AndroidStudioProjects/garosero/app/src/main/res/menu/navi_menu.xml" value="0.1796875" />
+        <entry key="app/src/main/res/layout/activity_map.xml" value="0.1" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
