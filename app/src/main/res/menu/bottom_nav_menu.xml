@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/bottom_item_home"
+        android:title="홈"
+        android:icon="@drawable/icon_home"/>
+
+    <item
+        android:id="@+id/bottom_item_course"
+        android:title="코스"
+        android:icon="@drawable/icon_course"/>
+
+    <item
+        android:id="@+id/bottom_item_application"
+        android:title="입양"
+        android:icon="@drawable/icon_application"/>
+
+    <item
+        android:id="@+id/bottom_item_forest"
+        android:title="나만의 숲"
+        android:icon="@drawable/icon_forest"/>
+</menu>

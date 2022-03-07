@@ -9,71 +9,36 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical" >
 
-        <!-- Page Title -->
-        <TextView
-            android:id="@+id/home_TextView_pageTitle"
-            style="@style/TextViewStyle.pageTitle"/>
-
-        <!-- Image View : Explain page -->
-        <androidx.cardview.widget.CardView
-            style="@style/customCardViewStyle.banner">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/home_TextView_explain"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="24dp"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:textSize="15sp"
-                    android:text="입양한 나무의 정보를 확인하세요!"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <ImageView
-                    style="@style/customImageView.character"
-                    android:layout_gravity="center"
-                    android:layout_marginEnd="32dp"
-                    android:background="@drawable/mid_tree"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-
-        <!-- Tab Button -->
+        <!-- tab button -->
         <LinearLayout
             android:paddingStart="@dimen/activity_padding_default"
             android:paddingEnd="@dimen/activity_padding_default"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="3">
+            android:weightSum="7">
+            <Button
+                android:id="@+id/home_Button_quests"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="퀘스트 보기"
+                android:background="@drawable/button_unclick"
+                android:layout_weight="1"/>
+
             <Button
                 android:id="@+id/home_Button_treeInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:text="내 나무 정보"
-                android:layout_weight="1"/>
-
-            <Button
-                android:id="@+id/home_Button_treeManagement"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="내 나무 관리"
-                android:layout_weight="1"/>
-
-            <Button
-                android:id="@+id/home_Button_diary"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="내 기록"
+                android:background="@drawable/button_unclick"
                 android:layout_weight="1"/>
         </LinearLayout>
 
@@ -83,6 +48,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingBottom="@dimen/activity_padding_default"/>
+
     </LinearLayout>
+
 
 </FrameLayout>

@@ -4,174 +4,135 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_marginLeft="@dimen/activity_margin_default"
+    android:layout_marginRight="@dimen/activity_margin_default"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <!-- 나무정보 -->
-    <androidx.cardview.widget.CardView
-        app:cardCornerRadius="12dp"
-        android:backgroundTint="@color/gray_default"
+
+    <!-- 나무이름 -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/activity_margin_default">
+        android:orientation="horizontal">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <EditText
+            android:id="@+id/treeManagement_TextView_treeName"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="@dimen/activity_padding_default"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:background="@null"
+            android:hint="나무이름을 지어주세요!"/>
 
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/viewPager_lottie"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/treeManagement_ImageView_treeCharacter"
-                app:layout_constraintStart_toEndOf="@+id/treeManagement_ImageView_treeCharacter"
-                app:layout_constraintTop_toTopOf="parent"
-                app:lottie_autoPlay="true"
-                android:visibility="gone"
-                app:lottie_rawRes="@raw/blinkchat" />
+    </LinearLayout>
 
-            <ImageView
-                android:id="@+id/treeManagement_ImageView_treeCharacter"
-                android:layout_width="119dp"
-                android:layout_height="153dp"
-                android:layout_gravity="center"
-                android:layout_margin="@dimen/activity_margin_small"
-                android:layout_marginTop="48dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <EditText
-                android:id="@+id/treeManagement_TextView_treeName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:background="@null"
-                android:gravity="center"
-                android:hint="나무이름을 지어주세요!"
-                android:paddingBottom="@dimen/activity_padding_default"
-                app:layout_constraintTop_toBottomOf="@+id/treeManagement_TextView_treeDay"
-                tools:layout_editor_absoluteX="20dp" />
-
-            <TextView
-                android:id="@+id/treeManagement_TextView_treeDay"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:gravity="center"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@+id/treeManagement_ImageView_treeCharacter"
-                tools:layout_editor_absoluteX="20dp" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-
-    <!-- ProgressBar -->
+    <!-- 나무image / loti animation -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/activity_margin_default"
-        android:layout_marginRight="@dimen/activity_margin_default"
-        android:layout_marginBottom="@dimen/activity_margin_default">
+        android:orientation="vertical">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/viewPager_lottie"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/treeManagement_ImageView_treeCharacter"
+            app:layout_constraintStart_toEndOf="@+id/treeManagement_ImageView_treeCharacter"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            android:visibility="gone"
+            app:lottie_rawRes="@raw/blinkchat" />
 
         <ImageView
-            android:id="@+id/treeManagement_ImageView_count"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@drawable/circle_green"
+            android:id="@+id/treeManagement_ImageView_treeCharacter"
+            android:layout_width="119dp"
+            android:layout_height="153dp"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/activity_margin_small"
+            android:layout_marginTop="48dp"
+            android:background="@drawable/big_tree"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="MissingConstraints" />
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:layout_width="wrap_content"
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- level -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="9">
+
+        <!-- tree level -->
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="3"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:id="@+id/treeManagement_TextView_count"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/treeManagement_ImageView_count"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/treeManagement_ImageView_count" />
+            android:orientation="vertical"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/textView_tree_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:text="07"
+                android:textSize="30sp"
+                android:textStyle="bold"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:text="레벨"
+                android:textSize="20sp" />
+        </LinearLayout>
 
+        <!-- progress bar -->
         <ProgressBar
-            android:scaleY="4"
             android:progress="5"
             android:progressTint="#55C595"
             android:max="10"
             android:id="@+id/treeManagement_ProgressBar"
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:progressDrawable="@drawable/my_progressbar"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:paddingStart="@dimen/activity_padding_default"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/treeManagement_ImageView_count"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="내 나무정보"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:layout_marginTop="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp"/>
-
-    <androidx.cardview.widget.CardView
-        app:cardCornerRadius="12dp"
-        android:backgroundTint="@color/gray_default"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/activity_margin_default">
-
-        <LinearLayout
-            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="@dimen/activity_padding_default"
-            android:orientation="vertical">
+            android:layout_weight="8"
+            android:paddingStart="@dimen/activity_padding_default" />
+    </LinearLayout>
 
-            <TextView
-                android:id="@+id/treeManagement_TextView_treeTitle"
-                android:textStyle="bold"
-                android:textSize="18sp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="15dp"
-                android:text="송파구에 있는 은행나무"/>
-
-            <TextView
-                android:id="@+id/treeManagement_TextView_treeDesc"
-                android:textSize="17sp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
-                android:lineSpacingExtra="8sp"
-                android:text="가을이 되면 낙엽이 지기 전에 잎사귀가 샛노랗게 물들어 아름답고, 다른 여러 장점이 있어 가로수로 많이 심어요.\n\n
-은행나무에서 은행은 그 열매가 '은빛이 나는 살구'라는 뜻에서 은행나무라고 불리게 되었다고 합니다."/>
-
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-    <Button
-        android:id="@+id/bt_submit"
-        android:layout_width="match_parent"
+    <!-- xp -->
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="parent"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="48dp"
-        android:layout_marginBottom="30dp"
-        android:background="@drawable/button_background"
-        android:text="이름 수정하기"
-        android:textColor="#FFFFFF"
-        tools:ignore="ButtonStyle" />
+        android:orientation="horizontal"
+        android:layout_gravity="end"
+        android:layout_marginEnd="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView_current_xp"
+            android:text="3,140"
+            android:textColor="@color/colorPrimary" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" / "
+            android:textColor="@color/gray_dark" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView_total_xp"
+            android:text="7,000"
+            android:textColor="@color/gray_dark" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/frameLayout_desc"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 </LinearLayout>

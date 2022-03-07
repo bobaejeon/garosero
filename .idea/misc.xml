@@ -45,7 +45,22 @@
         <entry key="..\:/Users/bbj56/AndroidStudioProjects/garosero/app/src/main/res/layout/tree_management_view_pager.xml" value="0.1" />
         <entry key="..\:/Users/bbj56/AndroidStudioProjects/garosero/app/src/main/res/layout/viewpager_treeinfo.xml" value="0.1" />
         <entry key="..\:/Users/bbj56/AndroidStudioProjects/garosero/app/src/main/res/menu/navi_menu.xml" value="0.1796875" />
+        <entry key="app/src/main/res/drawable/border.xml" value="0.2065" />
+        <entry key="app/src/main/res/drawable/border_bottom.xml" value="0.2455" />
+        <entry key="app/src/main/res/drawable/border_white.xml" value="0.2455" />
+        <entry key="app/src/main/res/drawable/button_back.xml" value="0.2455" />
+        <entry key="app/src/main/res/drawable/button_background.xml" value="0.2455" />
+        <entry key="app/src/main/res/drawable/button_focus.xml" value="0.2455" />
+        <entry key="app/src/main/res/drawable/button_unclick.xml" value="0.2455" />
+        <entry key="app/src/main/res/drawable/my_progressbar.xml" value="0.2065" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.26313405797101447" />
         <entry key="app/src/main/res/layout/activity_map.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.35" />
+        <entry key="app/src/main/res/layout/fragment_todo.xml" value="0.26313405797101447" />
+        <entry key="app/src/main/res/layout/fragment_tree_info.xml" value="0.13125" />
+        <entry key="app/src/main/res/layout/fragment_tree_info_sub.xml" value="0.2598958333333333" />
+        <entry key="app/src/main/res/layout/fragment_tree_management.xml" value="0.26313405797101447" />
+        <entry key="app/src/main/res/layout/viewpager_treeinfo.xml" value="0.4577893820713664" />
       </map>
     </option>
   </component>

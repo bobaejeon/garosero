@@ -76,8 +76,7 @@ public class TreeInfoFragment extends Fragment {
         try {
             FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.treeInfo_FrameLayout, fragment).commit();
-        } catch (IllegalStateException illegalStateException){}
-        catch (Exception e){
+        } catch (Exception e){
             e.printStackTrace();
         }
     }

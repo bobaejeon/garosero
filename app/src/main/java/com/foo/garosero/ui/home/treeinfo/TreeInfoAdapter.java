@@ -11,13 +11,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.foo.garosero.R;
+import com.foo.garosero.TreeInfoSubFragment;
 import com.foo.garosero.data.TreeInfo;
 import com.foo.garosero.data.UserInfo;
+import com.foo.garosero.ui.home.empty.EmptyFragment;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -35,7 +40,6 @@ import java.util.HashMap;
 public class TreeInfoAdapter extends RecyclerView.Adapter<TreeInfoAdapter.ViewHolder> {
     UserInfo ud;
 
-
     public TreeInfoAdapter(UserInfo ud){
         this.ud = ud;
     }
@@ -50,11 +54,11 @@ public class TreeInfoAdapter extends RecyclerView.Adapter<TreeInfoAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         TreeInfo treeInfo = ud.getTreeList().get(position);
         holder.tv_tree_name.setText(treeInfo.getTree_name());
-        holder.tv_tree_day.setText(getTreeDay(treeInfo.getStart_date()));
-        holder.tv_level.setText(String.valueOf(treeInfo.getXp()/10+1));
+//        holder.tv_tree_day.setText(getTreeDay(treeInfo.getStart_date()));
+        holder.tv_level.setText("0"+String.valueOf(treeInfo.getXp()/10+1));
         holder.progressBar.setProgress(treeInfo.getXp()%10);
-        holder.tv_desc_title.setText(getDescTitle(treeInfo.getLocation(),treeInfo.getTree_type()));
-        holder.tv_desc_content.setText(getDescContents(treeInfo.getTree_type()));
+//        holder.tv_desc_title.setText(getDescTitle(treeInfo.getLocation(),treeInfo.getTree_type()));
+//        holder.tv_desc_content.setText(getDescContents(treeInfo.getTree_type()));
         setBackgroundImageview(holder.treeCharacter, treeInfo.getTree_type(), treeInfo.getXp()/10+1);
 
         // 캐릭터 클릭시
@@ -72,23 +76,23 @@ public class TreeInfoAdapter extends RecyclerView.Adapter<TreeInfoAdapter.ViewHo
         });
 
         // 나무이름 수정 버튼
-        holder.btn_submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // 1. 현재 객체와 treeid가 같은 db 항목의 ref를 얻는다
-                // 2. 나무 이름 업데이트 3. 업데이트 성공시 토스트 띄우고 데이터 다시 불러오기
-                DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-                String newName = holder.tv_tree_name.getText().toString();
-
-                ref.child("Trees_taken/"+treeInfo.getTree_id()).child("tree_name").setValue(newName).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        treeInfo.setTree_name(newName);
-                        Toast.makeText(view.getContext(), "완료되었습니다.", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        });
+//        holder.btn_submit.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                // 1. 현재 객체와 treeid가 같은 db 항목의 ref를 얻는다
+//                // 2. 나무 이름 업데이트 3. 업데이트 성공시 토스트 띄우고 데이터 다시 불러오기
+//                DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+//                String newName = holder.tv_tree_name.getText().toString();
+//
+//                ref.child("Trees_taken/"+treeInfo.getTree_id()).child("tree_name").setValue(newName).addOnSuccessListener(new OnSuccessListener<Void>() {
+//                    @Override
+//                    public void onSuccess(Void unused) {
+//                        treeInfo.setTree_name(newName);
+//                        Toast.makeText(view.getContext(), "완료되었습니다.", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//            }
+//        });
     }
 
     @Override
@@ -104,21 +108,25 @@ public class TreeInfoAdapter extends RecyclerView.Adapter<TreeInfoAdapter.ViewHo
         TextView tv_tree_name, tv_tree_day, tv_level, tv_desc_title, tv_desc_content;
         ImageView treeCharacter;
         ProgressBar progressBar;
-        Button btn_submit;
+//        Button btn_submit;
         LottieAnimationView lottie;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            tv_level = itemView.findViewById(R.id.textView_tree_level);
             treeCharacter = itemView.findViewById(R.id.treeManagement_ImageView_treeCharacter);
             tv_tree_name = itemView.findViewById(R.id.treeManagement_TextView_treeName);
-            tv_tree_day = itemView.findViewById(R.id.treeManagement_TextView_treeDay);
-            tv_level = itemView.findViewById(R.id.treeManagement_TextView_count);
             progressBar = itemView.findViewById(R.id.treeManagement_ProgressBar);
-            tv_desc_title = itemView.findViewById(R.id.treeManagement_TextView_treeTitle);
-            tv_desc_content = itemView.findViewById(R.id.treeManagement_TextView_treeDesc);
-            btn_submit = itemView.findViewById(R.id.bt_submit);
             lottie = itemView.findViewById(R.id.viewPager_lottie);
+
+            // todo change
+            try {
+                FragmentManager manager = ((AppCompatActivity) itemView.getContext()).getSupportFragmentManager();
+                manager.beginTransaction().replace(R.id.frameLayout_desc, new TreeInfoSubFragment(), null).commit();
+            } catch (Exception e){
+                Log.e("TreeInfoSub", e.toString());
+            }
         }
     }
 
