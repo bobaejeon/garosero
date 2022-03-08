@@ -171,10 +171,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             Thread getDataThread = new Thread() {
                 @Override
                 public void run() {
-
-//                    String key = getString(R.string.SEOUL_GAROSU_API_KEY);
-//                    ApiHelper apiHelper = new ApiHelper();
-//                    treeApiDataList = apiHelper.getApiData(key, GU_NM);
                 }
             };
 
@@ -183,35 +179,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 getDataThread.start();
                 getDataThread.join();
 
-
-
-//                showMarker();
-
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
-//            String GU_NM = (String) adapter.getItem(index);
-//            Thread getDataThread = new Thread() {
-//                @Override
-//                public void run() {
-//
-//                    String key = getString(R.string.SEOUL_GAROSU_API_KEY);
-//                    ApiHelper apiHelper = new ApiHelper();
-//                    treeApiDataList = apiHelper.getApiData(key, GU_NM);
-//                }
-//            };
-//
-//            try {
-//                // 지연
-//                getDataThread.start();
-//                getDataThread.join();
-//
-//                showMarker();
-//
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
         }
     }
 
@@ -270,7 +240,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
                     // finish activity
                     if (available == true){
-                        ApplicationActivity.apiData = (TreeApiData) marker.getTag();
+                        // todo : change
+                        //ApplicationActivity.apiData = (TreeApiData) marker.getTag();
                         finish();
                     }
 

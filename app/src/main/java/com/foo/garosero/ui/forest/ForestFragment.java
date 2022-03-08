@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
+import com.foo.garosero.MainActivity;
 import com.foo.garosero.R;
 import com.foo.garosero.data.UserInfo;
 import com.foo.garosero.mviewmodel.HomeViewModel;
@@ -76,9 +77,9 @@ public class ForestFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.forest_btn_start:// 처음 시작하는 경우
+            case R.id.forest_btn_start:// todo : 처음 시작하는 경우
                 break;
-            case R.id.forest_btn_care://선택한 나무의 index를 intent로 전달
+            case R.id.forest_btn_care:// todo : 선택한 나무의 index를 intent로 전달
                 break;
             case R.id.forest_iv_tree1:
                 setTreeText(0);

@@ -3,17 +3,19 @@ package com.foo.garosero.ui.application;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.foo.garosero.R;
-import com.foo.garosero.data.TreeApiData;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,35 +27,35 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ApplicationActivity extends AppCompatActivity {
+public class ApplicationFragment extends Fragment {
+    View root;
+
     EditText et_name, et_phone, et_loc, et_motive, et_tree;
     Button bt_search, bt_application;
     RadioButton cb_indi, cb_team, cb_school;
-
-    public static TreeApiData apiData;
-
+    
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_application);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        root = inflater.inflate(R.layout.fragment_application, container, false);
 
         // init view
-        et_name = findViewById(R.id.application_et_name);
-        et_phone = findViewById(R.id.application_et_phone);
-        et_loc = findViewById(R.id.application_et_loc);
-        et_motive = findViewById(R.id.application_et_motive);
-        et_tree = findViewById(R.id.application_et_road);
-        bt_search = findViewById(R.id.application_btn_search);
-        bt_application = findViewById(R.id.application_btn_application);
-        cb_indi = findViewById(R.id.application_cb_indi);
-        cb_team = findViewById(R.id.application_cb_team);
-        cb_school = findViewById(R.id.application_cb_school);
+        et_name = root.findViewById(R.id.application_et_name);
+        et_phone = root.findViewById(R.id.application_et_phone);
+        et_loc = root.findViewById(R.id.application_et_loc);
+        et_motive = root.findViewById(R.id.application_et_motive);
+        et_tree = root.findViewById(R.id.application_et_road);
+        bt_search = root.findViewById(R.id.application_btn_search);
+        bt_application = root.findViewById(R.id.application_btn_application);
+        cb_indi = root.findViewById(R.id.application_cb_indi);
+        cb_team = root.findViewById(R.id.application_cb_team);
+        cb_school = root.findViewById(R.id.application_cb_school);
 
         // onclick event
         bt_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ApplicationActivity.this, MapActivity.class);
+                Intent intent = new Intent(getContext(), MapActivity.class);
                 startActivity(intent);
             }
         });
@@ -75,7 +77,7 @@ public class ApplicationActivity extends AppCompatActivity {
 
                 if (name.equals("") || phone.equals("") || motive.equals("")
                         || unit.equals("") || tree_id.equals("") || location.equals("")) {
-                    Toast.makeText(ApplicationActivity.this, "내용을 입력해주세요", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "내용을 입력해주세요", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 String uid = FirebaseAuth.getInstance().getUid();
@@ -93,9 +95,9 @@ public class ApplicationActivity extends AppCompatActivity {
                 childUpdate.put("date", today);
                 childUpdate.put("tree_id", tree_id);
                 childUpdate.put("location", location); // 위치 (xx구)
-                childUpdate.put("tree_type", apiData.getWDPT_NM()); // 가로명 (나무 종류)
+                //childUpdate.put("tree_type", apiData.getWDPT_NM()); // 가로명 (나무 종류)
 
-                final ProgressDialog mDialog = new ProgressDialog(ApplicationActivity.this);
+                final ProgressDialog mDialog = new ProgressDialog(getContext());
                 mDialog.setMessage("신청중입니다");
                 mDialog.show();
                 ref.updateChildren(childUpdate).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -103,36 +105,16 @@ public class ApplicationActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()){
                             mDialog.dismiss();
-                            Toast.makeText(ApplicationActivity.this,"신청이 완료되었습니다",  Toast.LENGTH_SHORT).show();
-                            finish();
+                            Toast.makeText(getContext(),"신청이 완료되었습니다",  Toast.LENGTH_SHORT).show();
+                            // todo : go to home frag
                         } else {
                             mDialog.dismiss();
-                            Toast.makeText(ApplicationActivity.this,"신청 실패",  Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(),"신청 실패",  Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
             }
         });
-
-        // 뒤로 가기
-        findViewById(R.id.application_ImageButton_back).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        try{
-            if (apiData!=null){
-                et_tree.setText(apiData.getOBJECTID());
-                et_loc.setText(apiData.getGU_NM());
-            }
-        } catch (Exception e){
-
-        }
+        return root;
     }
 }

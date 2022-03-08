@@ -20,7 +20,7 @@ import androidx.lifecycle.Observer;
 
 import com.foo.garosero.data.UserInfo;
 import com.foo.garosero.mviewmodel.HomeViewModel;
-import com.foo.garosero.ui.application.ApplicationActivity;
+import com.foo.garosero.ui.application.ApplicationFragment;
 import com.foo.garosero.ui.forest.ForestFragment;
 import com.foo.garosero.ui.home.HomeFragment;
 import com.foo.garosero.ui.information.InformationFragment;
@@ -161,8 +161,7 @@ public class MainActivity extends AppCompatActivity {
                         if(ud.getTreeList().size() == 5){
                             Toast.makeText(MainActivity.this,"다섯 그루까지만 신청 가능합니다.",Toast.LENGTH_SHORT).show();
                         } else {
-                            Intent intent = new Intent(MainActivity.this, ApplicationActivity.class);
-                            startActivity(intent);
+                            replaceFragment(new ApplicationFragment());
                         }
                         break;
                     case R.id.bottom_item_forest:
