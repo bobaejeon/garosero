@@ -13,7 +13,7 @@ import androidx.lifecycle.Observer;
 import com.foo.garosero.R;
 import com.foo.garosero.data.UserInfo;
 import com.foo.garosero.mviewmodel.HomeViewModel;
-import com.foo.garosero.ui.home.empty.EmptyFragment;
+import com.foo.garosero.ui.empty.EmptyFragment;
 
 
 public class TreeManagementFragment extends Fragment {

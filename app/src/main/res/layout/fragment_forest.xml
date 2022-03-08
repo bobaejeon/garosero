@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.forest.ForestFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/forest_layout_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/empty_background">
+
+        <!-- tree character -->
+        <ImageView
+            android:id="@+id/forest_iv_tree1"
+            android:layout_width="183dp"
+            android:layout_height="252dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginBottom="68dp"
+            android:src="@drawable/tree_initial3"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+        <ImageView
+            android:id="@+id/forest_iv_tree2"
+            android:layout_width="139dp"
+            android:layout_height="177dp"
+            android:layout_marginEnd="36dp"
+            android:layout_marginBottom="204dp"
+            android:src="@drawable/tree_initial1"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <ImageView
+            android:id="@+id/forest_iv_tree3"
+            android:layout_width="130dp"
+            android:layout_height="157dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="356dp"
+            android:src="@drawable/tree_initial2"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+        <ImageView
+            android:id="@+id/forest_iv_tree4"
+            android:layout_width="120dp"
+            android:layout_height="147dp"
+            android:layout_marginStart="156dp"
+            android:layout_marginBottom="396dp"
+            android:src="@drawable/tree_initial2"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+        <ImageView
+            android:id="@+id/forest_iv_tree5"
+            android:layout_width="132dp"
+            android:layout_height="142dp"
+            android:layout_marginBottom="420dp"
+            android:src="@drawable/tree_initial3"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <!-- tree info box -->
+        <LinearLayout
+            android:id="@+id/forest_layout_info"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
+            android:background="@drawable/white_round_background"
+            android:orientation="horizontal"
+            android:padding="20dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/forest_tv_tree_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="나무 이름" />
+
+                <TextView
+                    android:id="@+id/forest_tv_tree_level"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lv. 5" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/forest_btn_care"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/button_background"
+                android:text="관리하기"
+                android:textColor="#FFFFFF" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/forest_btn_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
+            android:background="@drawable/button_background"
+            android:padding="20dp"
+            android:text="시작하기"
+            android:textColor="#FFFFFF"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

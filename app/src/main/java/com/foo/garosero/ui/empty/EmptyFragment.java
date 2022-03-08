@@ -1,4 +1,4 @@
-package com.foo.garosero.ui.home.empty;
+package com.foo.garosero.ui.empty;
 
 import android.content.Intent;
 import android.os.Bundle;

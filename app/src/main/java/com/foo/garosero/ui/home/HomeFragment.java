@@ -7,19 +7,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.foo.garosero.R;
 import com.foo.garosero.mviewmodel.HomeViewModel;
 import com.foo.garosero.ui.home.diary.MyDiaryFragment;
-import com.foo.garosero.ui.home.empty.EmptyFragment;
+import com.foo.garosero.ui.empty.EmptyFragment;
 import com.foo.garosero.ui.home.treeinfo.TreeInfoFragment;
-import com.foo.garosero.ui.home.treemanagement.TreeManagementFragment;
 
 public class HomeFragment extends Fragment {
 

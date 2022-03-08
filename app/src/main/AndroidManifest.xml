@@ -32,9 +32,6 @@
             android:name=".ui.application.ApplicationActivity"
             android:exported="false" />
         <activity
-            android:name=".InitialActivity"
-            android:exported="false" />
-        <activity
             android:name=".ui.home.diary.ReportActivity"
             android:exported="false" />
         <activity

@@ -21,6 +21,7 @@ import androidx.lifecycle.Observer;
 import com.foo.garosero.data.UserInfo;
 import com.foo.garosero.mviewmodel.HomeViewModel;
 import com.foo.garosero.ui.application.ApplicationActivity;
+import com.foo.garosero.ui.forest.ForestFragment;
 import com.foo.garosero.ui.home.HomeFragment;
 import com.foo.garosero.ui.information.InformationFragment;
 import com.foo.garosero.ui.treetip.TreeTipFragment;
@@ -165,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                         break;
                     case R.id.bottom_item_forest:
-                        startActivity(new Intent(MainActivity.this, InitialActivity.class));
+                        replaceFragment(new ForestFragment());
                         break;
                 }
                 return false;
